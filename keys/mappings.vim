@@ -68,16 +68,20 @@ else
 endif
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
+nmap <M-J> mz:m+<cr>`z
+nmap <M-K> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
+  nmap ˙ <M-h>
   nmap ∆ <M-j>
   nmap ˚ <M-k>
+  nmap ¬ <M-l>
+  vmap ˙ <M-h>
   vmap ∆ <M-j>
   vmap ˚ <M-k>
+  vmap ¬ <M-l>
 endif
 
 " Better tabbing
