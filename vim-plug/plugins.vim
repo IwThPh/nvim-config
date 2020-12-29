@@ -34,6 +34,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Zen mode
     Plug 'junegunn/goyo.vim'
 
+    " Start Screen
+    Plug 'mhinz/vim-startify'
+
     """""""""""""""""""""""""
     " Themes
     """""""""""""""""""""""""

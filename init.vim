@@ -65,6 +65,7 @@ if exists('g:vscode')
 	source $HOME/.config/nvim/vscode/settings.vim
 else
 	source $HOME/.config/nvim/plug-config/fzf.vim
+	source $HOME/.config/nvim/plug-config/start-screen.vim
 	source $HOME/.config/nvim/plug-config/signify.vim
 	source $HOME/.config/nvim/plug-config/goyo.vim
 endif
