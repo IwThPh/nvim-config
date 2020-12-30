@@ -40,6 +40,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Neovim LSP Config 
 	Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
+	Plug 'RRethy/vim-illuminate'
 
 	"""""""""""""""""""""""""
     " Themes

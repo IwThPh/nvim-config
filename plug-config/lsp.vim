@@ -5,10 +5,23 @@ require'lspconfig'.intelephense.setup{
 	init_options = {
 		licenceKey = '/Users/iwanphillips/.config/intelephense/licence.txt' 
 	};
-    on_attach=require('completion').on_attach;
+    on_attach=function(client)
+        require('completion').on_attach(client)
+        require('illuminate').on_attach(client) 
+    end,
 }
-require'lspconfig'.tsserver.setup{ on_attach=require('completion').on_attach }
-require'lspconfig'.vuels.setup{ on_attach=require('completion').on_attach }
+require'lspconfig'.tsserver.setup{ 
+    on_attach=function(client)
+        require('completion').on_attach(client) 
+        require('illuminate').on_attach(client) 
+    end,
+}
+require'lspconfig'.vuels.setup{ 
+    on_attach=function(client)
+        require('completion').on_attach(client) 
+        require('illuminate').on_attach(client) 
+    end,
+}
 
 EOF
 
