@@ -64,6 +64,8 @@ if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
 else
+	source $HOME/.config/nvim/plug-config/completion.vim
+	source $HOME/.config/nvim/plug-config/lsp.vim
 	source $HOME/.config/nvim/plug-config/fzf.vim
 	source $HOME/.config/nvim/plug-config/start-screen.vim
 	source $HOME/.config/nvim/plug-config/signify.vim

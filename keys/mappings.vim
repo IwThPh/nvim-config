@@ -63,8 +63,9 @@ else
 	inoremap <C-u> <ESC>viwUi
 	nnoremap <C-u> viwU<Esc>
 
-	" <TAB>: completion.
-	inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+	" Use <Tab> and <S-Tab> to navigate through popup menu
+	inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+	inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac

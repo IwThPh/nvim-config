@@ -37,7 +37,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Start Screen
     Plug 'mhinz/vim-startify'
 
-    """""""""""""""""""""""""
+	" Neovim LSP Config 
+	Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/completion-nvim'
+
+	"""""""""""""""""""""""""
     " Themes
     """""""""""""""""""""""""
     "" Palenight Theme <3
