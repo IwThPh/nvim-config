@@ -7,6 +7,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+	" Icons
+	Plug 'ryanoasis/vim-devicons'
+	" Plug 'kyazdani42/nvim-web-devicons' "Lua icons. Couldnt get working on dev build
+    
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
     " File Explorer
