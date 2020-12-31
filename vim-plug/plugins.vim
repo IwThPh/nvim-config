@@ -42,6 +42,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/completion-nvim'
 	Plug 'RRethy/vim-illuminate'
 
+    " Neovim Treesitter
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " update modules on update
+
 	"""""""""""""""""""""""""
     " Themes
     """""""""""""""""""""""""
