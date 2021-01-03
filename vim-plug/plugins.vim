@@ -13,6 +13,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
+
+    " Start Screen
+    Plug 'mhinz/vim-startify'
+
     " File Explorer
     Plug 'scrooloose/NERDTree'
     " Auto pairs for '(' '[' '{'
@@ -37,9 +41,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Zen mode
     Plug 'junegunn/goyo.vim'
-
-    " Start Screen
-    Plug 'mhinz/vim-startify'
 
 	" Neovim LSP Config 
 	Plug 'neovim/nvim-lspconfig'
