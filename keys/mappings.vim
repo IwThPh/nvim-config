@@ -35,6 +35,9 @@ else
 	" SHIFT-TAB will go back
 	nnoremap <S-TAB> :bprevious<CR> 
 
+	" Map escape to escape sequence in terminal buffer.
+	:tnoremap <Esc> <C-\><C-n>
+
 	" Useful mappings for managing tabs
 	map <leader>tn :tabnew<cr>
 	map <leader>to :tabonly<cr>
