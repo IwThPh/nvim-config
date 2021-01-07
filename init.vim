@@ -68,6 +68,7 @@ else
 	source $HOME/.config/nvim/plug-config/lsp.vim
 	luafile	$HOME/.config/nvim/plug-config/treesitter.lua
 	source $HOME/.config/nvim/plug-config/fzf.vim
+	source $HOME/.config/nvim/plug-config/blamer.vim
 	source $HOME/.config/nvim/plug-config/start-screen.vim
 	source $HOME/.config/nvim/plug-config/nerdtree.vim
 	source $HOME/.config/nvim/plug-config/signify.vim

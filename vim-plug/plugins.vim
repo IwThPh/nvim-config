@@ -52,6 +52,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Neovim Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " update modules on update
 
+	"Git Blame
+	Plug 'APZelos/blamer.nvim'
+	
 	"""""""""""""""""""""""""
     " Themes
     """""""""""""""""""""""""
