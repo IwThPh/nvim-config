@@ -14,7 +14,8 @@ set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
-set laststatus=0                        " Always display the status line
+set laststatus=2                        " Always display the status line
+set scl=yes  							" force the signcolumn to appear
 set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like

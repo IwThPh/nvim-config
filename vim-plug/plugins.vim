@@ -7,6 +7,9 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+	" Status Line
+    Plug 'glepnir/galaxyline.nvim'
+
 	" Icons
 	Plug 'ryanoasis/vim-devicons'
 	" Plug 'kyazdani42/nvim-web-devicons' "Lua icons. Couldnt get working on dev build
@@ -23,9 +26,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
-
-    " Airline status
-    Plug 'vim-airline/vim-airline'
 
 	" Hex Colorizer
 	Plug 'norcalli/nvim-colorizer.lua'

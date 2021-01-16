@@ -37,8 +37,8 @@ if has("gui_running")
 endif
 
 " Source Theme
+luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 source $HOME/.config/nvim/themes/palenight.vim
-source $HOME/.config/nvim/themes/airline.vim
 
 " Allow for transparent bg, let Terminal handle it.
 if &background ==# 'dark'
