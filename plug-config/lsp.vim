@@ -40,6 +40,9 @@ function! LSPSetMappings()
     nnoremap <silent> <buffer> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
     nnoremap <silent> <buffer> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 
+    nnoremap <silent> <buffer> gn    <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+    nnoremap <silent> <buffer> gp    <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+
     nnoremap <silent> <buffer> ga    		<cmd>lua vim.lsp.buf.code_action()<CR>
     nnoremap <silent> <buffer> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
 endfunction
