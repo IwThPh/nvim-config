@@ -1,5 +1,6 @@
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let NERDTreeWinSize = 40
 
 map <leader>nf :NERDTreeFocus<cr>
 map <leader>nt :NERDTreeToggle<cr>
