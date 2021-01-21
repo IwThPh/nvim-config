@@ -41,9 +41,9 @@ luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 source $HOME/.config/nvim/themes/palenight.vim
 
 " Allow for transparent bg, let Terminal handle it.
-if &background ==# 'dark'
-	hi Normal guibg=NONE ctermbg=NONE
-endif
+" if &background ==# 'dark'
+" 	hi Normal guibg=NONE ctermbg=NONE
+" endif
 
 lua require'plug-colorizer'
 

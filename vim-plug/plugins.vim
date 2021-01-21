@@ -62,7 +62,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Themes
     """""""""""""""""""""""""
     "" Palenight Theme <3
-	Plug 'drewtempelmeyer/palenight.vim'
+	" Plug 'drewtempelmeyer/palenight.vim'
+	Plug 'christianchiarulli/nvcode-color-schemes.vim' " Better highlighting choices
+
 	" One Dark/Light Theme 
 	Plug 'rakr/vim-one'
 
