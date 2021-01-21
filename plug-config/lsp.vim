@@ -5,6 +5,13 @@ require'lspconfig'.intelephense.setup{
 	init_options = {
 		licenceKey = '/Users/iwanphillips/.config/intelephense/licence.txt' 
 	};
+	settings = {
+		intelephense = {
+			enviroment = {
+				phpVersion = "7.3.9";
+			};
+		};
+	};
     on_attach=function(client)
         require('completion').on_attach(client)
         require('illuminate').on_attach(client) 
