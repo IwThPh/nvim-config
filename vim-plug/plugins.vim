@@ -21,8 +21,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-startify'
 
     " File Explorer
-    Plug 'scrooloose/NERDTree'
-	Plug 'Xuyuanp/nerdtree-git-plugin'
+	Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
