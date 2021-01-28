@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  require('illuminate').on_attach(client) 
+  require'illuminate'.on_attach(client) 
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -76,4 +76,8 @@ end
 local servers = { "intelephense", "vuels", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
+
+  vim.api.nvim_command [[ hi def link LspReferenceText IncSearch ]]
+  vim.api.nvim_command [[ hi def link LspReferenceWrite IncSearch ]]
+  vim.api.nvim_command [[ hi def link LspReferenceRead IncSearch ]]
 end
