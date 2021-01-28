@@ -64,7 +64,8 @@ if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
 else
-	source $HOME/.config/nvim/plug-config/completion.vim
+	" source $HOME/.config/nvim/plug-config/completion.vim
+	luafile $HOME/.config/nvim/plug-config/completion.lua
 	luafile $HOME/.config/nvim/plug-config/lsp.lua
 	luafile	$HOME/.config/nvim/plug-config/treesitter.lua
 	source $HOME/.config/nvim/plug-config/vista.vim
