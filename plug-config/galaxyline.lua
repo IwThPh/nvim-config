@@ -5,7 +5,7 @@ local gls = gl.section
 gl.short_line_list = {'LuaTree','vista','dbui'}
 
 local colors = {
-  bg = '#2C323C',
+  bg = '#1d212f',
   yellow = '#ffcb6b',
   cyan = '#89DDFF',
   darkblue = '#939ede',
@@ -66,7 +66,7 @@ gls.left[1] = {
 gls.left[2] = {
   ViMode = {
     provider = function()
-      local alias = {n = ' NORMAL ',i = ' INSERT ',c= ' COMMAND ',v= ' VISUAL ',V= ' V-LINE ', [''] = ' VISUAL '}
+      local alias = {n = ' NORMAL ',i = ' INSERT ',c= ' COMMAND ',t = ' TERMINAL ',v= ' VISUAL ',V= ' V-LINE ', [''] = ' VISUAL '}
       return alias[vim.fn.mode()]
     end,
     separator = '▋ ',

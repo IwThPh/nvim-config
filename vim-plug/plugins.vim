@@ -23,6 +23,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " File Explorer
 	Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
+	" Buffer line 
+	Plug 'akinsho/nvim-bufferline.lua'
+
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 

@@ -31,9 +31,9 @@ else
 	nnoremap <M-l>    :vertical resize +2<CR>
 
 	" TAB in general mode will move to text buffer
-	nnoremap <TAB> :bnext<CR>
+	nnoremap <TAB> :BufferLineCycleNext<CR>
 	" SHIFT-TAB will go back
-	nnoremap <S-TAB> :bprevious<CR> 
+	nnoremap <S-TAB> :BufferLineCyclePrev<CR> 
 
 	" Map escape to escape sequence in terminal buffer.
 	:tnoremap <Esc> <C-\><C-n>
