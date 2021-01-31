@@ -1,6 +1,6 @@
 " Quick Save and Quit.
 map <Leader><Leader> :w<CR>
-map <Leader>q :wq!<CR>
+map <Leader>q :Sayonara<CR>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>

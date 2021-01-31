@@ -26,6 +26,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Buffer line 
 	Plug 'akinsho/nvim-bufferline.lua'
 
+	"Better buffer deletion
+	Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
