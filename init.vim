@@ -67,6 +67,7 @@ else
 	" source $HOME/.config/nvim/plug-config/completion.vim
 	luafile $HOME/.config/nvim/plug-config/completion.lua
 	luafile $HOME/.config/nvim/plug-config/lsp.lua
+	luafile $HOME/.config/nvim/plug-config/test.lua
 	luafile	$HOME/.config/nvim/plug-config/treesitter.lua
 	luafile	$HOME/.config/nvim/plug-config/bufferline.lua
 	source $HOME/.config/nvim/plug-config/vista.vim

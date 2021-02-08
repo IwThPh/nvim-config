@@ -61,6 +61,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	"Git Blame
 	Plug 'APZelos/blamer.nvim'
 
+	" Testing
+	Plug 'vim-test/vim-test'
+
 	" Vista | LSP Symbol viewer
     Plug 'liuchengxu/vista.vim'
 	
