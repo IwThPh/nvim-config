@@ -40,6 +40,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-rooter'
+	Plug 'ojroques/nvim-lspfuzzy'
 
     " Commenting out lines easily
     Plug 'tpope/vim-commentary'
