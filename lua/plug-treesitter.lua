@@ -1,6 +1,8 @@
 require'nvim-treesitter'.setup{
-	indent = { enable = true },
-	highlight = { enable = true },
+  	ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+	highlight = { 
+		enable = true 
+	},
 }
 --TreeSitter based code folding
 vim.api.nvim_command('set foldmethod=expr')

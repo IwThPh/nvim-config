@@ -1,4 +1,7 @@
 local chad_settings = {
+	theme = {
+		text_colour_set = "nerdtree_syntax_dark";
+	};
 	view = {
 		width = 40;
 	};

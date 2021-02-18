@@ -30,6 +30,31 @@ configs['intelephense'] = {
 				enviroment = {
 					phpVersion = "7.3.9";
 				};
+				phpdoc = {
+					propertyTemplate = {
+					  summary = "$1";
+					  tags = {
+						"@var ${2:$SYMBOL_TYPE}"
+					  };
+					},
+					functionTemplate = {
+					  summary = "$SYMBOL_NAME";
+					  description = "${1}";
+					  tags = {
+						"@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2",
+						"@return ${1:$SYMBOL_TYPE} $2",
+						"@throws ${1:$SYMBOL_TYPE} $2",
+						"@author Iwan Phillips <iwan.phillips@worthers.com>"
+					  };
+					};
+					classTemplate = {
+					  summary = "$1";
+					  tags = {
+						"@package ${1:$SYMBOL_NAMESPACE}",
+						"@author Iwan Phillips <iwan.phillips@worthers.com>"
+					  };
+					};
+				};
 			};
 		};
 	};
@@ -48,7 +73,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   -- buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -65,9 +90,9 @@ local on_attach = function(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    buf_set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
 end
 

@@ -37,14 +37,8 @@ if has("gui_running")
 endif
 
 " Source Theme
-luafile $HOME/.config/nvim/plug-config/galaxyline.lua
 source $HOME/.config/nvim/themes/palenight.vim
-
-" Allow for transparent bg, let Terminal handle it.
-" if &background ==# 'dark'
-" 	hi Normal guibg=NONE ctermbg=NONE
-" endif
-
+lua require'plug-galaxyline'
 lua require'plug-colorizer'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -64,12 +58,12 @@ if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
 else
-	luafile $HOME/.config/nvim/plug-config/completion.lua
-	luafile $HOME/.config/nvim/plug-config/lsp.lua
-	luafile $HOME/.config/nvim/plug-config/test.lua
-	luafile	$HOME/.config/nvim/plug-config/treesitter.lua
-	luafile	$HOME/.config/nvim/plug-config/bufferline.lua
-	luafile $HOME/.config/nvim/plug-config/chadtree.lua
+	lua require'plug-completion'
+	lua require'plug-lsp'
+	lua require'plug-test'
+	lua require'plug-treesitter'
+	lua require'plug-bufferline'
+	lua require'plug-chadtree'
 
 	source $HOME/.config/nvim/plug-config/vista.vim
 	source $HOME/.config/nvim/plug-config/fzf.vim
