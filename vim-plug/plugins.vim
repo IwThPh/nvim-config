@@ -33,6 +33,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
+	" Vim surround
+	Plug 'tpope/vim-surround'
+
 	" Hex Colorizer
 	Plug 'norcalli/nvim-colorizer.lua'
 
