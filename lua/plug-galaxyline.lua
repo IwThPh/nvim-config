@@ -4,7 +4,13 @@ local gl = require('galaxyline')
 local gls = gl.section
 gl.short_line_list = {'LuaTree','vista','dbui','startify','chadtree'}
 
+local getHighlightTerm = function(group, term)
+	local hi = vim.api.nvim_exec([[execute('hi ' . "]] .. group .. [[")]], true)
+	return string.match(hi, [[ .* ]] .. term .. [[=(#[%w]+).*]])
+end
+
 local colors = require('galaxyline.theme').default
+colors.bg = getHighlightTerm('StatusLine', 'guibg');
 
 local buffer_not_empty = function()
   return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
