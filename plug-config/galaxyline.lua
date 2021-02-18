@@ -2,59 +2,17 @@
 
 local gl = require('galaxyline')
 local gls = gl.section
-gl.short_line_list = {'LuaTree','vista','dbui'}
+gl.short_line_list = {'LuaTree','vista','dbui','startify','chadtree'}
 
-local colors = {
-  bg = '#1d212f',
-  yellow = '#ffcb6b',
-  cyan = '#89DDFF',
-  darkblue = '#939ede',
-  green = '#C3e88d',
-  orange = '#f78c6c',
-  purple = '#c792ea',
-  magenta = '#d16d9e',
-  grey = '#bfc7d5',
-  blue = '#82b1ff',
-  red = '#ff5370'
-}
-
--- Palenight Colors
--- "red"#ff5370"
--- "light_red"#ff869a"
--- "dark_red"#BE5046"
--- "green"#C3E88D"
--- "yellow"#ffcb6b"
--- "dark_yellow"#F78C6C"
--- "blue"#82b1ff"
--- "purple"#c792ea"
--- "blue_purple"#939ede"
--- "cyan"#89DDFF"
--- "white"#bfc7d5"
--- "black"#292D3E"
--- "comment_grey"#697098"
--- "gutter_fg_grey"#4B5263"
--- "cursor_grey"#2C323C"
--- "visual_grey"#3E4452"
--- "menu_grey"#3E4452"
--- "special_grey"#3B4048"
--- "vertsplit"#181A1F"
--- "white_mask_1"#333747"
--- "white_mask_3"#474b59"
--- "white_mask_11"#989aa2"
+local colors = require('galaxyline.theme').default
 
 local buffer_not_empty = function()
-  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-    return true
-  end
-  return false
+  return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
 end
 
 local checkwidth = function()
   local squeeze_width  = vim.fn.winwidth(0) / 2
-  if squeeze_width > 40 then
-    return true
-  end
-  return false
+  return squeeze_width > 40
 end
 
 gls.left[1] = {
@@ -74,7 +32,18 @@ gls.left[2] = {
     highlight = {colors.yellow,colors.bg,'bold'},
   },
 }
-gls.left[3] ={
+gls.left[3] = {
+  FileName = {
+    provider = function()
+		return vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.');
+	end,
+    condition = buffer_not_empty,
+    separator = ' ',
+    separator_highlight = {colors.violet,colors.bg},
+    highlight = {colors.magenta,colors.bg}
+  },
+}
+gls.left[4] ={
   FileIcon = {
     separator = '',
     provider = 'FileIcon',
@@ -82,21 +51,12 @@ gls.left[3] ={
     highlight = {colors.magenta,colors.bg},
   },
 }
-gls.left[4] = {
-  FileName = {
-    provider = {'FileName'},
-    condition = buffer_not_empty,
-    separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.magenta,colors.bg}
-  }
-}
 gls.left[5] = {
   LeftEnd = {
     provider = function() return ' ' end,
     separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.purple,colors.bg}
+    separator_highlight = {colors.violet,colors.bg},
+    highlight = {colors.violet,colors.bg}
   }
 }
 gls.left[6] = {
@@ -167,9 +127,9 @@ gls.right[4] = {
   GitBranch = {
     provider = 'GitBranch',
     separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
+    separator_highlight = {colors.violet,colors.bg},
     condition = buffer_not_empty,
-    highlight = {colors.grey,colors.bg},
+    highlight = {colors.fg,colors.bg},
   }
 }
 gls.right[5] = {
@@ -185,7 +145,7 @@ gls.right[6] = {
     provider = 'LineColumn',
     separator = ' | ',
     separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.grey,colors.bg},
+    highlight = {colors.fg,colors.bg},
   },
 }
 gls.right[7] = {
@@ -193,7 +153,7 @@ gls.right[7] = {
     provider = 'LinePercent',
     separator = ' |',
     separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.grey,colors.bg},
+    highlight = {colors.fg,colors.bg},
   }
 }
 gls.right[8] = {
@@ -207,7 +167,7 @@ gls.short_line_left[1] = {
   LeftEnd = {
     provider = function() return ' ' end,
     separator = ' ',
-    separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.purple,colors.bg}
+    separator_highlight = {colors.violet,colors.bg},
+    highlight = {colors.violet,colors.bg}
   }
 }

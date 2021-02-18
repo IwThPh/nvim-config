@@ -8,7 +8,7 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 	" Status Line
-    Plug 'glepnir/galaxyline.nvim'
+    Plug 'glepnir/galaxyline.nvim', {'branch' : 'main'}
 
 	" Icons
 	Plug 'ryanoasis/vim-devicons'
