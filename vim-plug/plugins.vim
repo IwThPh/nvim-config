@@ -78,6 +78,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Plug 'drewtempelmeyer/palenight.vim'
 	Plug 'christianchiarulli/nvcode-color-schemes.vim' " Better highlighting choices
 	Plug 'ayu-theme/ayu-vim' 
+	Plug 'jsit/toast.vim'
 
 	" One Dark/Light Theme 
 	Plug 'rakr/vim-one'
