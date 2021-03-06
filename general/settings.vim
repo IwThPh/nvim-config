@@ -42,10 +42,10 @@ set tabstop=4
 set lbr
 set tw=500
 
+set colorcolumn=100
+
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
-
 
 " A buffer becomes hidden when it is abandoned
 set hid
