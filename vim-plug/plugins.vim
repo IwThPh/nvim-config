@@ -38,9 +38,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'kyazdani42/nvim-web-devicons' " Icons
 	Plug 'romgrk/barbar.nvim' " Buffer line 
 
-	" Git line edits...
-	Plug 'mhinz/vim-signify'
-
     " Zen mode
     Plug 'junegunn/goyo.vim'
 
@@ -57,6 +54,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 	"Git 
 	Plug 'tpope/vim-fugitive'
+	Plug 'lewis6991/gitsigns.nvim'
 
 	" Testing
 	Plug 'vim-test/vim-test'

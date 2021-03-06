@@ -46,10 +46,10 @@ else
 	lua require'plug-test'
 	lua require'plug-treesitter'
 	lua require'plug-chadtree'
+	lua require'plug-gitsigns'
 
 	source $HOME/.config/nvim/plug-config/vista.vim
 	source $HOME/.config/nvim/plug-config/start-screen.vim
-	source $HOME/.config/nvim/plug-config/signify.vim
 	source $HOME/.config/nvim/plug-config/goyo.vim
 endif
 
