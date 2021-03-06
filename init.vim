@@ -37,7 +37,7 @@ if has("gui_running")
 endif
 
 " Source Theme
-source $HOME/.config/nvim/themes/palenight.vim
+source $HOME/.config/nvim/themes/embark.vim
 lua require'plug-galaxyline'
 lua require'plug-colorizer'
 
