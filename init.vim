@@ -42,12 +42,12 @@ if exists('g:vscode')
 else
 	lua require'plug-completion'
 	lua require'plug-lsp'
+	lua require'plug-telescope'
 	lua require'plug-test'
 	lua require'plug-treesitter'
 	lua require'plug-chadtree'
 
 	source $HOME/.config/nvim/plug-config/vista.vim
-	source $HOME/.config/nvim/plug-config/fzf.vim
 	source $HOME/.config/nvim/plug-config/start-screen.vim
 	source $HOME/.config/nvim/plug-config/signify.vim
 	source $HOME/.config/nvim/plug-config/goyo.vim

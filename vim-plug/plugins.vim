@@ -9,6 +9,9 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 	" Status Line
     Plug 'glepnir/galaxyline.nvim', {'branch' : 'main'}
+	" Deps
+	Plug 'nvim-lua/popup.nvim'
+	Plug 'nvim-lua/plenary.nvim'
 
     
     " Better Syntax Support
@@ -30,12 +33,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Hex Colorizer
 	Plug 'norcalli/nvim-colorizer.lua'
 
-	" FZF - Fuzzy File Search
-	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	Plug 'junegunn/fzf.vim'
-	Plug 'airblade/vim-rooter'
-	Plug 'ojroques/nvim-lspfuzzy'
-
     " Commenting out lines easily
     Plug 'tpope/vim-commentary'
 	Plug 'kyazdani42/nvim-web-devicons' " Icons
@@ -54,6 +51,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Neovim Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " update modules on update
+
+	" Fuzzy Finder
+	Plug 'nvim-telescope/telescope.nvim'
 
 	"Git 
 	Plug 'tpope/vim-fugitive'
