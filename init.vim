@@ -54,6 +54,8 @@ lua require'plug-colorizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:python3_host_prog = '/Users/iwanphillips/.pyenv/versions/neovim3/bin/python'
+
 if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
