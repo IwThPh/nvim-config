@@ -42,6 +42,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'kosayoda/nvim-lightbulb' " VSCode like light bulb for code actions
     Plug 'liuchengxu/vista.vim' " Vista | LSP Symbol viewer
 
+	" Start up time profilling
+	Plug 'dstein64/vim-startuptime'
+
 	" Debug/Testing
 	Plug 'vim-test/vim-test'
 
