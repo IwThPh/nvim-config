@@ -62,7 +62,6 @@ else
 	lua require'plug-lsp'
 	lua require'plug-test'
 	lua require'plug-treesitter'
-	lua require'plug-bufferline'
 	lua require'plug-chadtree'
 
 	source $HOME/.config/nvim/plug-config/vista.vim

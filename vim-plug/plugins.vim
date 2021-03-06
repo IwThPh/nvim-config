@@ -10,9 +10,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Status Line
     Plug 'glepnir/galaxyline.nvim', {'branch' : 'main'}
 
-	" Icons
-	Plug 'ryanoasis/vim-devicons'
-	" Plug 'kyazdani42/nvim-web-devicons' "Lua icons. Couldnt get working on dev build
     
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
@@ -23,12 +20,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " File Explorer
 	Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
-	" Buffer line 
-	Plug 'akinsho/nvim-bufferline.lua'
-
-	"Better buffer deletion
-	" Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-	Plug 'ojroques/nvim-bufdel'
 
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
@@ -47,6 +38,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Commenting out lines easily
     Plug 'tpope/vim-commentary'
+	Plug 'kyazdani42/nvim-web-devicons' " Icons
+	Plug 'romgrk/barbar.nvim' " Buffer line 
 
 	" Git line edits...
 	Plug 'mhinz/vim-signify'

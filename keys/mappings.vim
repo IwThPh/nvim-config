@@ -1,6 +1,6 @@
 " Quick Save and Quit.
 map <Leader><Leader> :w<CR>
-map <Leader>q :BufDel<CR>
+map <Leader>q :BufferClose<CR>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -31,9 +31,9 @@ else
 	nnoremap <M-l>    :vertical resize +2<CR>
 
 	" TAB in general mode will move to text buffer
-	nnoremap <TAB> :BufferLineCycleNext<CR>
+	nnoremap <TAB> :BufferNext<CR>
 	" SHIFT-TAB will go back
-	nnoremap <S-TAB> :BufferLineCyclePrev<CR> 
+	nnoremap <S-TAB> :BufferPrevious<CR> 
 
 	" Map escape to escape sequence in terminal buffer.
 	:tnoremap <Esc> <C-\><C-n>
