@@ -7,46 +7,25 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-	" Status Line
-    Plug 'glepnir/galaxyline.nvim', {'branch' : 'main'}
 	" Deps
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
 
-    
-    " Better Syntax Support
-    Plug 'sheerun/vim-polyglot'
-
-    " Start Screen
-    Plug 'mhinz/vim-startify'
-
-    " File Explorer
-	Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-
-
-    " Auto pairs for '(' '[' '{'
-    Plug 'jiangmiao/auto-pairs'
-
-	" Vim surround
-	Plug 'tpope/vim-surround'
-
-	" Hex Colorizer
-	Plug 'norcalli/nvim-colorizer.lua'
-
-    " Commenting out lines easily
-    Plug 'tpope/vim-commentary'
+	" Visual / UI Plugins
+    Plug 'glepnir/galaxyline.nvim', {'branch' : 'main'} " Status Line
 	Plug 'kyazdani42/nvim-web-devicons' " Icons
+    Plug 'mhinz/vim-startify' " Start Screen
 	Plug 'romgrk/barbar.nvim' " Buffer line 
+	Plug 'norcalli/nvim-colorizer.lua'	" Hex Colorizer
+	Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'} " File Explorer
+    Plug 'junegunn/goyo.vim' " Zen mode
 
-    " Zen mode
-    Plug 'junegunn/goyo.vim'
+	" Quick Formatting/Editing
+    Plug 'jiangmiao/auto-pairs' " Auto pairs for '(' '[' '{'
+	Plug 'tpope/vim-surround' " Vim surround
+    Plug 'tpope/vim-commentary' " Commenting out lines easily
 
-	" Neovim LSP Config 
-	Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
-	Plug 'RRethy/vim-illuminate'
-
-    " Neovim Treesitter
+    " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " update modules on update
 
 	" Fuzzy Finder
@@ -56,23 +35,20 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'lewis6991/gitsigns.nvim'
 
-	" Testing
+	" Neovim LSP Config 
+	Plug 'neovim/nvim-lspconfig' " Official LSP quick setup 
+    Plug 'hrsh7th/nvim-compe' " Completion
+	Plug 'RRethy/vim-illuminate' " Symbol highlighting
+	Plug 'kosayoda/nvim-lightbulb' " VSCode like light bulb for code actions
+    Plug 'liuchengxu/vista.vim' " Vista | LSP Symbol viewer
+
+	" Debug/Testing
 	Plug 'vim-test/vim-test'
 
-	" Vista | LSP Symbol viewer
-    Plug 'liuchengxu/vista.vim'
-	
-	"""""""""""""""""""""""""
-    " Themes
-    """""""""""""""""""""""""
-    "" Palenight Theme <3
-	" Plug 'drewtempelmeyer/palenight.vim'
-	Plug 'christianchiarulli/nvcode-color-schemes.vim' " Better highlighting choices
+    " Colourschemes
 	Plug 'ayu-theme/ayu-vim' 
+	Plug 'drewtempelmeyer/palenight.vim'
 	Plug 'embark-theme/vim', { 'as': 'embark' }
 	Plug 'jsit/toast.vim'
-
-	" One Dark/Light Theme 
 	Plug 'rakr/vim-one'
-
 call plug#end()
