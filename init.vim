@@ -41,8 +41,8 @@ if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
 else
-	lua require'plug-lsp'
 	lua require'plugin.completion'
+	lua require'plugin.lsp'
 	lua require'plugin.telescope'
 	lua require'plugin.telescope.mapping'
 	lua require'plugin.test'

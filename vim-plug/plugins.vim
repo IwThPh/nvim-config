@@ -37,10 +37,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 	" Neovim LSP Config 
 	Plug 'neovim/nvim-lspconfig' " Official LSP quick setup 
+	Plug 'nvim-lua/lsp_extensions.nvim' " Rust - Inlay hints, see plugins.lsp.extensions
     Plug 'hrsh7th/nvim-compe' " Completion
-	Plug 'RRethy/vim-illuminate' " Symbol highlighting
+	Plug 'RRethy/vim-illuminate' " Symbol hover highlighting
 	Plug 'kosayoda/nvim-lightbulb' " VSCode like light bulb for code actions
-    Plug 'liuchengxu/vista.vim' " Vista | LSP Symbol viewer
+    Plug 'liuchengxu/vista.vim' " Symbol viewer
+	Plug 'glepnir/lspsaga.nvim' " Handlers, see plugins.lsp.handlers for override examples
 
 	" Start up time profilling
 	Plug 'dstein64/vim-startuptime'
