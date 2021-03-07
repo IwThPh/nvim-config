@@ -42,8 +42,9 @@ if exists('g:vscode')
 	source $HOME/.config/nvim/vscode/settings.vim
 else
 	lua require'plug-lsp'
-	lua require'plug-telescope'
 	lua require'plugin.completion'
+	lua require'plugin.telescope'
+	lua require'plugin.telescope.mapping'
 	lua require'plugin.test'
 	lua require'plugin.treesitter'
 	lua require'plugin.chadtree'
