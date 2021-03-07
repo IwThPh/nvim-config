@@ -29,8 +29,8 @@ set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 " Source Theme
 source $HOME/.config/nvim/themes/embark.vim
-lua require'plug-galaxyline'
-lua require'plug-colorizer'
+lua require'plugin.galaxyline'
+lua require'plugin.colorizer'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin Settings
@@ -41,13 +41,13 @@ if exists('g:vscode')
 	" VS Code extension
 	source $HOME/.config/nvim/vscode/settings.vim
 else
-	lua require'plug-completion'
 	lua require'plug-lsp'
 	lua require'plug-telescope'
-	lua require'plug-test'
-	lua require'plug-treesitter'
-	lua require'plug-chadtree'
-	lua require'plug-gitsigns'
+	lua require'plugin.completion'
+	lua require'plugin.test'
+	lua require'plugin.treesitter'
+	lua require'plugin.chadtree'
+	lua require'plugin.gitsigns'
 
 	source $HOME/.config/nvim/plug-config/vista.vim
 	source $HOME/.config/nvim/plug-config/start-screen.vim
