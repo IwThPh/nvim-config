@@ -43,7 +43,9 @@ local on_attach = function(client, bufnr)
 		sorting_strategy = "ascending",
 		prompt_position = "top",
 		ignore_filename = true,
+		height = 20,
 	}, true)
+
 	mapper_tele('<leader>wd', 'lsp_document_symbols', { ignore_filename = true }, true)
 	mapper_tele('<leader>ww', 'lsp_workspace_symbols', { ignore_filename = true }, true)
 
@@ -58,6 +60,10 @@ local on_attach = function(client, bufnr)
 		mapper('n', '<leader>r', 'vim.lsp.buf.formatting()')
 	end
 
+	if filetype == 'rust' then
+		vim.cmd([[autocmd BufEnter,BufWritePost <buffer> :lua require('plugin.lsp.extensions').show_line_hints() <CR>]])
+	end
+
 	-- Reset LSP and reload Buffer
 	mapper('n', '<space>rr', 'vim.lsp.stop_client(vim.lsp.get_active_clients()); vim.cmd [[e]]')
 end
@@ -66,7 +72,7 @@ end
 configs['intelephense'] = {
 	default_config = {
 		cmd = { "intelephense", "--stdio" };
-		filetypes = { "php" };
+		filetypes = { "php", "blade.php" };
 		root_dir = function (pattern)
 			local cwd  = vim.loop.cwd();
 			local root = util.root_pattern("composer.json", ".git")(pattern);
@@ -112,6 +118,13 @@ local servers = { "intelephense", "vuels", "tsserver", "rust_analyzer", "jsonls"
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+nvim_lsp['sqlls'].setup { 
+	on_attach = on_attach,
+	settings = { 
+		cmd = {"sql-language-server", "up", "--method", "stdio"}; 
+	},
+}
 
 -- Highlighting
 vim.api.nvim_command [[ hi def link LspReferenceText IncSearch ]]

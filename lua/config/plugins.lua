@@ -26,8 +26,8 @@ return require('packer').startup {
 		use 'romgrk/barbar.nvim' 					-- Buffer line 
 		use 'norcalli/nvim-colorizer.lua' 			-- Hex Colorizer
 		use {										-- File explorer
-			'ms-jpq/chadtree', branch = 'chad', 
-			run = 'python3 -m chadtree deps'
+			'kyazdani42/nvim-tree.lua', 
+			requires = {'kyazdani42/nvim-web-devicons'}
 		}
 		use 'junegunn/goyo.vim' 					-- Focus mode
 
@@ -47,6 +47,8 @@ return require('packer').startup {
 				{ 'nvim-lua/popup.nvim' }, 
 			}
 		}
+		use 'nvim-telescope/telescope-fzf-writer.nvim'
+		use 'nvim-telescope/telescope-dap.nvim'
 
 		-- Git 
 		use 'tpope/vim-fugitive'
@@ -67,8 +69,12 @@ return require('packer').startup {
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'
 
+		-- Project rooting
+		use 'airblade/vim-rooter'
+
 		-- Debug/Testing
-		use 'vim-test/vim-test'
+		use 'vim-test/vim-test'						-- Test runner
+		use 'mfussenegger/nvim-dap'					-- Debug Adapter Protocol
 
 		-- Colourschemes
 		use 'ayu-theme/ayu-vim' 

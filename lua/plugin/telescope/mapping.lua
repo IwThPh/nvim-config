@@ -36,5 +36,9 @@ map_tele('<leader>fh', 	'help_tags')
 map_tele('<C-g>', 		'git_status')
 map_tele('<leader>co', 	'git_branches')
 
+-- Dap
+map_tele('<leader>df', 	'dap_frames')
+map_tele('<leader>dl', 	'dap_list')
+
 return map_tele
 

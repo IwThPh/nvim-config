@@ -44,10 +44,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
-  chadtree = {
-    loaded = true,
-    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/chadtree"
-  },
   embark = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/embark"
@@ -80,6 +76,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-dap"
+  },
   ["nvim-lightbulb"] = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-lightbulb"
@@ -87,6 +87,10 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -112,6 +116,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["telescope-dap.nvim"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
+  },
+  ["telescope-fzf-writer.nvim"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope-fzf-writer.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope.nvim"
@@ -135,6 +147,10 @@ _G.packer_plugins = {
   ["vim-one"] = {
     loaded = true,
     path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-one"
+  },
+  ["vim-rooter"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-rooter"
   },
   ["vim-startify"] = {
     loaded = true,

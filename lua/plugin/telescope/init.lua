@@ -45,6 +45,7 @@ require('telescope').setup{
 		initial_mode = "insert",
 		selection_strategy = "reset",
 		sorting_strategy = "ascending",
+		scroll_strategy = nil,
 		layout_strategy = "flex",
 		layout_defaults = {
 		  horizontal = { mirror = false, },
@@ -70,8 +71,18 @@ require('telescope').setup{
 
 		-- Developer configurations: Not meant for general override
 		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-	}
+	},
+	extensions = {
+        fzf_writer = {
+            minimum_grep_characters = 2,
+            minimum_files_characters = 2,
+            use_highlighter = true,
+        }
+    }
 }
+
+require('telescope').load_extension('fzf_writer')
+require('telescope').load_extension('dap')
 
 -- Highlight groups.
 local nvim_cmd = vim.api.nvim_command
@@ -160,6 +171,14 @@ function M.help_tags()
   require('telescope.builtin').help_tags {
     show_version = true,
   }
+end
+
+function M.dap_frames()
+ require('telescope').extensions.dap.frames { }
+end
+
+function M.dap_list()
+ require('telescope').extensions.dap.list_breakpoints { }
 end
 
 return setmetatable({}, {
