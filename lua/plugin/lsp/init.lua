@@ -106,6 +106,11 @@ configs['intelephense'] = {
 						};
 					};
 				};
+				format = {
+					braces = {
+						"allman"
+					}; 
+				};
 			};
 		};
 	};
