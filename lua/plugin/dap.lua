@@ -19,6 +19,7 @@ end
 mapper('n', '<leader>dd', [[require'dap'.continue()]]) 
 mapper('n', '<leader>ds', [[require'dap'.stop()]]) 
 mapper('n', '<leader>d<leader>', [[require'dap'.toggle_breakpoint()]]) 
+mapper('n', '<leader>dc', [[require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))]]) 
 mapper('n', '<leader>do', [[require'dap'.step_over()]]) 
 mapper('n', '<leader>di', [[require'dap'.step_into()]]) 
 mapper('n', '<leader>du', [[require'dap'.step_out()]]) 
@@ -29,6 +30,8 @@ vim.fn.sign_define('DapBreakpoint', {text='', texthl='Error', linehl='', numh
 vim.fn.sign_define('DapLogPoint', {text='', texthl='Debug', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='', texthl='SignColumn', linehl='', numhl=''})
 
+-- REPL Completion
+vim.api.nvim_command [[ au FileType dap-repl lua require('dap.ext.autocompl').attach() ]]
 
 -- Adapter Configuration
 local dap = require('dap')
