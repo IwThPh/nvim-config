@@ -30,6 +30,10 @@ return require('packer').startup {
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
 		use 'junegunn/goyo.vim' 					-- Focus mode
+		use { 
+			'nacro90/numb.nvim',					-- Line viewer E.g. {:number}
+			config = function() require('numb').setup() end,
+		}
 
 		-- Quick Formatting/Editing
 		use 'jiangmiao/auto-pairs' 					-- Auto pairs for '(' '[' '{'
