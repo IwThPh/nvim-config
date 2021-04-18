@@ -147,6 +147,15 @@ gls.right[5] = {
 }
 
 gls.right[6] = {
+  ShowLspClient = {
+    provider = 'GetLspClient',
+    separator = ' | ',
+    separator_highlight = {colors.darkblue,colors.bg},
+    highlight = {colors.fg,colors.bg},
+  },
+}
+
+gls.right[7] = {
   LineInfo = {
     provider = 'LineColumn',
     separator = ' | ',
@@ -154,7 +163,7 @@ gls.right[6] = {
     highlight = {colors.fg,colors.bg},
   },
 }
-gls.right[7] = {
+gls.right[8] = {
   PerCent = {
     provider = 'LinePercent',
     separator = ' |',
@@ -162,7 +171,7 @@ gls.right[7] = {
     highlight = {colors.fg,colors.bg},
   }
 }
-gls.right[8] = {
+gls.right[9] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow,colors.bg},
