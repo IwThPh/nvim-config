@@ -69,6 +69,7 @@ return require('packer').startup {
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
 		use 'liuchengxu/vista.vim' 					-- Symbol viewer
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
+		use 'onsails/lspkind-nvim' 					-- Completion icons.
 
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'

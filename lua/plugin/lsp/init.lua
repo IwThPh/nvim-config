@@ -21,6 +21,32 @@ local mapper = function(mode, key, result)
 	vim.api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
 end
 
+require'lspkind'.init({
+	with_text = true,
+	symbol_map = {
+	  Text = '',
+	  Method = 'ƒ',
+	  Function = '',
+	  Constructor = '',
+	  Variable = '',
+	  Class = '',
+	  Interface = 'ﰮ',
+	  Module = '',
+	  Property = '',
+	  Unit = '',
+	  Value = '',
+	  Enum = '了',
+	  Keyword = '',
+	  Snippet = '﬌',
+	  Color = '',
+	  File = '',
+	  Folder = '',
+	  EnumMember = '',
+	  Constant = '',
+	  Struct = ''
+	},
+}) 
+
 local on_attach = function(client, bufnr)
 	require'illuminate'.on_attach(client) 
 	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
