@@ -111,6 +111,7 @@ local on_attach = function(client, bufnr)
 	mapper_tele('<leader>ww', 'lsp_workspace_symbols', { ignore_filename = true }, true)
 
 	vim.api.nvim_buf_set_keymap(0, 'n', '<leader>xx', "<cmd>LspTroubleToggle<CR>", {noremap = true, silent = true})
+	vim.api.nvim_buf_set_keymap(0, 'n', '<C-s>', "<cmd>SymbolsOutline<CR>", {noremap = true, silent = true})
 
 	-- To consider
 	-- mapper('n', '<leader>wa', 'vim.lsp.buf.add_workspace_folder()<CR>')
