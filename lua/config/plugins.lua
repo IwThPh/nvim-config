@@ -74,6 +74,15 @@ return require('packer').startup {
 			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
 			requires = "kyazdani42/nvim-web-devicons",
 		}
+		use {
+			'simrat39/symbols-outline.nvim',		-- Symbol outline tree viewer (Like vista) 
+			config = function ()
+				require'symbols-outline'.setup {
+					highlight_hovered_item = true,
+					show_guides = true,
+				}
+			end
+		}
 
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'
