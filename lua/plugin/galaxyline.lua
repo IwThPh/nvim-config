@@ -2,7 +2,7 @@
 
 local gl = require('galaxyline')
 local gls = gl.section
-gl.short_line_list = {'LuaTree','vista','dbui','startify','chadtree'}
+gl.short_line_list = {'LuaTree','vista','dbui','startify','chadtree', 'NvimTree'}
 
 local getHighlightTerm = function(group, term)
 	local hi = vim.api.nvim_exec([[execute('hi ' . "]] .. group .. [[")]], true)

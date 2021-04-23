@@ -31,6 +31,8 @@ if vim.g.vscode then
 else
 	require'plugin.completion'
 	require'plugin.lsp'
+	require'plugin.dashboard'
+	require'plugin.truezen'
 	require'plugin.telescope'
 	require'plugin.telescope.mapping'
 	require'plugin.test'
@@ -40,7 +42,5 @@ else
 	require'plugin.gitsigns'
 
 	source'/plug-config/vista.vim'
-	source'/plug-config/start-screen.vim'
-	source'/plug-config/goyo.vim'
 end
 

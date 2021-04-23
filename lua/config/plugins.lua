@@ -22,14 +22,14 @@ return require('packer').startup {
 			'glepnir/galaxyline.nvim', branch = 'main', 
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
-		use 'mhinz/vim-startify' 					-- Start Screen
+		use 'glepnir/dashboard-nvim'				-- Start Screen
 		use 'romgrk/barbar.nvim' 					-- Buffer line 
 		use 'norcalli/nvim-colorizer.lua' 			-- Hex Colorizer
 		use {										-- File explorer
 			'kyazdani42/nvim-tree.lua', 
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
-		use 'junegunn/goyo.vim' 					-- Focus mode
+		use "kdav5758/TrueZen.nvim"					-- Focus mode
 		use { 
 			'nacro90/numb.nvim',					-- Line viewer E.g. {:number}
 			config = function() require('numb').setup() end,
@@ -70,6 +70,10 @@ return require('packer').startup {
 		use 'liuchengxu/vista.vim' 					-- Symbol viewer
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
+		use {
+			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
+			requires = "kyazdani42/nvim-web-devicons",
+		}
 
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'
