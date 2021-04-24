@@ -78,6 +78,10 @@ return require('packer').startup {
 			requires = "kyazdani42/nvim-web-devicons",
 		}
 		use {
+			'folke/lsp-colors.nvim',				-- LSP Diagnostics colour auto linking
+			config = function () require'lsp-colors'.setup() end
+		}
+		use {
 			'simrat39/symbols-outline.nvim',		-- Symbol outline tree viewer (Like vista) 
 			config = function ()
 				require'symbols-outline'.setup {
