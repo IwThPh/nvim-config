@@ -112,10 +112,11 @@ local on_attach = function(client, bufnr)
 
 	vim.api.nvim_buf_set_keymap(0, 'n', '<leader>xx', "<cmd>LspTroubleToggle<CR>", {noremap = true, silent = true})
 
+	mapper('n', '<leader>wa', 'vim.lsp.buf.add_workspace_folder()<CR>')
+	mapper('n', '<leader>wr', 'vim.lsp.buf.remove_workspace_folder()<CR>')
+	mapper('n', '<leader>wl', 'P(vim.lsp.buf.list_workspace_folders())')
+
 	-- To consider
-	-- mapper('n', '<leader>wa', 'vim.lsp.buf.add_workspace_folder()<CR>')
-	-- mapper('n', '<leader>wr', 'vim.lsp.buf.remove_workspace_folder()<CR>')
-	-- mapper('n', '<leader>wl', 'P(vim.lsp.buf.list_workspace_folders())')
 	-- mapper('n', '<leader>q', 'vim.lsp.diagnostic.set_loclist()<CR>')
 
 	-- Set some keybinds conditional on server capabilities
