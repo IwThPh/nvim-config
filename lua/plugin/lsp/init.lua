@@ -191,6 +191,7 @@ end
 
 nvim_lsp['sqlls'].setup { 
 	on_attach = on_attach,
+	cmd = {"sql-language-server", "up", "--method", "stdio"}; 
 	settings = { 
 		cmd = {"sql-language-server", "up", "--method", "stdio"}; 
 	},
