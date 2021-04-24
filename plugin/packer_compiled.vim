@@ -75,10 +75,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
   },
-  ["auto-pairs"] = {
-    loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/auto-pairs"
-  },
   ["ayu-vim"] = {
     loaded = true,
     path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/ayu-vim"
@@ -123,6 +119,11 @@ _G.packer_plugins = {
     config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tnumb\frequire\0" },
     loaded = true,
     path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/numb.nvim"
+  },
+  ["nvim-autopairs"] = {
+    config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    loaded = true,
+    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -173,7 +174,7 @@ _G.packer_plugins = {
     path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
   ["symbols-outline.nvim"] = {
-    config = { "\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\27highlight_hovered_item\2\16show_guides\2\nsetup\20symbols-outline\frequire\0" },
+    config = { "\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\16show_guides\2\27highlight_hovered_item\2\nsetup\20symbols-outline\frequire\0" },
     loaded = true,
     path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
   },
@@ -234,12 +235,16 @@ _G.packer_plugins = {
 time("Defining packer_plugins", false)
 -- Config for: symbols-outline.nvim
 time("Config for symbols-outline.nvim", true)
-try_loadstring("\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\27highlight_hovered_item\2\16show_guides\2\nsetup\20symbols-outline\frequire\0", "config", "symbols-outline.nvim")
+try_loadstring("\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\16show_guides\2\27highlight_hovered_item\2\nsetup\20symbols-outline\frequire\0", "config", "symbols-outline.nvim")
 time("Config for symbols-outline.nvim", false)
 -- Config for: numb.nvim
 time("Config for numb.nvim", true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tnumb\frequire\0", "config", "numb.nvim")
 time("Config for numb.nvim", false)
+-- Config for: nvim-autopairs
+time("Config for nvim-autopairs", true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time("Config for nvim-autopairs", false)
 if should_profile then save_profiles() end
 
 END

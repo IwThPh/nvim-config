@@ -36,7 +36,10 @@ return require('packer').startup {
 		}
 
 		-- Quick Formatting/Editing
-		use 'jiangmiao/auto-pairs' 					-- Auto pairs for '(' '[' '{'
+		use {
+			'windwp/nvim-autopairs', 				-- Auto pairs for '(' '[' '{'
+			config = function() require('nvim-autopairs').setup() end,
+		}
 		use 'tpope/vim-surround' 					-- Surround selection
 		use 'tpope/vim-commentary' 					-- Commenting out lines easily
 
