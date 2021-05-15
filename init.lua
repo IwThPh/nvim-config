@@ -44,6 +44,7 @@ if vim.g.vscode then
 else
 	require'plugin.completion'
 	require'plugin.lsp'
+	require'plugin.barbar'
 	require'plugin.dashboard'
 	require'plugin.truezen'
 	require'plugin.telescope'
