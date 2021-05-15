@@ -70,7 +70,6 @@ return require('packer').startup {
 		use 'hrsh7th/nvim-compe' 					-- Auto-completion
 		use 'RRethy/vim-illuminate' 				-- Symbol hover highlighting
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
-		use 'liuchengxu/vista.vim' 					-- Symbol viewer
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
 		use {
