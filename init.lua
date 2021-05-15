@@ -21,7 +21,20 @@ vim.api.nvim_command('set wildmode=list:longest,list:full')
 vim.api.nvim_command('set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store')
 
 -- Colours, Themes and Fonts
-source'/themes/embark.vim'
+vim.g.material_style = 'palenight'         
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = true
+vim.g.material_italic_functions = true
+vim.g.material_italic_variables = false
+vim.g.material_contrast = true
+vim.g.material_borders = true 
+require'material'.set()
+
+vim.api.nvim_set_keymap('n', '<C-m>', [[<Cmd>lua require('material.functions').toggle_style()<CR>]], { noremap = true, silent = true })
+
+-- Work around for netrw | barbar bug
+vim.g.netrw_bufsettings = 'noma nomod nonu nowrap ro buflisted'
+
 require'plugin.galaxyline'
 require'plugin.colorizer'
 
@@ -40,7 +53,5 @@ else
 	require'plugin.treesitter'
 	require'plugin.nvimtree'
 	require'plugin.gitsigns'
-
-	source'/plug-config/vista.vim'
 end
 
