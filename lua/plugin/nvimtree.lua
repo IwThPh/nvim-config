@@ -2,7 +2,7 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
 vim.g.nvim_tree_side = 'left' --left by default
 vim.g.nvim_tree_width = 40 --30 by default
-vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' } --empty by default
+vim.g.nvim_tree_ignore = { '.git', '.cache' } --empty by default
 vim.g.nvim_tree_auto_open = 0 --0 by default, opens the tree when typing `vim $DIR` or `vim`
 vim.g.nvim_tree_auto_close = 1 --0 by default, closes the tree when it's the last window
 vim.g.nvim_tree_auto_ignore_ft = {'startify'} --empty by default, don't auto open tree on specific filetypes.
