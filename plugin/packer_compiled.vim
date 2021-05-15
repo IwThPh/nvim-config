@@ -47,8 +47,8 @@ local function save_profiles(threshold)
 end
 
 time("Luarocks path setup", true)
-local package_path_str = "/home/iwanp/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/iwanp/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/iwanp/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/iwanp/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/iwanp/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/iwanphillips/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/iwanphillips/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/iwanphillips/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/iwanphillips/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/iwanphillips/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -73,171 +73,175 @@ time("Defining packer_plugins", true)
 _G.packer_plugins = {
   ["TrueZen.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
   },
   ["ayu-vim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/ayu-vim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/ayu-vim"
   },
   ["barbar.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/barbar.nvim"
   },
   ["dashboard-nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
   embark = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/embark"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/embark"
   },
   ["galaxyline.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
   },
   ["lsp-colors.nvim"] = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15lsp-colors\frequire\0" },
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
   },
   ["lsp-trouble.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
   },
   ["lsp_extensions.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/lsp_extensions.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/lsp_extensions.nvim"
   },
   ["lspkind-nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
   },
   ["lspsaga.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
+  ["material.nvim"] = {
+    loaded = true,
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/material.nvim"
   },
   ["numb.nvim"] = {
     config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tnumb\frequire\0" },
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/numb.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/numb.nvim"
   },
   ["nvim-autopairs"] = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
   ["nvim-compe"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-compe"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-dap"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-dap"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-dap"
   },
   ["nvim-lightbulb"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-lightbulb"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-lightbulb"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
   ["palenight.vim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/palenight.vim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/palenight.vim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
   ["popup.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
   ["symbols-outline.nvim"] = {
-    config = { "\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\27highlight_hovered_item\2\16show_guides\2\nsetup\20symbols-outline\frequire\0" },
+    config = { "\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\16show_guides\2\27highlight_hovered_item\1\nsetup\20symbols-outline\frequire\0" },
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim"
   },
   ["telescope-dap.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
   },
   ["telescope-fzf-writer.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/telescope-fzf-writer.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope-fzf-writer.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
   ["toast.vim"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/toast.vim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/toast.vim"
   },
   ["vim-commentary"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-commentary"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
   ["vim-illuminate"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-illuminate"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-illuminate"
   },
   ["vim-one"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-one"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-one"
   },
   ["vim-rooter"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-rooter"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-rooter"
   },
   ["vim-startuptime"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-startuptime"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-startuptime"
   },
   ["vim-surround"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-surround"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-surround"
   },
   ["vim-test"] = {
     loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vim-test"
-  },
-  ["vista.vim"] = {
-    loaded = true,
-    path = "/home/iwanp/.local/share/nvim/site/pack/packer/start/vista.vim"
+    path = "/Users/iwanphillips/.local/share/nvim/site/pack/packer/start/vim-test"
   }
 }
 
 time("Defining packer_plugins", false)
+-- Config for: nvim-autopairs
+time("Config for nvim-autopairs", true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time("Config for nvim-autopairs", false)
 -- Config for: lsp-colors.nvim
 time("Config for lsp-colors.nvim", true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15lsp-colors\frequire\0", "config", "lsp-colors.nvim")
@@ -246,13 +250,9 @@ time("Config for lsp-colors.nvim", false)
 time("Config for numb.nvim", true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tnumb\frequire\0", "config", "numb.nvim")
 time("Config for numb.nvim", false)
--- Config for: nvim-autopairs
-time("Config for nvim-autopairs", true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time("Config for nvim-autopairs", false)
 -- Config for: symbols-outline.nvim
 time("Config for symbols-outline.nvim", true)
-try_loadstring("\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\27highlight_hovered_item\2\16show_guides\2\nsetup\20symbols-outline\frequire\0", "config", "symbols-outline.nvim")
+try_loadstring("\27LJ\2\ni\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\16show_guides\2\27highlight_hovered_item\1\nsetup\20symbols-outline\frequire\0", "config", "symbols-outline.nvim")
 time("Config for symbols-outline.nvim", false)
 if should_profile then save_profiles() end
 
