@@ -84,7 +84,7 @@ return require('packer').startup {
 			'simrat39/symbols-outline.nvim',		-- Symbol outline tree viewer (Like vista) 
 			config = function ()
 				require'symbols-outline'.setup {
-					highlight_hovered_item = true,
+					highlight_hovered_item = false,
 					show_guides = true,
 				}
 			end
