@@ -68,6 +68,7 @@ return require('packer').startup {
 		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup 
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
 		use 'hrsh7th/nvim-compe' 					-- Auto-completion
+		use 'norcalli/snippets.nvim'				-- Snippets
 		use 'RRethy/vim-illuminate' 				-- Symbol hover highlighting
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers

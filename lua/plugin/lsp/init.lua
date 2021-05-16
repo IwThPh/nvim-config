@@ -181,12 +181,24 @@ configs['intelephense'] = {
 	};
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
 local servers = { "intelephense", "vuels", "tsserver", "rust_analyzer", "jsonls", }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  nvim_lsp[lsp].setup { 
+	  on_attach = on_attach,
+	  capabilities = capabilities,
+  }
 end
 
 nvim_lsp['sqlls'].setup { 
