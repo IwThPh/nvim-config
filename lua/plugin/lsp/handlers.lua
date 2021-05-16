@@ -15,10 +15,15 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   require('lsp_extensions.workspace.diagnostic').handler, {
     signs = {
-      severity_limit = "Error",
+      severity_limit = "Warning",
     }
   }
 )
+
+vim.fn.sign_define("LspDiagnosticsSignError", { text="" })
+vim.fn.sign_define("LspDiagnosticsSignWarning", { text="" })
+vim.fn.sign_define("LspDiagnosticsSignInformation", { text="" })
+vim.fn.sign_define("LspDiagnosticsSignHint", { text="" })
 
 vim.lsp.handlers["textDocument/hover"] = require('lspsaga.hover').handler
 
