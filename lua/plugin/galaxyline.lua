@@ -23,19 +23,19 @@ end
 
 gls.left[1] = {
   FirstElement = {
-    provider = function() return '▋ ' end,
+    provider = function() return ' ' end,
     highlight = {colors.cyan,colors.bg}
   },
 }
 gls.left[2] = {
   ViMode = {
     provider = function()
-      local alias = {n = ' NORMAL ',i = ' INSERT ',c= ' COMMAND ',t = ' TERMINAL ',v= ' VISUAL ',V= ' V-LINE ', [''] = ' VISUAL '}
+      local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',t = 'TERMINAL',v= 'VISUAL',V= 'V-LINE', [''] = 'VISUAL'}
       return alias[vim.fn.mode()]
     end,
-    separator = '▋ ',
+    separator = ' ',
     separator_highlight = {colors.cyan,colors.bg},
-    highlight = {colors.yellow,colors.bg,'bold'},
+    highlight = {colors.yellow,colors.cyan,'bold'},
   },
 }
 gls.left[3] = {
@@ -68,7 +68,7 @@ gls.left[5] = {
 gls.left[6] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
-    icon = '  ',
+    icon = '  ',
     highlight = {colors.red,colors.bg}
   }
 }
@@ -80,21 +80,21 @@ gls.left[7] = {
 gls.left[8] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
-    icon = '  ',
+    icon = '  ',
     highlight = {colors.yellow,colors.bg},
   }
 }
 gls.left[9] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
-    icon = '   ',
+    icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
 }
 gls.left[10] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
-    icon = '   ',
+    icon = '  ',
     highlight = {colors.orange,colors.bg},
   }
 }

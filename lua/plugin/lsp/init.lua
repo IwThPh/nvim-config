@@ -78,7 +78,7 @@ require("trouble").setup {
 		hint = "",
 		information = ""
 	},
-	use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+	use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
 }
 
 
@@ -111,6 +111,11 @@ local on_attach = function(client, bufnr)
 	mapper_tele('<leader>ww', 'lsp_workspace_symbols', { ignore_filename = true }, true)
 
 	vim.api.nvim_buf_set_keymap(0, 'n', '<leader>xx', "<cmd>LspTroubleToggle<CR>", {noremap = true, silent = true})
+	vim.api.nvim_buf_set_keymap(0, 'n', '<C-s>', "<cmd>SymbolsOutline<CR>", {noremap = true, silent = true})
+
+	mapper('n', '<leader>wa', 'vim.lsp.buf.add_workspace_folder()<CR>')
+	mapper('n', '<leader>wr', 'vim.lsp.buf.remove_workspace_folder()<CR>')
+	mapper('n', '<leader>wl', 'P(vim.lsp.buf.list_workspace_folders())')
 
 	mapper('n', '<leader>wa', 'vim.lsp.buf.add_workspace_folder()<CR>')
 	mapper('n', '<leader>wr', 'vim.lsp.buf.remove_workspace_folder()<CR>')
@@ -180,12 +185,24 @@ configs['intelephense'] = {
 	};
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
 local servers = { "intelephense", "vuels", "tsserver", "rust_analyzer", "jsonls", }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  nvim_lsp[lsp].setup { 
+	  on_attach = on_attach,
+	  capabilities = capabilities,
+  }
 end
 
 nvim_lsp['sqlls'].setup { 

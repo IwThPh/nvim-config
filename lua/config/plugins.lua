@@ -68,9 +68,9 @@ return require('packer').startup {
 		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup 
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
 		use 'hrsh7th/nvim-compe' 					-- Auto-completion
+		use 'norcalli/snippets.nvim'				-- Snippets
 		use 'RRethy/vim-illuminate' 				-- Symbol hover highlighting
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
-		use 'liuchengxu/vista.vim' 					-- Symbol viewer
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
 		use {
@@ -85,7 +85,7 @@ return require('packer').startup {
 			'simrat39/symbols-outline.nvim',		-- Symbol outline tree viewer (Like vista) 
 			config = function ()
 				require'symbols-outline'.setup {
-					highlight_hovered_item = true,
+					highlight_hovered_item = false,
 					show_guides = true,
 				}
 			end
@@ -104,9 +104,12 @@ return require('packer').startup {
 		-- Colourschemes
 		use 'ayu-theme/ayu-vim' 
 		use 'drewtempelmeyer/palenight.vim'
-		use { 'embark-theme/vim', as = 'embark' }
+		use { 'embark-theme/vim', as = 'embark', branch = 'main' }
 		use 'jsit/toast.vim'
 		use 'rakr/vim-one'
+		use {										
+			'marko-cerovac/material.nvim', branch = 'pure-lua', 
+		}
 	end,
 	config = {
 		_display = {
