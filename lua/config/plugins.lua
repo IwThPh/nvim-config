@@ -29,7 +29,7 @@ return require('packer').startup {
 			'kyazdani42/nvim-tree.lua', 
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
-		use "kdav5758/TrueZen.nvim"					-- Focus mode
+		use "Pocco81/TrueZen.nvim"					-- Focus mode
 		use { 
 			'nacro90/numb.nvim',					-- Line viewer E.g. {:number}
 			config = function() require('numb').setup() end,
