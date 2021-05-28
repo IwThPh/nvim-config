@@ -99,13 +99,7 @@ local on_attach = function(client, bufnr)
 	mapper('n', 'gn', 'vim.lsp.diagnostic.goto_next()')
 
 	mapper_tele('ga', 'lsp_code_actions', nil, true)
-	mapper_tele('gr', 'lsp_references', {
-		layout_strategy = "vertical",
-		sorting_strategy = "ascending",
-		prompt_position = "top",
-		ignore_filename = true,
-		height = 20,
-	}, true)
+	mapper_tele('gr', 'lsp_references', nil, true)
 
 	mapper_tele('<leader>wd', 'lsp_document_symbols', { ignore_filename = true }, true)
 	mapper_tele('<leader>ww', 'lsp_workspace_symbols', { ignore_filename = true }, true)
@@ -164,14 +158,12 @@ configs['intelephense'] = {
 							"@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2",
 							"@return ${1:$SYMBOL_TYPE} $2",
 							"@throws ${1:$SYMBOL_TYPE} $2",
-							"@author Iwan Phillips <iwan.phillips@worthers.com>"
 						};
 					};
 					classTemplate = {
 						summary = "$1";
 						tags = {
 							"@package ${1:$SYMBOL_NAMESPACE}",
-							"@author Iwan Phillips <iwan.phillips@worthers.com>"
 						};
 					};
 				};
@@ -184,6 +176,55 @@ configs['intelephense'] = {
 		};
 	};
 }
+
+configs['vuels'] = {
+	default_config = {
+		cmd = { "vls" };
+		filetypes = {"vue"};
+		root_dir = util.root_pattern("package.json");
+		init_options = {
+			config = {
+				vetur = {
+					useWorkspaceDependencies = false;
+					validation = {
+						template = true;
+						style = true;
+						script = true;
+					};
+					completion = {
+						autoImport = true;
+						useScaffoldSnippets = false;
+						tagCasing = "kebab";
+					};
+					format = {
+						defaultFormatter = {
+							js = "none";
+							ts = "none";
+						};
+						defaultFormatterOptions = {
+							tabSize = 4;
+							useTabs = true;
+						};
+						scriptInitialIndent = false;
+						styleInitialIndent = false;
+					}
+				};
+				css = {};
+				html = {
+					suggest = {};
+				};
+				javascript = {
+					format = {};
+				};
+					typescript = {
+					format = {};
+				};
+				emmet = {};
+				stylusSupremacy = {};
+			};
+		};
+	};
+};
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -236,7 +277,7 @@ local blade_formatter = {
 nvim_lsp.efm.setup {
 	on_attach = on_attach,
 	init_options = {documentFormatting = true},
-	filetypes = {"javascript", "typescript", "blade"},
+	filetypes = {"javascript", "typescript", "blade", "vue"},
 	root_dir = function(fname)
 		return util.root_pattern(".git")(fname);
 	end,
