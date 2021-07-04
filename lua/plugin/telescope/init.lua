@@ -38,7 +38,6 @@ require('telescope').setup{
 		  '--column',
 		  '--smart-case'
 		},
-		prompt_position = "top",
 		prompt_prefix = "> ",
 		selection_caret = "> ",
 		entry_prefix = "  ",
@@ -47,30 +46,41 @@ require('telescope').setup{
 		sorting_strategy = "ascending",
 		scroll_strategy = nil,
 		layout_strategy = "flex",
-		layout_defaults = {
-		  horizontal = { mirror = false, },
-		  vertical = { mirror = false, },
+		layout_config = {
+			width = 0.95,
+			height = 0.85,
+			prompt_position = "top",
+			horizontal = { 
+				mirror = false,
+				preview_width = function(_, cols, _)
+					if cols > 200 then
+						return math.floor(cols * 0.4)
+					else
+						return math.floor(cols * 0.6)
+					end
+				end,
+			},
+			vertical = {
+				mirror = false,
+				width = 0.9,
+				height = 0.95,
+				preview_height = 0.5,
+			},
 		},
 		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
 		file_ignore_patterns = {},
 		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
 		shorten_path = true,
 		winblend = 0,
-		width = 0.65,
-		preview_cutoff = 120,
-		results_height = 1,
-		results_width = 0.8,
 		border = {},
 		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
 		color_deicons = true,
 		use_less = true,
 		set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-		-- Developer configurations: Not meant for general override
-		buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
 	},
 	extensions = {
         fzf_writer = {
@@ -155,8 +165,10 @@ end
 
 function M.project_search()
   require('telescope.builtin').find_files {
-    previewer = false,
-    layout_strategy = "vertical",
+    layout_strategy = 'horizontal',
+    layout_config = {
+      preview_width = 0.5,
+    },
     cwd = require('lspconfig.util').root_pattern(".git")(vim.fn.expand("%:p")),
   }
 end
