@@ -107,9 +107,7 @@ return require('packer').startup {
 		use { 'embark-theme/vim', as = 'embark', branch = 'main' }
 		use 'jsit/toast.vim'
 		use 'rakr/vim-one'
-		use {										
-			'marko-cerovac/material.nvim', branch = 'pure-lua', 
-		}
+		use 'marko-cerovac/material.nvim'
 	end,
 	config = {
 		_display = {
