@@ -1,16 +1,26 @@
 -- require'nvim-web-devicons'.setup()
+if not pcall(require, 'galaxyline') then
+  return
+end
+
+local should_reload = true
+local reloader = function()
+  if should_reload then
+    RELOAD('galaxyline')
+  end
+end
+
+reloader()
 
 local gl = require('galaxyline')
 local gls = gl.section
 gl.short_line_list = {'LuaTree','vista','dbui','startify','chadtree', 'NvimTree'}
 
-local getHighlightTerm = function(group, term)
-	local hi = vim.api.nvim_exec([[execute('hi ' . "]] .. group .. [[")]], true)
-	return string.match(hi, [[ .* ]] .. term .. [[=(#[%w]+).*]])
-end
-
-local colors = require('galaxyline.theme').default
-colors.bg = getHighlightTerm('StatusLine', 'guibg');
+local colors = require('material.colors')
+colors.magenta = colors.pink
+colors.violet = colors.purple
+colors.darkblue = colors.blue
+colors.blue = colors.paleblue
 
 local buffer_not_empty = function()
   return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -23,7 +33,7 @@ end
 
 gls.left[1] = {
   FirstElement = {
-    provider = function() return ' ' end,
+    provider = function() return '███' end,
     highlight = {colors.cyan,colors.bg}
   },
 }
@@ -33,9 +43,9 @@ gls.left[2] = {
       local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',t = 'TERMINAL',v= 'VISUAL',V= 'V-LINE', [''] = 'VISUAL'}
       return alias[vim.fn.mode()]
     end,
-    separator = ' ',
+    separator = '█ ',
     separator_highlight = {colors.cyan,colors.bg},
-    highlight = {colors.yellow,colors.cyan,'bold'},
+    highlight = {colors.bg,colors.cyan,'bold'},
   },
 }
 gls.left[3] = {
@@ -116,7 +126,7 @@ gls.right[2] = {
     -- separator = ' ',
     -- separator_highlight = {colors.purple,colors.bg},
     icon = '  ',
-    highlight = {colors.blue,colors.bg},
+    highlight = {colors.darkblue,colors.bg},
   }
 }
 gls.right[3] = {
@@ -154,30 +164,6 @@ gls.right[6] = {
     highlight = {colors.fg,colors.bg},
   },
 }
-
-gls.right[7] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    separator = ' | ',
-    separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.fg,colors.bg},
-  },
-}
-gls.right[8] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = ' |',
-    separator_highlight = {colors.darkblue,colors.bg},
-    highlight = {colors.fg,colors.bg},
-  }
-}
-gls.right[9] = {
-  ScrollBar = {
-    provider = 'ScrollBar',
-    highlight = {colors.yellow,colors.bg},
-  }
-}
-
 gls.short_line_left[1] = {
   LeftEnd = {
     provider = function() return ' ' end,
