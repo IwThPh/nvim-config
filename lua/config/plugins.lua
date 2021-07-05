@@ -52,10 +52,10 @@ return require('packer').startup {
 			require = { 
 				{ 'nvim-lua/plenary.nvim' },
 				{ 'nvim-lua/popup.nvim' }, 
-				{ 'nvim-telescope/telescope-fzf-writer.nvim' }, 
-				{ 'nvim-telescope/telescope-dap.nvim' }, 
 			}
 		}
+		use 'nvim-telescope/telescope-fzf-writer.nvim'
+		use 'nvim-telescope/telescope-dap.nvim'
 
 		-- Git 
 		use 'tpope/vim-fugitive'
