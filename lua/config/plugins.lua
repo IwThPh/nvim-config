@@ -66,6 +66,7 @@ return require('packer').startup {
 
 		-- Neovim LSP Config 
 		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup 
+		use 'kabouzeid/nvim-lspinstall' 			-- LSP quick installer to avoid package manager annoyances. 
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
 		use 'hrsh7th/nvim-compe' 					-- Auto-completion
 		use 'norcalli/snippets.nvim'				-- Snippets
