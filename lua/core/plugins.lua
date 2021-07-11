@@ -106,11 +106,6 @@ return require('packer').startup {
 		use 'mfussenegger/nvim-dap'					-- Debug Adapter Protocol
 
 		-- Colourschemes
-		use 'ayu-theme/ayu-vim' 
-		use 'drewtempelmeyer/palenight.vim'
-		use { 'embark-theme/vim', as = 'embark', branch = 'main' }
-		use 'jsit/toast.vim'
-		use 'rakr/vim-one'
 		use 'marko-cerovac/material.nvim'
 	end,
 	config = {
