@@ -34,6 +34,7 @@ return require('packer').startup {
 			'nacro90/numb.nvim',					-- Line viewer E.g. {:number}
 			config = function() require('numb').setup() end,
 		}
+		use "lukas-reineke/indent-blankline.nvim"
 
 		-- Quick Formatting/Editing
 		use {
