@@ -70,7 +70,10 @@ require('telescope').setup{
 		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
 		file_ignore_patterns = {},
 		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-		shorten_path = true,
+		path_display = {
+			"shorten",
+			"absolute"
+		},
 		winblend = 0,
 		border = {},
 		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -113,7 +116,6 @@ local M = {}
 function M.edit_neovim()
   require('telescope.builtin').find_files {
     prompt_title = "~ dotfiles ~",
-    shorten_path = false,
     cwd = "~/.config/nvim",
 
     layout_strategy = 'horizontal',
@@ -128,7 +130,6 @@ function M.git_files()
     winblend = 10,
     border = true,
     previewer = false,
-    shorten_path = false,
   }
 
   require('telescope.builtin').git_files(opts)
@@ -140,7 +141,6 @@ function M.buffer_git_files()
     winblend = 10,
     border = true,
     previewer = false,
-    shorten_path = false,
   })
 end
 
@@ -149,7 +149,6 @@ function M.lsp_code_actions()
     winblend = 10,
     border = true,
     previewer = false,
-    shorten_path = false,
   }
 
   require('telescope.builtin').lsp_code_actions(opts)
@@ -157,7 +156,6 @@ end
 
 function M.live_grep()
  require('telescope').extensions.fzf_writer.staged_grep {
-   shorten_path = true,
    previewer = false,
    fzf_separator = "|>",
  }
@@ -174,9 +172,7 @@ function M.project_search()
 end
 
 function M.buffers()
-  require('telescope.builtin').buffers {
-    shorten_path = false,
-  }
+  require('telescope.builtin').buffers { }
 end
 
 function M.help_tags()
