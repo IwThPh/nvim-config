@@ -1,14 +1,10 @@
 
 let mapleader = " " " Set leader to spacebar
 
-syntax enable                           " Enables syntax highlighing
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
 set spelllang=en_gb
-set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
-set fileencoding=utf-8                  " The encoding written to file
-set ruler              			        " Show the cursor position all the time
 set cmdheight=2                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -18,7 +14,6 @@ set laststatus=2                        " Always display the status line
 set scl=yes  							" force the signcolumn to appear
 set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
-set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
 set linespace=3
 set so=7
@@ -28,13 +23,7 @@ set so=7
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use tabs instead of spaces
-set autoindent
 set noexpandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
 
@@ -43,8 +32,6 @@ set lbr
 set tw=500
 
 set colorcolumn=100
-
-set ai "Auto indent
 set si "Smart indent
 
 " A buffer becomes hidden when it is abandoned
@@ -55,12 +42,6 @@ set ignorecase
 
 " When searching try to be smart about cases
 set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -73,12 +54,7 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-
-set backspace=eol,start,indent          " Configure backspace so it acts as it should act
 set whichwrap+=<,>,h,l
-
-set nobackup                            " This is recommended by coc
-set nowritebackup                       " This is recommended by coc
 
 set updatetime=300                      " Faster completion
 set timeoutlen=500                      " By default timeoutlen is 1000 ms
