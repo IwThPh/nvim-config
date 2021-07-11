@@ -44,7 +44,9 @@ end
 
 local on_attach = function(client, bufnr)
 	-- LSP supported highlighting
-	require'illuminate'.on_attach(client) 
+	require'illuminate'.on_attach(client)
+	require 'lsp_signature'.on_attach()
+
 	vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 

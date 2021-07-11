@@ -75,6 +75,7 @@ return require('packer').startup {
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
 		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
+		use 'ray-x/lsp_signature.nvim' 				-- Signature information
 		use {
 			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
 			requires = "kyazdani42/nvim-web-devicons",
