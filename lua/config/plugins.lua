@@ -64,6 +64,7 @@ return require('packer').startup {
 			'lewis6991/gitsigns.nvim',
 			require = { 'nvim-lua/plenary.nvim' }
 		}
+		use 'sindrets/diffview.nvim'
 
 		-- Neovim LSP Config 
 		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup 
