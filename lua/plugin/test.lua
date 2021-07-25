@@ -8,3 +8,6 @@ set_keymap('n', 'ta', ':TestSuite<CR>', opts)
 set_keymap('n', 'tt', ':TestLast<CR>', opts)
 
 vim.api.nvim_set_var("test#strategy", "neovim")
+vim.api.nvim_set_var("test#php#runner", "phpunit")
+vim.api.nvim_set_var("test#php#phpunit#executable", "./vendor/bin/phpunit")
+
