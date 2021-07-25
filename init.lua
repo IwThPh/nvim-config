@@ -4,12 +4,12 @@
 require'core.utils'
 require'core.mappings'
 require'core.options'
-require'core.globals'
 require'core.plugins'
 require'core.colours'
 
 -- Plugins
 if vim.g.vscode then
+
 	U.source'/vscode/settings.vim'
 else
 	require'plugin.galaxyline'
