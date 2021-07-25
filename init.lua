@@ -27,6 +27,7 @@ else
 	require'plugin.nvimtree'
 	require'plugin.gitsigns'
 	require'plugin.indent-blankline'
+	require'plugin.outline'
 end
 
 -- Work around for netrw | barbar bug

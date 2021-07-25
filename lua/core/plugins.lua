@@ -85,15 +85,7 @@ return require('packer').startup {
 			'folke/lsp-colors.nvim',				-- LSP Diagnostics colour auto linking
 			config = function () require'lsp-colors'.setup() end
 		}
-		use {
-			'simrat39/symbols-outline.nvim',		-- Symbol outline tree viewer (Like vista) 
-			config = function ()
-				require'symbols-outline'.setup {
-					highlight_hovered_item = false,
-					show_guides = true,
-				}
-			end
-		}
+		use 'simrat39/symbols-outline.nvim'			-- Symbol outline tree viewer (Like vista)
 
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'
