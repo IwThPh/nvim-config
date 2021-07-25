@@ -19,6 +19,7 @@ local themes = require('telescope.themes')
 
 require('telescope').setup{
 	defaults = {
+
 		mappings = {
 			i = {
 				["<C-n>"]  = actions.move_selection_next,
@@ -29,29 +30,21 @@ require('telescope').setup{
 				["<C-d>"]  = actions.preview_scrolling_down,
 			},
 		},
-		vimgrep_arguments = {
-		  'rg',
-		  '--color=never',
-		  '--no-heading',
-		  '--with-filename',
-		  '--line-number',
-		  '--column',
-		  '--smart-case'
-		},
+
 		prompt_prefix = "> ",
 		selection_caret = "> ",
-		entry_prefix = "  ",
-		initial_mode = "insert",
+
 		selection_strategy = "reset",
 		sorting_strategy = "ascending",
-		scroll_strategy = nil,
+		scroll_strategy = "cycle",
+
 		layout_strategy = "flex",
 		layout_config = {
 			width = 0.95,
 			height = 0.85,
 			prompt_position = "top",
-			horizontal = { 
-				mirror = false,
+
+			horizontal = {
 				preview_width = function(_, cols, _)
 					if cols > 200 then
 						return math.floor(cols * 0.4)
@@ -60,31 +53,37 @@ require('telescope').setup{
 					end
 				end,
 			},
+
 			vertical = {
-				mirror = false,
 				width = 0.9,
 				height = 0.95,
 				preview_height = 0.5,
 			},
 		},
-		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+
+		color_devicons = true,
+
 		file_ignore_patterns = {},
-		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+
 		path_display = {
-			"shorten",
 			"absolute"
 		},
+
 		winblend = 0,
+
 		border = {},
 		borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-		color_deicons = true,
-		use_less = true,
+
 		set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+
+		generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+		file_sorter =  require'telescope.sorters'.get_fuzzy_file,
 
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 	},
+
 	extensions = {
         fzf_writer = {
             minimum_grep_characters = 2,
@@ -156,7 +155,6 @@ end
 
 function M.live_grep()
  require('telescope').extensions.fzf_writer.staged_grep {
-   previewer = false,
    fzf_separator = "|>",
  }
 end
@@ -168,6 +166,18 @@ function M.project_search()
       preview_width = 0.5,
     },
     cwd = require('lspconfig.util').root_pattern(".git")(vim.fn.expand("%:p")),
+  }
+end
+
+function M.project_vendor_search()
+  require('telescope.builtin').find_files {
+    prompt_title = "~ vendor files ~",
+    cwd = "./vendor",
+
+    layout_strategy = 'horizontal',
+    layout_config = {
+      preview_width = 0.65,
+    },
   }
 end
 
@@ -187,6 +197,14 @@ end
 
 function M.dap_list()
  require('telescope').extensions.dap.list_breakpoints { }
+end
+
+function M.spell_suggest()
+  require('telescope.builtin').spell_suggest(themes.get_dropdown {
+    winblend = 10,
+    border = true,
+    previewer = false,
+  })
 end
 
 return setmetatable({}, {

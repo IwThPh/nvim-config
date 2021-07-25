@@ -28,13 +28,15 @@ end
 -- Dotfiles
 map_tele('<leader>en', 	'edit_neovim')
 
--- General 
+-- General
 map_tele('<C-f>', 		'project_search')
+map_tele('<leader>v', 	'project_vendor_search')
 map_tele('<leader>g', 	'live_grep')
 map_tele('<leader>b', 	'buffers')
 map_tele('<leader>fh', 	'help_tags')
 map_tele('<C-g>', 		'git_status')
 map_tele('<leader>co', 	'git_branches')
+map_tele('<leader>so', 	'spell_suggest')
 
 -- Dap
 map_tele('<leader>df', 	'dap_frames')

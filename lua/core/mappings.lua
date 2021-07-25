@@ -107,4 +107,4 @@ nmap('<leader>ss', ':setlocal spell!<cr>')
 nmap('<leader>sn',']s')
 nmap('<leader>sp','[s')
 nmap('<leader>sa','zg')
-nmap('<leader>s?','z=')
+-- Spelling suggest moved to telescope mappings
