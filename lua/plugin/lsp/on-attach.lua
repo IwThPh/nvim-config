@@ -36,6 +36,7 @@ local function mappings(client)
 	-- Set some keybinds conditional on server capabilities
 	if client.resolved_capabilities.document_formatting or client.resolved_capabilities.document_range_formatting then
 		mapper('n', '<leader>r', 'vim.lsp.buf.formatting()')
+		mapper('n', '<leader>vr', 'vim.lsp.buf.range_formatting()')
 	end
 
 	-- Reset LSP and reload Buffer
