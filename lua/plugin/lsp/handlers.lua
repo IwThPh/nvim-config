@@ -1,12 +1,12 @@
 local border = {
-	{"🭽", "FloatBorder"},
-	{"▔", "FloatBorder"},
-	{"🭾", "FloatBorder"},
-	{"▕", "FloatBorder"},
-	{"🭿", "FloatBorder"},
-	{"▁", "FloatBorder"},
-	{"🭼", "FloatBorder"},
-	{"▏", "FloatBorder"},
+	{"╭", "FloatBorder"},
+	{"─", "FloatBorder"},
+	{"╮", "FloatBorder"},
+	{"│", "FloatBorder"},
+	{"╯", "FloatBorder"},
+	{"─", "FloatBorder"},
+	{"╰", "FloatBorder"},
+	{"│", "FloatBorder"},
 }
 
 --Custom LSP Handlers
