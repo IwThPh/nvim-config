@@ -35,6 +35,10 @@ return require('packer').startup {
 			config = function() require('numb').setup() end,
 		}
 		use "lukas-reineke/indent-blankline.nvim"
+		use {
+			 "vuki656/package-info.nvim",					-- Line viewer E.g. {:number}
+			config = function() require('package-info').setup() end,
+		}
 
 		-- Quick Formatting/Editing
 		use {
