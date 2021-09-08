@@ -34,28 +34,28 @@ nmap('<C-h>', '<C-W>h')
 nmap('<C-l>', '<C-W>l')
 
 -- Use alt + hjkl to resize windows
-nmap('<M-j>', ':resize -2<CR>')
-nmap('<M-k>', ':resize +2<CR>')
-nmap('<M-h>', ':vertical resize -2<CR>')
-nmap('<M-l>', ':vertical resize +2<CR>')
+nmap('<M-j>', '<cmd>resize -2<CR>')
+nmap('<M-k>', '<cmd>resize +2<CR>')
+nmap('<M-h>', '<cmd>vertical resize -2<CR>')
+nmap('<M-l>', '<cmd>vertical resize +2<CR>')
 
 -- TAB in general mode will move to text buffer
-nmap('<TAB>', ':BufferNext<CR>')
+nmap('<TAB>', '<cmd>BufferNext<CR>')
 -- SHIFT-TAB will go back
-nmap('<S-TAB>', ':BufferPrevious<CR>')
+nmap('<S-TAB>', '<cmd>BufferPrevious<CR>')
 
 -- Map escape to escape sequence in terminal buffer.
 tmap('<Esc>', '<C-\\><C-n>')
 
 -- Useful mappings for managing tabs
-nmap('<leader>tn',':tabnew<cr>')
-nmap('<leader>to',':tabonly<cr>')
-nmap('<leader>tc',':tabclose<cr>')
-nmap('<leader>tm',':tabmove')
-nmap('<leader>t<leader>', ':tabnext<cr>')
+nmap('<leader>tn','<cmd>tabnew<cr>')
+nmap('<leader>to','<cmd>tabonly<cr>')
+nmap('<leader>tc','<cmd>tabclose<cr>')
+nmap('<leader>tm','<cmd>tabmove')
+nmap('<leader>t<leader>', '<cmd>tabnext<cr>')
 
 -- Switch CWD to the directory of the open buffer
-nmap('<leader>cd', ':cd %:p:h<cr>:pwd<cr>')
+nmap('<leader>cd', '<cmd>cd %:p:h<cr><cmd>pwd<cr>')
 
 -- Return to last edit position when opening files (You want this!)
 vim.cmd [[ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]]
@@ -80,16 +80,14 @@ nmap('<M-K>',"mz:m-2<cr>`z")
 vmap('<M-j>',":m'>+<cr>`<my`>mzgv`yo`z")
 vmap('<M-k>',":m'<-2<cr>`>my`<mzgv`yo`z")
 
-if vim.fn.has('mac') == 1 or vim.fn.has('macunix') == 1 then
-  nmap('˙','<M-h>')
-  nmap('∆','<M-j>')
-  nmap('˚','<M-k>')
-  nmap('¬','<M-l>')
-  vmap('˙','<M-h>')
-  vmap('∆','<M-j>')
-  vmap('˚','<M-k>')
-  vmap('¬','<M-l>')
-end
+nmap('˙','<M-h>')
+nmap('∆','<M-j>')
+nmap('˚','<M-k>')
+nmap('¬','<M-l>')
+vmap('˙','<M-h>')
+vmap('∆','<M-j>')
+vmap('˚','<M-k>')
+vmap('¬','<M-l>')
 
 -- Better tabbing
 vmap('<','<gv')
