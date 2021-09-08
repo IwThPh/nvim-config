@@ -76,11 +76,8 @@ return require('packer').startup {
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
 		use 'hrsh7th/nvim-compe' 					-- Auto-completion
 		use 'norcalli/snippets.nvim'				-- Snippets
-		use 'RRethy/vim-illuminate' 				-- Symbol hover highlighting
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
-		use 'glepnir/lspsaga.nvim' 					-- Handlers, see plugins.lsp.handlers
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
-		use 'ray-x/lsp_signature.nvim' 				-- Signature information
 		use {
 			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
 			requires = "kyazdani42/nvim-web-devicons",
