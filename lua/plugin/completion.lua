@@ -1,45 +1,61 @@
-vim.api.nvim_set_option('completeopt', 'menu,menuone,noinsert,noselect')
+local cmp = require'cmp'
+local lspkind = require'lspkind'
 
-require'compe'.setup {
-	enabled = true;
-	autocomplete = true;
-	debug = false;
-	min_length = 1;
-	preselect = 'enable';
-	throttle_time = 80;
-	source_timeout = 200;
-	resolve_timeout = 800;
-	incomplete_delay = 400;
-	max_abbr_width = 100;
-	max_kind_width = 100;
-	max_menu_width = 100;
+cmp.setup {
+	snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+	completion = {
+		completeopt='menu,menuone,noinsert,noselect'
+	},
+
+	formatting = {
+		format = function(_, vim_item)
+			vim_item.kind = lspkind.presets.default[vim_item.kind]
+			return vim_item
+		end
+	},
 
 	documentation = {
-		border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-		winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-		max_width = 120,
-		min_width = 60,
-		max_height = math.floor(vim.o.lines * 0.3),
-		min_height = 1,
-	};
+		border =  {"🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏"},
+	},
 
-	source = {
-		path = true;
-		buffer = true;
-		calc = false;
-		nvim_lsp = true;
-		nvim_lua = true;
-		vsnip = false;
-		ultisnips = false;
-		luasnip = false;
-	};
+	mapping = {
+		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		},
+		['<Tab>'] = function(fallback)
+			if vim.fn.pumvisible() == 1 then
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+			else
+				fallback()
+			end
+		end,
+		['<S-Tab>'] = function(fallback)
+			if vim.fn.pumvisible() == 1 then
+				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+			else
+				fallback()
+			end
+		end,
+	},
+
+	sources = {
+		{ name='nvim_lsp' },
+		{ name='nvim_lua' },
+		{ name='buffer' },
+		{ name='path' },
+	},
 }
 
 -- Mappings.
-local function set_keymap(...) vim.api.nvim_set_keymap(...) end
-local opts = { noremap=true, silent=true, expr=true }
-set_keymap('i', '<C-Space>', 'compe#complete()', opts)
-set_keymap('i', '<CR>', 'compe#confirm("<CR>")', opts)
-set_keymap('i', '<C-e>', 'compe#close("<C-e>")', opts)
-
 require'snippets'.use_suggested_mappings()

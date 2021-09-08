@@ -14,23 +14,23 @@ return require('packer').startup {
 		use 'wbthomason/packer.nvim'
 
 		-- Deps
-		use 'nvim-lua/plenary.nvim' 
-		use 'nvim-lua/popup.nvim' 
+		use 'nvim-lua/plenary.nvim'
+		use 'nvim-lua/popup.nvim'
 
 		-- Visual / UI
 		use {										-- Status line
-			'glepnir/galaxyline.nvim', branch = 'main', 
+			'glepnir/galaxyline.nvim', branch = 'main',
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
 		use 'glepnir/dashboard-nvim'				-- Start Screen
-		use 'romgrk/barbar.nvim' 					-- Buffer line 
+		use 'romgrk/barbar.nvim' 					-- Buffer line
 		use 'norcalli/nvim-colorizer.lua' 			-- Hex Colorizer
 		use {										-- File explorer
-			'kyazdani42/nvim-tree.lua', 
+			'kyazdani42/nvim-tree.lua',
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
 		use "Pocco81/TrueZen.nvim"					-- Focus mode
-		use { 
+		use {
 			'nacro90/numb.nvim',					-- Line viewer E.g. {:number}
 			config = function() require('numb').setup() end,
 		}
@@ -54,15 +54,15 @@ return require('packer').startup {
 		-- Fuzzy Finder
 		use {										-- Extensible Fuzzy Finder
 			'nvim-telescope/telescope.nvim',
-			require = { 
+			require = {
 				{ 'nvim-lua/plenary.nvim' },
-				{ 'nvim-lua/popup.nvim' }, 
+				{ 'nvim-lua/popup.nvim' },
 			}
 		}
 		use 'nvim-telescope/telescope-fzf-writer.nvim'
 		use 'nvim-telescope/telescope-dap.nvim'
 
-		-- Git 
+		-- Git
 		use 'tpope/vim-fugitive'
 		use {
 			'lewis6991/gitsigns.nvim',
@@ -70,11 +70,18 @@ return require('packer').startup {
 		}
 		use 'sindrets/diffview.nvim'
 
-		-- Neovim LSP Config 
-		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup 
-		use 'kabouzeid/nvim-lspinstall' 			-- LSP quick installer to avoid package manager annoyances. 
+		-- Neovim LSP Config
+		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup
+		use 'kabouzeid/nvim-lspinstall' 			-- LSP quick installer to avoid package manager annoyances.
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
-		use 'hrsh7th/nvim-compe' 					-- Auto-completion
+		use {										-- Auto-completion
+			'hrsh7th/nvim-cmp',
+			requires = {
+				{"hrsh7th/vim-vsnip"},
+				{"hrsh7th/cmp-nvim-lsp"},
+				{'hrsh7th/cmp-buffer'},				-- Install the buffer completion source
+			}
+		}
 		use 'norcalli/snippets.nvim'				-- Snippets
 		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
 		use 'onsails/lspkind-nvim' 					-- Completion icons.
