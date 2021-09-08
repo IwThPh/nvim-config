@@ -39,6 +39,7 @@ return require('packer').startup {
 			 "vuki656/package-info.nvim",					-- Line viewer E.g. {:number}
 			config = function() require('package-info').setup() end,
 		}
+		use 'gelguy/wilder.nvim'
 
 		-- Quick Formatting/Editing
 		use {

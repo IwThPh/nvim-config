@@ -28,6 +28,7 @@ else
 	require'plugin.gitsigns'
 	require'plugin.indent-blankline'
 	require'plugin.outline'
+	U.source'/vim/wilder.vim'
 end
 
 -- Work around for netrw | barbar bug
