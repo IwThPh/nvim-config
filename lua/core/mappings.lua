@@ -80,14 +80,15 @@ nmap('<M-K>',"mz:m-2<cr>`z")
 vmap('<M-j>',":m'>+<cr>`<my`>mzgv`yo`z")
 vmap('<M-k>',":m'<-2<cr>`>my`<mzgv`yo`z")
 
-nmap('˙','<M-h>')
-nmap('∆','<M-j>')
-nmap('˚','<M-k>')
-nmap('¬','<M-l>')
-vmap('˙','<M-h>')
-vmap('∆','<M-j>')
-vmap('˚','<M-k>')
-vmap('¬','<M-l>')
+local remap = { noremap = false }
+nmap('˙','<M-h>', remap)
+nmap('∆','<M-j>', remap)
+nmap('˚','<M-k>', remap)
+nmap('¬','<M-l>', remap)
+vmap('˙','<M-h>', remap)
+vmap('∆','<M-j>', remap)
+vmap('˚','<M-k>', remap)
+vmap('¬','<M-l>', remap)
 
 -- Better tabbing
 vmap('<','<gv')
