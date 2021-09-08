@@ -61,7 +61,6 @@ o.magic = true
 o.whichwrap = o.whichwrap + '<,>,h,l'
 
 -- Format options
-o.formatoptions = o.formatoptions + {
-	o = false,	-- O and o, don't continue comments.
-	r = true,	-- Pressing enter continues comments.
-}
+-- Pressing enter continues comments.
+-- o and O don't continue comments.
+o.formatoptions = o.formatoptions + 'r' - 'o'
