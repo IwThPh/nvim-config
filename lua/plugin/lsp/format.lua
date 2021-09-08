@@ -32,7 +32,7 @@ local languages = {
 	scss = { prettier },
 	css = { prettier },
 	markdown = { prettier },
-	blade = { blade_formatter },
+	blade = { php = { blade_formatter } },
 }
 
 -- Return client config
