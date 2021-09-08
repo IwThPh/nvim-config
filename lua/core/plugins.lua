@@ -99,6 +99,9 @@ return require('packer').startup {
 
 		-- Colourschemes
 		use 'marko-cerovac/material.nvim'
+		use 'folke/tokyonight.nvim'
+		use 'EdenEast/nightfox.nvim'
+
 	end,
 	config = {
 		_display = {
