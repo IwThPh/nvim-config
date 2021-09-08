@@ -60,7 +60,7 @@ configs['php'] = {
 				format = {
 					braces = {
 						"allman"
-					}; 
+					};
 				};
 			};
 		};
@@ -75,15 +75,20 @@ configs['vue'] = {
 		init_options = {
 			config = {
 				vetur = {
-					useWorkspaceDependencies = false;
+					useWorkspaceDependencies = true;
 					validation = {
-						template = true;
-						style = true;
-						script = true;
+						template = true,
+						script = true,
+						style = true,
+						templateProps = true,
+						interpolation = true,
 					};
+					experimental = {
+                    	templateInterpolationService = true
+                	},
 					completion = {
 						autoImport = true;
-						useScaffoldSnippets = false;
+						useScaffoldSnippets = true;
 						tagCasing = "kebab";
 					};
 					format = {
@@ -106,7 +111,7 @@ configs['vue'] = {
 				javascript = {
 					format = {};
 				};
-					typescript = {
+				typescript = {
 					format = {};
 				};
 				emmet = {};
@@ -160,7 +165,7 @@ for _, server in pairs(servers) do
 	if server == "lua" then
 		config.settings = lua_settings
 	end
-	
+
 	if server == "efm" then
 		config = require'plugin.lsp.format'
 	end
@@ -168,11 +173,11 @@ for _, server in pairs(servers) do
 	require'lspconfig'[server].setup(config)
 end
 
-nvim_lsp['sqlls'].setup { 
+nvim_lsp['sqlls'].setup {
 	on_attach = on_attach,
-	cmd = {"sql-language-server", "up", "--method", "stdio"}; 
-	settings = { 
-		cmd = {"sql-language-server", "up", "--method", "stdio"}; 
+	cmd = {"sql-language-server", "up", "--method", "stdio"};
+	settings = {
+		cmd = {"sql-language-server", "up", "--method", "stdio"};
 	},
 }
 
