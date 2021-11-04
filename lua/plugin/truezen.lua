@@ -1,77 +1,52 @@
-require('lspconfig')
-local true_zen = require('true-zen')
+local zen = require('zen-mode')
 
-true_zen.setup({
-	true_false_commands = false,
-	cursor_by_mode = false,
-	before_minimalist_mode_shown = false,
-	before_minimalist_mode_hidden = false,
-	after_minimalist_mode_shown = false,
-	after_minimalist_mode_hidden = false,
-	unknown_bkg_color_fix = false,
-
-	bottom = {
-		hidden_laststatus = 0,
-		hidden_ruler = false,
-		hidden_showmode = false,
-		hidden_showcmd = false,
-		hidden_cmdheight = 1,
-
-		shown_laststatus = 2,
-		shown_ruler = true,
-		shown_showmode = false,
-		shown_showcmd = false,
-		shown_cmdheight = 1
-	},
-
-	top = {
-		hidden_showtabline = 0,
-		shown_showtabline = 2
-	},
-
-	left = {
-		hidden_number = false,
-		hidden_relativenumber = false,
-		hidden_signcolumn = "no",
-		shown_number = true,
-		shown_relativenumber = false,
-		shown_signcolumn = "no"
-	},
-
-	ataraxis = {
-		just_do_it_for_me = true,
-		left_padding = 40,
-		right_padding = 40,
-		top_padding = 0,
-		bottom_padding = 0
-	},
-
-	focus = {
-		margin_of_error = 5
-	},
-
-	integrations = {
-		integration_galaxyline = true,
-		integration_vim_airline = false,
-		integration_vim_powerline = false,
-		integration_tmux = false,
-		integration_express_line = false,
-		integration_gitgutter = false,
-		integration_vim_signify = false,
-		integration_limelight = false
-	}
+zen.setup({
+  window = {
+    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+    -- height and width can be:
+    -- * an absolute number of cells when > 1
+    -- * a percentage of the width / height of the editor when <= 1
+    -- * a function that returns the width or the height
+    width = 120, -- width of the Zen window
+    height = 1, -- height of the Zen window
+    -- by default, no options are changed for the Zen window
+    -- uncomment any of the options below, or add other vim.wo options you want to apply
+    options = {
+      -- signcolumn = "no", -- disable signcolumn
+      -- number = false, -- disable number column
+      -- relativenumber = false, -- disable relative numbers
+      -- cursorline = false, -- disable cursorline
+      -- cursorcolumn = false, -- disable cursor column
+      -- foldcolumn = "0", -- disable fold column
+      -- list = false, -- disable whitespace characters
+    },
+  },
+  plugins = {
+    -- disable some global vim options (vim.o...)
+    -- comment the lines to not apply the options
+    options = {
+      enabled = true,
+      ruler = false, -- disables the ruler text in the cmd line area
+      showcmd = false, -- disables the command in the last line of the screen
+    },
+    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+    gitsigns = { enabled = false }, -- disables git signs
+    tmux = { enabled = false }, -- disables the tmux statusline
+    -- this will change the font size on kitty when in zen mode
+    -- to make this work, you need to set the following kitty options:
+    -- - allow_remote_control socket-only
+    -- - listen_on unix:/tmp/kitty
+    kitty = {
+      enabled = false,
+      font = "+4", -- font size increment
+    },
+  },
+  -- callback where you can add custom code when the Zen window opens
+  on_open = function(win)
+  end,
+  -- callback where you can add custom code when the Zen window closes
+  on_close = function()
+  end,
 })
 
-vim.api.nvim_set_keymap('n', '<leader>z', '<cmd>TZAtaraxis<CR>', { noremap = true, silent = true })
-
-true_zen.after_minimalist_mode_hidden = function ()
-end
-
-true_zen.before_minimalist_mode_hidden = function ()
-end
-
-true_zen.after_minimalist_mode_shown = function ()
-end
-
-true_zen.before_minimalist_mode_shown = function ()
-end
+vim.api.nvim_set_keymap('n', '<leader>z', '<cmd>ZenMode<CR>', { noremap = true, silent = true })
