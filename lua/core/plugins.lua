@@ -89,20 +89,18 @@ return require("packer").startup({
 		use("sindrets/diffview.nvim")
 
 		-- Neovim LSP Config
-		use 'neovim/nvim-lspconfig' 				-- Official LSP quick setup
-		use 'kabouzeid/nvim-lspinstall' 			-- LSP quick installer to avoid package manager annoyances.
-		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
-		use {										-- Auto-completion
-			'hrsh7th/nvim-cmp',
+		use("neovim/nvim-lspconfig") -- Official LSP quick setup
+		use("kabouzeid/nvim-lspinstall") -- LSP quick installer to avoid package manager annoyances.
 		use("williamboman/nvim-lsp-installer")
+		use("nvim-lua/lsp_extensions.nvim") -- see plugins.lsp.extensions
+		use({ -- Auto-completion
+			"hrsh7th/nvim-cmp",
 			requires = {
 				{ "hrsh7th/vim-vsnip" },
 				{ "hrsh7th/cmp-nvim-lsp" },
-				{'hrsh7th/cmp-buffer'},				-- Install the buffer completion source
-			}
-		}
-		use 'kosayoda/nvim-lightbulb' 				-- VSCode like light bulb for code actions
-		use {
+				{ "hrsh7th/cmp-buffer" }, -- Install the buffer completion source
+			},
+		})
 		use("norcalli/snippets.nvim") -- Snippets
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
