@@ -1,8 +1,8 @@
-local o  =  vim.opt
+local o = vim.opt
 
 -- Appearance
 o.cmdheight = 2
-o.colorcolumn = '100'
+o.colorcolumn = "100"
 o.cursorline = true
 o.wrap = false
 o.number = true
@@ -26,12 +26,12 @@ o.pumheight = 8
 -- General
 o.hidden = true
 o.joinspaces = false
-o.mouse = 'a'
+o.mouse = "a"
 o.scrolloff = 7
 o.splitbelow = true
 o.splitright = true
-o.spelllang = 'en_gb'
-o.langmenu='en'
+o.spelllang = "en_gb"
+o.langmenu = "en"
 o.updatetime = 300
 o.timeoutlen = 500
 
@@ -48,9 +48,9 @@ o.hid = true
 o.inccommand = "nosplit"
 o.ignorecase = true
 o.smartcase = true
-o.wildignore =  { ".git/*", "node_modules/*" }
+o.wildignore = { ".git/*", "node_modules/*" }
 o.wildignorecase = true
-o.wildmode='list:longest,list:full'
+o.wildmode = "list:longest,list:full"
 
 -- Performance
 o.lazyredraw = true
@@ -58,9 +58,9 @@ o.lazyredraw = true
 -- For regex
 o.magic = true
 
-o.whichwrap = o.whichwrap + '<,>,h,l'
+o.whichwrap = o.whichwrap + "<,>,h,l"
 
 -- Format options
 -- Pressing enter continues comments.
 -- o and O don't continue comments.
-o.formatoptions = o.formatoptions + 'r' - 'o'
+o.formatoptions = o.formatoptions + "r" - "o"
