@@ -43,14 +43,10 @@ local function mappings(client)
 	mapper('n', '<space>rr', 'vim.lsp.stop_client(vim.lsp.get_active_clients()); vim.cmd [[e]]')
 end
 
-local on_attach = function(client, bufnr)
-	-- LSP supported highlighting
-	vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-
+local on_attach = function(client, _)
 	mappings(client)
 
-	if filetype == 'rust' then
+	if client.name == 'rust' then
 		vim.cmd([[autocmd BufEnter,BufWritePost <buffer> :lua require('plugin.lsp.extensions').show_line_hints() <CR>]])
 	end
 
@@ -61,7 +57,9 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- Except Intelephense
-	if client.name == 'php' then client.resolved_capabilities.document_formatting = true end
+	if client.name == 'php' then
+		client.resolved_capabilities.document_formatting = true
+	end
 end
 
 return on_attach
