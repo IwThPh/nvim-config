@@ -121,6 +121,13 @@ lsp_installer.on_server_ready(function(server)
     vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
+-- Null ls
+-- Initialise null language server
+require("plugin.lsp.null-ls")
+nvim_lsp["null-ls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 
 -- Highlighting
 vim.api.nvim_command([[ hi def link LspReferenceText IncSearch ]])

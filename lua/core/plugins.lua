@@ -101,6 +101,13 @@ return require("packer").startup({
 				{ "hrsh7th/cmp-buffer" }, -- Install the buffer completion source
 			},
 		})
+		use({
+			"jose-elias-alvarez/null-ls.nvim",
+			require = {
+				{ "nvim-lua/plenary.nvim" },
+				{ "neovim/nvim-lspconfig" },
+			},
+		})
 		use("norcalli/snippets.nvim") -- Snippets
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
