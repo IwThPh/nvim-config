@@ -16,14 +16,14 @@ local mapper = function(mode, key, result)
 	vim.api.nvim_set_keymap(mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
 end
 
-mapper('n', '<leader>dd', [[require'dap'.continue()]]) 
-mapper('n', '<leader>ds', [[require'dap'.stop()]]) 
-mapper('n', '<leader>d<leader>', [[require'dap'.toggle_breakpoint()]]) 
-mapper('n', '<leader>dc', [[require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))]]) 
-mapper('n', '<leader>do', [[require'dap'.step_over()]]) 
-mapper('n', '<leader>di', [[require'dap'.step_into()]]) 
-mapper('n', '<leader>du', [[require'dap'.step_out()]]) 
-mapper('n', '<leader>dr', [[require'dap'.repl.open()]]) 
+mapper('n', '<leader>dd', [[require'dap'.continue()]])
+mapper('n', '<leader>ds', [[require'dap'.stop()]])
+mapper('n', '<leader>d<leader>', [[require'dap'.toggle_breakpoint()]])
+mapper('n', '<leader>dc', [[require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))]])
+mapper('n', '<leader>do', [[require'dap'.step_over()]])
+mapper('n', '<leader>di', [[require'dap'.step_into()]])
+mapper('n', '<leader>du', [[require'dap'.step_out()]])
+mapper('n', '<leader>dr', [[require'dap'.repl.open()]])
 
 -- Highlights
 vim.fn.sign_define('DapBreakpoint', {text='', texthl='Error', linehl='', numhl=''})
@@ -50,7 +50,7 @@ dap.configurations.php = {
 		type = 'php',
 		request = 'launch',
 		name = 'PHP XDebug - Launch Adapter',
-		port = 9003,
+		port = 9000,
 		protocol = 'inspector',
 		console = 'integratedTerminal',
 	},
@@ -58,7 +58,7 @@ dap.configurations.php = {
 		type = 'php',
 		request = 'launch',
 		name = 'PHP XDebug - Launch File',
-		port = 9003,
+		port = 9000,
 		program = '${file}',
 		cwd = vim.fn.getcwd(),
 		protocol = 'inspector',
