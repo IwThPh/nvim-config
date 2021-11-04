@@ -6,16 +6,16 @@ end
 
 local function mappings(client)
 	mapper('n', 'gD', 'vim.lsp.buf.declaration()')
-	mapper('n', 'gd', 'vim.lsp.buf.definition()')
 	mapper('n', 'K', 'vim.lsp.buf.hover()')
-	mapper('n', 'gi', 'vim.lsp.buf.implementation()')
 	mapper('n', 'gh', 'vim.lsp.buf.signature_help()')
 	mapper('n', 'gl', 'vim.lsp.diagnostic.show_line_diagnostics()')
-	mapper('n', '1gD', 'vim.lsp.buf.type_definition()')
 	mapper('n', 'gR', 'vim.lsp.buf.rename()')
 	mapper('n', 'gp', 'vim.lsp.diagnostic.goto_prev()')
 	mapper('n', 'gn', 'vim.lsp.diagnostic.goto_next()')
 
+	mapper_tele('gd', 'lsp_definitions', nil, true)
+	mapper_tele('gi', 'lsp_implementations', nil, true)
+	mapper_tele('gtd', 'lsp_type_definitions', nil, true)
 	mapper_tele('ga', 'lsp_code_actions', nil, true)
 	mapper_tele('gr', 'lsp_references', nil, true)
 
