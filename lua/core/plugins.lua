@@ -90,11 +90,20 @@ return require('packer').startup {
 			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
 			requires = "kyazdani42/nvim-web-devicons",
 		}
-		use {
-			'folke/lsp-colors.nvim',				-- LSP Diagnostics colour auto linking
-			config = function () require'lsp-colors'.setup() end
-		}
-		use 'simrat39/symbols-outline.nvim'			-- Symbol outline tree viewer (Like vista)
+		use({
+			"folke/todo-comments.nvim",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("todo-comments").setup({})
+			end,
+		})
+		use({
+			"folke/lsp-colors.nvim", -- LSP Diagnostics colour auto linking
+			config = function()
+				require("lsp-colors").setup()
+			end,
+		})
+		use("simrat39/symbols-outline.nvim") -- Symbol outline tree viewer (Like vista)
 
 		-- Start up time profilling
 		use 'dstein64/vim-startuptime'

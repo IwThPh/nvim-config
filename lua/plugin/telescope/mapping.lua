@@ -42,5 +42,8 @@ map_tele('<leader>so', 	'spell_suggest')
 map_tele('<leader>df', 	'dap_frames')
 map_tele('<leader>dl', 	'dap_list')
 
+-- Todo list
+vim.api.nvim_buf_set_keymap(0, 'n', '<leader>tl', "<cmd>TodoTelescope<CR>", {noremap = true, silent = true})
+
 return map_tele
 
