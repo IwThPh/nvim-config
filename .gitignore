@@ -1,4 +1,5 @@
 autoload/plugged/
 session/
+sessions/
 spell/
 plugin/packer_compiled.lua
