@@ -31,6 +31,14 @@ return require('packer').startup {
 		}
 		use "lukas-reineke/indent-blankline.nvim"
 		use {
+		use({
+			"folke/persistence.nvim",
+			event = "BufReadPre", -- this will only start session saving when an actual file was opened
+			module = "persistence",
+			config = function()
+				require("persistence").setup()
+			end,
+		})
 			 "vuki656/package-info.nvim",					-- Line viewer E.g. {:number}
 			config = function() require('package-info').setup() end,
 		}
