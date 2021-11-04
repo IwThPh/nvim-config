@@ -18,10 +18,6 @@ return require('packer').startup {
 		use 'nvim-lua/popup.nvim'
 
 		-- Visual / UI
-		use {										-- Status line
-			'glepnir/galaxyline.nvim', branch = 'main',
-			requires = {'kyazdani42/nvim-web-devicons'}
-		}
 		use 'romgrk/barbar.nvim' 					-- Buffer line
 		use 'norcalli/nvim-colorizer.lua' 			-- Hex Colorizer
 		use {										-- File explorer
