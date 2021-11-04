@@ -131,6 +131,7 @@ return require("packer").startup({
 		use("marko-cerovac/material.nvim")
 		use("folke/tokyonight.nvim")
 		use("EdenEast/nightfox.nvim")
+		use("wuelnerdotexe/vim-enfocado")
 	end,
 	config = {
 		_display = {

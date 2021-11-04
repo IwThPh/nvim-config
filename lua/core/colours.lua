@@ -10,8 +10,8 @@
 -- require'material'.set()
 
 vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_sidebars = {"qf", "vista_kind", "terminal", "packer", "NvimTree", "Outline"}
-vim.cmd[[colorscheme tokyonight]]
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "NvimTree", "Outline" }
+vim.cmd([[colorscheme tokyonight]])
 
 -- local nightfox = require('nightfox')
 
@@ -30,3 +30,5 @@ vim.cmd[[colorscheme tokyonight]]
 
 -- -- Load the configuration set above and apply the colorscheme
 -- nightfox.load()
+
+-- vim.cmd([[colorscheme enfocado]])
