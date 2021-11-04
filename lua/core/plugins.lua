@@ -22,7 +22,6 @@ return require('packer').startup {
 			'glepnir/galaxyline.nvim', branch = 'main',
 			requires = {'kyazdani42/nvim-web-devicons'}
 		}
-		use 'glepnir/dashboard-nvim'				-- Start Screen
 		use 'romgrk/barbar.nvim' 					-- Buffer line
 		use 'norcalli/nvim-colorizer.lua' 			-- Hex Colorizer
 		use {										-- File explorer
