@@ -48,7 +48,7 @@ return require("packer").startup({
 		})
 		use("lukas-reineke/indent-blankline.nvim")
 		use({
-			 "vuki656/package-info.nvim",					-- Line viewer E.g. {:number}
+			"vuki656/package-info.nvim", -- Line viewer E.g. {:number}
 			requires = "MunifTanjim/nui.nvim",
 			config = function()
 				require("package-info").setup()
@@ -94,9 +94,10 @@ return require("packer").startup({
 		use 'nvim-lua/lsp_extensions.nvim' 			-- see plugins.lsp.extensions
 		use {										-- Auto-completion
 			'hrsh7th/nvim-cmp',
+		use("williamboman/nvim-lsp-installer")
 			requires = {
-				{"hrsh7th/vim-vsnip"},
-				{"hrsh7th/cmp-nvim-lsp"},
+				{ "hrsh7th/vim-vsnip" },
+				{ "hrsh7th/cmp-nvim-lsp" },
 				{'hrsh7th/cmp-buffer'},				-- Install the buffer completion source
 			}
 		}
@@ -105,7 +106,7 @@ return require("packer").startup({
 		use("norcalli/snippets.nvim") -- Snippets
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
-			"folke/lsp-trouble.nvim",				-- LSP Diagnostics list
+			"folke/lsp-trouble.nvim", -- LSP Diagnostics list
 			requires = "kyazdani42/nvim-web-devicons",
 		})
 		use({
@@ -163,5 +164,5 @@ return require("packer").startup({
 				return win, bufnr
 			end,
 		},
-		},
+	},
 })
