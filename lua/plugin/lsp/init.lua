@@ -105,10 +105,6 @@ lsp_installer.on_server_ready(function(server)
 		opts.settings = intelephense_settings
 	end
 
-	if server.name == "intelephense" then
-		opts.settings = intelephense_settings
-	end
-
     if server.name == "sqlls" then
 		opts.cmd = { "sql-language-server", "up", "--method", "stdio" }
 		opts.settings = {
