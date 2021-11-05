@@ -97,6 +97,8 @@ return require("packer").startup({
 			"hrsh7th/nvim-cmp",
 			requires = {
 				{ "hrsh7th/vim-vsnip" },
+				{ "hrsh7th/cmp-vsnip" },
+				{ "rafamadriz/friendly-snippets" },
 				{ "hrsh7th/cmp-nvim-lsp" },
 				{ "hrsh7th/cmp-buffer" }, -- Install the buffer completion source
 			},
@@ -108,7 +110,6 @@ return require("packer").startup({
 				{ "neovim/nvim-lspconfig" },
 			},
 		})
-		use("norcalli/snippets.nvim") -- Snippets
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
 			"folke/lsp-trouble.nvim", -- LSP Diagnostics list
