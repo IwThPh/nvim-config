@@ -110,6 +110,14 @@ return require("packer").startup({
 				{ "neovim/nvim-lspconfig" },
 			},
 		})
+		use({
+			"jose-elias-alvarez/nvim-lsp-ts-utils",
+			require = {
+				{ "neovim/nvim-lspconfig" },
+				{ "jose-elias-alvarez/null-ls.nvim" },
+			},
+		})
+
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
 			"folke/lsp-trouble.nvim", -- LSP Diagnostics list
