@@ -51,7 +51,7 @@ local intelephense_settings = {
 		init_options = { licenceKey = "/Users/iwanphillips/.config/intelephense/licence.txt" },
 		settings = {
 			intelephense = {
-				enviroment = { phpVersion = "7.3.9" },
+				enviroment = { phpVersion = "7.4.16" },
 				phpdoc = {
 					propertyTemplate = {
 						summary = "$1",
@@ -101,7 +101,7 @@ lsp_installer.on_server_ready(function(server)
 		opts.settings = lua_settings
 	end
 
-	if server.name == "intelephense" then
+	if server.name == "php" then
 		opts.settings = intelephense_settings
 	end
 
