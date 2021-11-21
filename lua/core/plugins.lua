@@ -55,6 +55,12 @@ return require("packer").startup({
 			end,
 		})
 		use("gelguy/wilder.nvim")
+		use({
+			"luukvbaal/stabilize.nvim",
+			config = function()
+				require("stabilize").setup()
+			end,
+		})
 
 		-- Quick Formatting/Editing
 		use({
