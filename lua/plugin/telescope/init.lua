@@ -64,8 +64,8 @@ require("telescope").setup({
 		color_devicons = true,
 
 		file_ignore_patterns = {
-			'node_modules',
-			'.git',
+			"node_modules",
+			".git",
 		},
 
 		path_display = {
@@ -159,6 +159,17 @@ end
 
 function M.live_grep()
 	require("telescope.builtin").live_grep()
+end
+
+function M.live_grep_string_input()
+	local default = vim.api.nvim_eval([[expand('<cword>')]])
+	local search = vim.ui.input({
+		prompt = "Search for: ",
+		default = default,
+	}, function(input)
+		require("telescope.builtin").grep_string({ search = input })
+	end)
+	
 end
 
 function M.project_search()
