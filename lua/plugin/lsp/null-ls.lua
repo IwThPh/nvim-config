@@ -1,11 +1,12 @@
 local null_ls = require("null-ls")
 
-null_ls.config({
+null_ls.setup({
+	on_attach = require("plugin.lsp.on-attach"),
 	sources = {
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.sqlformat,
 		null_ls.builtins.formatting.eslint_d,
-		-- null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.prettier,
 		-- null_ls.builtins.formatting.fixjson,
 
 		null_ls.builtins.diagnostics.write_good,
