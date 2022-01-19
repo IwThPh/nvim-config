@@ -18,12 +18,10 @@ return require("packer").startup({
 		use("nvim-lua/popup.nvim")
 
 		-- Visual / UI
-		use({
-			"windwp/windline.nvim",
-			config = function ()
-				require('wlsample.bubble2')
-			end
-		})
+		use {
+			'nvim-lualine/lualine.nvim',
+			requires = {'kyazdani42/nvim-web-devicons', opt = true}
+		}
 		use({
 			"folke/persistence.nvim",
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened

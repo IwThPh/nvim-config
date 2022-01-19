@@ -1,9 +1,9 @@
 local o = vim.opt
 
 -- Appearance
-o.cmdheight = 2
+o.cmdheight = 1
 o.colorcolumn = "100"
-o.cursorline = true
+o.cursorline = false
 o.wrap = false
 o.number = true
 o.showmode = false

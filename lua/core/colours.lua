@@ -9,26 +9,79 @@
 
 -- require'material'.set()
 
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "NvimTree", "Outline" }
-vim.cmd([[colorscheme tokyonight]])
-
--- local nightfox = require('nightfox')
+-- vim.g.tokyonight_style = "storm"
+-- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer", "NvimTree", "Outline" }
+-- vim.cmd([[colorscheme tokyonight]])
 
 -- -- This function set the configuration of nightfox. If a value is not passed in the setup function
 -- -- it will be taken from the default configuration above
--- nightfox.setup({
---   fox = "nightfox",
---   styles = {
---     comments = "italic", -- change style of comments to be italic
---     keywords = "bold", -- change style of keywords to be bold
---     functions = "italic,bold" -- styles can be a comma separated list
---   },
---   colors = {},
---   hlgroup = {}
--- })
+local nightfox = require("nightfox")
+nightfox.setup({
+	transparent=false,
+	terminal_colors=true,
+	fox = "dayfox",
+	styles = {
+		comments = "italic", -- change style of comments to be italic
+		keywords = "bold", -- change style of keywords to be bold
+		functions = "italic,bold", -- styles can be a comma separated list
+	},
+	inverse = {
+		-- match_paren = true, -- Enable/Disable inverse highlighting for match parens
+		-- visual = true, -- Enable/Disable inverse highlighting for visual selection
+		-- search = true, -- Enable/Disable inverse highlights for search highlights
+	},
+	colors = {},
+	hlgroup = {},
+})
 
 -- -- Load the configuration set above and apply the colorscheme
--- nightfox.load()
+nightfox.load()
 
 -- vim.cmd([[colorscheme enfocado]])
+
+-- Status line
+require("lualine").setup({
+	options = {
+		icons_enabled = true,
+		theme = "auto",
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
+		disabled_filetypes = {},
+		always_divide_middle = true,
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
+		lualine_c = {
+			{
+				"filename",
+				file_status = true, -- displays file status (readonly status, modified status)
+				path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+				shorting_target = 40, -- Shortens path to leave 40 space in the window
+			},
+		},
+		lualine_x = { "filetype" },
+		lualine_y = { "progress" },
+		lualine_z = { "location" },
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {
+			{
+				"filename",
+				file_status = true, -- displays file status (readonly status, modified status)
+				path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+				shorting_target = 40, -- Shortens path to leave 40 space in the window
+			},
+		},
+		lualine_x = { "location" },
+		lualine_y = {},
+		lualine_z = {},
+	},
+	tabline = {},
+	extensions = {
+		"nvim-tree",
+		"symbols-outline",
+	},
+})
