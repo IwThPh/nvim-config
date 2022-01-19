@@ -120,15 +120,11 @@ end)
 -- Null ls
 -- Initialise null language server
 require("plugin.lsp.null-ls")
-nvim_lsp["null-ls"].setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
 
 -- Highlighting
-vim.api.nvim_command([[ hi def link LspReferenceText IncSearch ]])
-vim.api.nvim_command([[ hi def link LspReferenceWrite IncSearch ]])
-vim.api.nvim_command([[ hi def link LspReferenceRead IncSearch ]])
+-- vim.api.nvim_command([[ hi def link LspReferenceText IncSearch ]])
+-- vim.api.nvim_command([[ hi def link LspReferenceWrite IncSearch ]])
+-- vim.api.nvim_command([[ hi def link LspReferenceRead IncSearch ]])
 
 -- -- VOLAR MULTISERVER CONFIG https://github.com/johnsoncodehk/volar/discussions/606
 -- local volar_cmd = { "volar-server", "--stdio" }
