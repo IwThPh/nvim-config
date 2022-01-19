@@ -15,3 +15,4 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldtext = [[substitute(getline(v:foldstart),'\t',repeat(' ',&tabstop),'g').'···'.trim(getline(v:foldend))]]
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
+vim.o.foldlevelstart=1
