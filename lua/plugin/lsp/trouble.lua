@@ -1,10 +1,10 @@
-require("trouble").setup {
+require("trouble").setup({
 	height = 10, -- height of the trouble list
 	icons = true, -- use dev-icons for filenames
-	mode = "workspace", -- "workspace" or "document"
+	mode = "workspace_diagnostics", -- "workspace" or "document"
 	fold_open = "", -- icon used for open folds
 	fold_closed = "", -- icon used for closed folds
-	action_keys = { 
+	action_keys = {
 		close = "q", -- close the list
 		refresh = "r", -- manually refresh
 		jump = "<cr>", -- jump to the diagnostic or open / close folds
@@ -15,7 +15,7 @@ require("trouble").setup {
 		cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
 		open_folds = "zR", -- open all folds
 		previous = "k", -- preview item
-		next = "j" -- next item
+		next = "j", -- next item
 	},
 	indent_lines = true, -- add an indent guide below the fold icons
 	auto_open = false, -- automatically open the list when you have diagnostics
@@ -26,7 +26,7 @@ require("trouble").setup {
 		error = "",
 		warning = "",
 		hint = "",
-		information = ""
+		information = "",
 	},
-	use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
-}
+	use_diagnostic_signs = true, -- enabling this will use the signs defined in your lsp client
+})
