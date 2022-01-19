@@ -24,7 +24,6 @@ o.pumblend = 10
 o.pumheight = 8
 
 -- General
-o.hidden = true
 o.joinspaces = false
 o.mouse = "a"
 o.scrolloff = 7
@@ -45,7 +44,6 @@ o.smartindent = true
 o.hid = true
 
 -- Searching
-o.inccommand = "nosplit"
 o.ignorecase = true
 o.smartcase = true
 o.wildignore = { ".git/*", "node_modules/*" }
