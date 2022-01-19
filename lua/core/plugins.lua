@@ -94,7 +94,6 @@ return require("packer").startup({
 
 		-- Neovim LSP Config
 		use("neovim/nvim-lspconfig") -- Official LSP quick setup
-		use("kabouzeid/nvim-lspinstall") -- LSP quick installer to avoid package manager annoyances.
 		use("williamboman/nvim-lsp-installer")
 		use("nvim-lua/lsp_extensions.nvim") -- see plugins.lsp.extensions
 		use({ -- Auto-completion
@@ -140,7 +139,6 @@ return require("packer").startup({
 				require("lsp-colors").setup()
 			end,
 		})
-		use("simrat39/symbols-outline.nvim") -- Symbol outline tree viewer (Like vista)
 
 		-- Start up time profilling
 		use("dstein64/vim-startuptime")
