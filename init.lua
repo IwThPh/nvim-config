@@ -25,7 +25,6 @@ else
 	require("plugin.nvimtree")
 	require("plugin.gitsigns")
 	require("plugin.indent-blankline")
-	require("plugin.outline")
 	U.source("/vim/wilder.vim")
 end
 
