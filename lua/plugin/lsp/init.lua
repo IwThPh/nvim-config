@@ -20,7 +20,7 @@ local on_attach = require("plugin.lsp.on-attach")
 local lua_settings = {
 	Lua = {
 		runtime = {
-			-- LuaJIT in the case of Neovim
+			-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 			version = "LuaJIT",
 			path = vim.split(package.path, ";"),
 		},
@@ -30,10 +30,11 @@ local lua_settings = {
 		},
 		workspace = {
 			-- Make the server aware of Neovim runtime files
-			library = {
-				[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-				[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-			},
+			library = vim.api.nvim_get_runtime_file("", true),
+		},
+		-- Do not send telemetry data containing a randomized but unique identifier
+		telemetry = {
+			enable = false,
 		},
 	},
 }
@@ -83,12 +84,48 @@ local intelephense_settings = {
 	},
 }
 
+local volar_settings = {
+	languageFeatures = {
+		-- not supported - https://github.com/neovim/neovim/pull/14122
+		semanticTokens = false,
+		references = true,
+		definition = true,
+		typeDefinition = true,
+		callHierarchy = true,
+		hover = true,
+		rename = true,
+		renameFileRefactoring = true,
+		signatureHelp = true,
+		codeAction = true,
+		completion = {
+			defaultTagNameCase = "both",
+			defaultAttrNameCase = "kebabCase",
+		},
+		schemaRequestService = true,
+		documentHighlight = true,
+		documentLink = true,
+		codeLens = true,
+		diagnostics = true,
+	},
+	documentFeatures = {
+		-- not supported - https://github.com/neovim/neovim/pull/13654
+		documentColor = false,
+		selectionRange = true,
+		foldingRange = true,
+		linkedEditingRange = true,
+		documentSymbol = true,
+		documentFormatting = {
+			defaultPrintWidth = 100,
+		},
+	},
+}
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
-    local opts = {
+	local opts = {
 		on_attach = on_attach,
 		capabilities = capabilities,
 		flags = {
@@ -105,16 +142,24 @@ lsp_installer.on_server_ready(function(server)
 		opts.settings = intelephense_settings
 	end
 
-    if server.name == "sqlls" then
+	if server.name == "volar" then
+		opts.settings = volar_settings
+		opts.init_options = {
+			typescript = {
+				serverPath = "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js",
+			},
+		}
+	end
+
+	if server.name == "sqlls" then
 		opts.cmd = { "sql-language-server", "up", "--method", "stdio" }
 		opts.settings = {
 			cmd = { "sql-language-server", "up", "--method", "stdio" },
 		}
-    end
+	end
 
-    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
+	-- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+	server:setup(opts)
 end)
 
 -- Null ls
@@ -135,7 +180,7 @@ require("plugin.lsp.null-ls")
 -- 		cmd = volar_cmd,
 -- 		root_dir = volar_root_dir,
 -- 		-- If you want to use Volar's Take Over Mode (if you know, you know)
--- 		filetypes = {  "vue", "json" },
+-- filetypes = {  "vue", "json" },
 -- 		init_options = {
 -- 			typescript = {
 -- 				serverPath = "../../../typescript/lib/tsserverlibrary.js",

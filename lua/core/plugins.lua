@@ -120,6 +120,12 @@ return require("packer").startup({
 				{ "jose-elias-alvarez/null-ls.nvim" },
 			},
 		})
+		use({
+			"j-hui/fidget.nvim",
+			config = function()
+				require("fidget").setup({})
+			end,
+		})
 
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
