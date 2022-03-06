@@ -62,3 +62,6 @@ o.whichwrap = o.whichwrap + "<,>,h,l"
 -- Pressing enter continues comments.
 -- o and O don't continue comments.
 o.formatoptions = o.formatoptions + "r" - "o"
+
+vim.api.nvim_command('autocmd! FileType markdown setlocal spell')
+vim.api.nvim_command('autocmd! FileType gitcommit setlocal spell')
