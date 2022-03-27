@@ -23,7 +23,7 @@ vim.g.bufferline = {
 
 	-- Sets the icon's highlight group.
 	-- If false, will use nvim-web-devicons colors
-	icon_custom_colors = false,
+	icon_custom_colors = true,
 
 	-- Configure icons on the bufferline.
 	icon_separator_active = '▎',
@@ -32,7 +32,7 @@ vim.g.bufferline = {
 	icon_close_tab_modified = '●',
 
 	-- Sets the maximum padding width with which to surround each tab
-	maximum_padding = 8,
+	maximum_padding = 6,
 
 	-- If set, the letters for each buffer in buffer-pick mode will be
 	-- assigned based on their name. Otherwise or in case all letters are
@@ -47,6 +47,5 @@ vim.g.bufferline = {
 
 	-- Sets the name of unnamed buffers. By default format is --[Buffer X]--
 	-- where X is the buffer number. But only a static string is accepted here.
-	no_name_title = nil,
+	no_name_title = 'Untitled',
 }
-
