@@ -38,7 +38,7 @@ require("nvim-tree").setup({
 	-- hijack netrw window on startup
 	hijack_netrw = true,
 	-- open the tree when running this setup function
-	open_on_setup = true,
+	open_on_setup = false,
 	-- will not open on setup if the filetype is in this list
 	ignore_ft_on_setup = { "startify " },
 	-- closes neovim automatically when the tree is the last **WINDOW** in the view
@@ -80,7 +80,7 @@ require("nvim-tree").setup({
 
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`
-		width = 50,
+		width = 40,
 		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
 		side = "left",
 		-- if true the tree will resize itself after opening a file
@@ -95,4 +95,4 @@ require("nvim-tree").setup({
 	},
 })
 
-vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>f", [[<cmd> lua require"plugin.helpers.tree".toggle()<CR>]], { noremap = true, silent = true })
