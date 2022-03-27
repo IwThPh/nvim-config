@@ -9,7 +9,7 @@ o.number = true
 o.showmode = false
 o.signcolumn = "yes"
 o.termguicolors = true
-o.laststatus = 2
+o.laststatus = 3
 o.showmatch = true
 o.matchtime = 2
 
