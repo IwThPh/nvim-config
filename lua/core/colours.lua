@@ -17,25 +17,24 @@
 -- -- it will be taken from the default configuration above
 local nightfox = require("nightfox")
 nightfox.setup({
-	transparent=false,
-	terminal_colors=true,
-	fox = "dayfox",
-	styles = {
-		comments = "italic", -- change style of comments to be italic
-		keywords = "bold", -- change style of keywords to be bold
-		functions = "italic,bold", -- styles can be a comma separated list
+	options = {
+		transparent = false,
+		terminal_color = true,
+		styles = {
+			comments = "italic", -- change style of comments to be italic
+			keywords = "bold", -- change style of keywords to be bold
+			functions = "italic,bold", -- styles can be a comma separated list
+		},
+		inverse = {
+			-- match_paren = true, -- Enable/Disable inverse highlighting for match parens
+			-- visual = true, -- Enable/Disable inverse highlighting for visual selection
+			-- search = true, -- Enable/Disable inverse highlights for search highlights
+		},
 	},
-	inverse = {
-		-- match_paren = true, -- Enable/Disable inverse highlighting for match parens
-		-- visual = true, -- Enable/Disable inverse highlighting for visual selection
-		-- search = true, -- Enable/Disable inverse highlights for search highlights
-	},
-	colors = {},
-	hlgroup = {},
 })
 
 -- -- Load the configuration set above and apply the colorscheme
-nightfox.load()
+vim.cmd([[colorscheme dayfox]])
 
 -- vim.cmd([[colorscheme enfocado]])
 
