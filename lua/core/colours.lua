@@ -51,7 +51,7 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { "branch", "diff", { "diagnostics", sources = { "nvim_diagnostic" } } },
+		lualine_b = { "branch", "diff" },
 		lualine_c = {
 			{
 				"filename",
@@ -60,7 +60,7 @@ require("lualine").setup({
 				shorting_target = 40, -- Shortens path to leave 40 space in the window
 			},
 		},
-		lualine_x = { "filetype" },
+		lualine_x = { { "diagnostics", sources = { "nvim_diagnostic" } }, "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},
