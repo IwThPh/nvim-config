@@ -75,7 +75,7 @@ require("packer").startup(
 			end,
 		})
 		use("tpope/vim-surround") -- Surround selection
-		use("tpope/vim-commentary") -- Commenting out lines easily
+		use({ "numToStr/Comment.nvim", config = function() require 'Comment'.setup() end }) -- Commenting out lines easily
 
 		-- Treesitter
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -154,6 +154,9 @@ require("packer").startup(
 				require("lsp-colors").setup()
 			end,
 		})
+
+		-- Sidebar (like symbols-outline and vista)
+		use("sidebar-nvim/sidebar.nvim")
 
 		-- Start up time profilling
 		use("dstein64/vim-startuptime")
