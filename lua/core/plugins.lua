@@ -8,20 +8,16 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	execute("packadd packer.nvim")
 end
 
-return require("packer").startup({
+require("packer").startup(
 	function(use)
 		-- Packer can manage itself as an optional plugin
 		use("wbthomason/packer.nvim")
 
-		-- Deps
-		use("nvim-lua/plenary.nvim")
-		use("nvim-lua/popup.nvim")
-
 		-- Visual / UI
-		use {
-			'nvim-lualine/lualine.nvim',
-			requires = {'kyazdani42/nvim-web-devicons', opt = true}
-		}
+		use({
+			"nvim-lualine/lualine.nvim",
+			requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		})
 		use({
 			"folke/persistence.nvim",
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -36,7 +32,7 @@ return require("packer").startup({
 		-- 	"kyazdani42/nvim-tree.lua",
 		-- 	requires = { "kyazdani42/nvim-web-devicons" },
 		-- })
-		
+
 		use({ -- File explorer
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v2.x",
@@ -174,30 +170,5 @@ return require("packer").startup({
 		use("folke/tokyonight.nvim")
 		use("EdenEast/nightfox.nvim")
 		use("wuelnerdotexe/vim-enfocado")
-	end,
-	config = {
-		_display = {
-			open_fn = function(name)
-				-- Can only use plenary when we have our plugins.
-				--  We can only get plenary when we don't have our plugins ;)
-				local ok, float_win = pcall(function()
-					return require("plenary.window.float").percentage_range_window(0.8, 0.8)
-				end)
-
-				if not ok then
-					vim.cmd([[65vnew  [packer] ]])
-
-					return vim.api.nvim_get_current_win(), vim.api.nvim_get_current_buf()
-				end
-
-				local bufnr = float_win.bufnr
-				local win = float_win.win_id
-
-				vim.api.nvim_buf_set_name(bufnr, name)
-				vim.api.nvim_win_set_option(win, "winblend", 10)
-
-				return win, bufnr
-			end,
-		},
-	},
-})
+	end
+)
