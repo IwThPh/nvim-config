@@ -19,9 +19,9 @@ require("indent_blankline").setup({
 	show_current_context_start = true,
 })
 
-vim.api.nvim_create_augroup('IndentBlanklineContextAutogroup', { clear = true })
+local indent_group = vim.api.nvim_create_augroup('IndentBlanklineContextAutogroup', { clear = true })
 vim.api.nvim_create_autocmd('CursorMoved', {
-	group = 'IndentBlanklineContextAutogroup',
+	group = indent_group,
 	pattern = '*',
 	command = 'IndentBlanklineRefresh',
 })
