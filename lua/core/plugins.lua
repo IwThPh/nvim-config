@@ -138,6 +138,8 @@ return require("packer").startup({
 			end,
 		})
 
+		use("lewis6991/impatient.nvim")
+
 		use("onsails/lspkind-nvim") -- Completion icons.
 		use({
 			"folke/lsp-trouble.nvim", -- LSP Diagnostics list
