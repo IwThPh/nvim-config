@@ -25,6 +25,12 @@ autocmd('FileType', {
 	command = 'startinsert',
 })
 
+autocmd('FileType', {
+	group = 'bufcheck',
+	pattern = { 'gitcommit', 'gitrebase', 'markdown' },
+	command = 'setlocal spell',
+})
+
 -- Return to last position...
 autocmd('BufReadPost', {
 	group = 'bufcheck',
