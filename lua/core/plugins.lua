@@ -32,10 +32,21 @@ return require("packer").startup({
 		})
 		use("romgrk/barbar.nvim") -- Buffer line
 		use("norcalli/nvim-colorizer.lua") -- Hex Colorizer
+		-- use({ -- File explorer
+		-- 	"kyazdani42/nvim-tree.lua",
+		-- 	requires = { "kyazdani42/nvim-web-devicons" },
+		-- })
+		
 		use({ -- File explorer
-			"kyazdani42/nvim-tree.lua",
-			requires = { "kyazdani42/nvim-web-devicons" },
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v2.x",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"kyazdani42/nvim-web-devicons",
+				"MunifTanjim/nui.nvim",
+			},
 		})
+
 		use("folke/zen-mode.nvim")
 		use("folke/twilight.nvim")
 		use({
