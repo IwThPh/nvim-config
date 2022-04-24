@@ -28,6 +28,3 @@ else
 	require("plugin.indent-blankline")
 	U.source("/vim/wilder.vim")
 end
-
--- Work around for netrw | barbar bug
-vim.g.netrw_bufsettings = "noma nomod nonu nowrap ro buflisted"
