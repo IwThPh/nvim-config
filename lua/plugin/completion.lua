@@ -37,9 +37,14 @@ cmp.setup({
 		}),
 	},
 
-	documentation = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
 	},
+
+	-- documentation = {
+	-- 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	-- },
 
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
