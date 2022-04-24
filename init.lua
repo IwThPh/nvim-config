@@ -6,6 +6,7 @@ require("core.mappings")
 require("core.options")
 require("core.plugins")
 require("core.colours")
+require("core.autocmds")
 
 -- Plugins
 if vim.g.vscode then
