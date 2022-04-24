@@ -138,8 +138,9 @@ lsp_installer.on_server_ready(function(server)
 		opts.settings = lua_settings
 	end
 
-	if server.name == "php" then
-		opts.settings = intelephense_settings
+	if server.name == "intelephense" then
+		opts.init_options = intelephense_settings.init_options
+		opts.settings = intelephense_settings.settings
 	end
 
 	if server.name == "volar" then
