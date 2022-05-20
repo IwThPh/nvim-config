@@ -32,6 +32,14 @@ require("packer").startup(
 		-- 	"kyazdani42/nvim-tree.lua",
 		-- 	requires = { "kyazdani42/nvim-web-devicons" },
 		-- })
+		use({
+			"rcarriga/nvim-notify", 
+			config = function ()
+				local notify = require'notify'
+				vim.notify = notify
+				notify.setup({ stages = "slide" })
+			end
+		}) -- Notifications
 
 		use({ -- File explorer
 			"nvim-neo-tree/neo-tree.nvim",
