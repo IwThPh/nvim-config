@@ -31,6 +31,11 @@ autocmd('FileType', {
 	command = 'setlocal spell',
 })
 
+autocmd('FocusLost', {
+	group = bufcheck,
+	command = 'wa',
+})
+
 -- Return to last position...
 autocmd('BufReadPost', {
 	group = bufcheck,
