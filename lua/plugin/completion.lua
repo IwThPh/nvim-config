@@ -16,9 +16,6 @@ cmp.setup({
 			vim.fn["vsnip#anonymous"](args.body)
 		end,
 	},
-	completion = {
-		completeopt = "menu,menuone,noinsert,noselect",
-	},
 
 	formatting = {
 		-- format = function(_, vim_item)
