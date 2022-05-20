@@ -2,7 +2,7 @@ local o = vim.opt
 
 -- Appearance
 o.cmdheight = 1
-o.colorcolumn = "100"
+o.colorcolumn = "0"
 o.cursorline = false
 o.wrap = false
 o.number = true
@@ -19,8 +19,8 @@ o.writebackup = false
 o.swapfile = false
 
 -- Completion
-o.completeopt = "menuone,noselect"
-o.pumblend = 10
+o.completeopt = "menu,menuone,noinsert,noselect"
+o.pumblend = 30
 o.pumheight = 8
 
 -- General
