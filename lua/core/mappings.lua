@@ -62,6 +62,7 @@ vim.cmd([[ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe
 
 -- Open current file in a new vertical split with '='
 nmap("=", ":vsplit<cr>")
+nmap("-", ":split<cr>")
 
 -- Quickly open a markdown buffer for scribble
 nmap("<leader>n", ":e ~/buffer.md<cr>")
