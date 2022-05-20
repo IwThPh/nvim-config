@@ -43,7 +43,6 @@ autocmd('BufReadPost', {
 	callback = function()
 		if fn.line("'\"") > 0 and fn.line("'\"") <= fn.line("$") then
 			fn.setpos('.', fn.getpos("'\""))
-			vim.api.nvim_feedkeys('zz', 'n', true)
 		end
 	end,
 })
