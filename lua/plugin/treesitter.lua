@@ -10,8 +10,7 @@ require("nvim-treesitter.configs").setup({
 
 --TreeSitter based code folding
 vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-
+vim.o.foldexpr = "v:lnum==1?'>1':getline(v:lnum)=~'use'?1:nvim_treesitter#foldexpr()"
 vim.o.foldtext = [[substitute(getline(v:foldstart),'\t',repeat(' ',&tabstop),'g').'···'.trim(getline(v:foldend))]]
 vim.o.foldnestmax = 3
 vim.o.foldminlines = 1
