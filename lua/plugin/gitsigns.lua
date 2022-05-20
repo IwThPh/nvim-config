@@ -41,7 +41,7 @@ require("gitsigns").setup({
 		["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
 		["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
 	},
-	sign_priority = 6,
+	sign_priority = 1,
 	update_debounce = 100,
 	status_formatter = nil, -- Use default
 	max_file_length = 40000,
