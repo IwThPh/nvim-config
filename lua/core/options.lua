@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- Appearance
-o.cmdheight = 1
+o.cmdheight = 0
 o.colorcolumn = "0"
 o.cursorline = false
 o.wrap = false
