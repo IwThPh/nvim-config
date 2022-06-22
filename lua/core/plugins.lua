@@ -14,10 +14,7 @@ require("packer").startup(
 		use("wbthomason/packer.nvim")
 
 		-- Visual / UI
-		use({
-			"nvim-lualine/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		})
+		use "rebelot/heirline.nvim"
 		use({
 			"folke/persistence.nvim",
 			event = "BufReadPre", -- this will only start session saving when an actual file was opened
