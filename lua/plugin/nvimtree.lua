@@ -1,4 +1,3 @@
-vim.g.nvim_tree_indent_markers = 1 --0 by default, this option shows indent markers when folders are open
 vim.g.nvim_tree_git_hl = 1 --0 by default, will enable file highlight for git attributes (can be used without the icons).
 vim.g.nvim_tree_root_folder_modifier = ":~" --This is the default. See :help filename-modifiers for more options
 vim.g.nvim_tree_add_trailing = 1 --0 by default, append a trailing slash to folder names
@@ -80,7 +79,7 @@ require("nvim-tree").setup({
 
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`
-		width = 40,
+		width = 30,
 		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
 		side = "left",
 		-- if true the tree will resize itself after opening a file
@@ -93,6 +92,12 @@ require("nvim-tree").setup({
 			list = {},
 		},
 	},
+
+	renderer = {
+		indent_markers = {
+			enable = 1
+		}
+	}
 })
 
 vim.api.nvim_set_keymap("n", "<leader>f", [[<cmd> lua require"plugin.helpers.tree".toggle()<CR>]], { noremap = true, silent = true })
