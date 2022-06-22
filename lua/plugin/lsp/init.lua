@@ -165,11 +165,6 @@ local servers = {
 						},
 					},
 				},
-				format = {
-					braces = {
-						"allman",
-					},
-				},
 			},
 		},
 	},
