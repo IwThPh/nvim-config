@@ -4,40 +4,158 @@ P = function(v)
 	return v
 end
 
-if pcall(require, "plenary") then
-	RELOAD = require("plenary.reload").reload_module
+local M = {}
+local api = vim.api
 
-	R = function(name)
-		RELOAD(name)
-		return require(name)
-	end
+local merge_tb = vim.tbl_deep_extend
+
+M.close_buffer = function(bufnr)
+   if vim.bo.buftype == "terminal" then
+      if vim.bo.buflisted then
+         vim.bo.buflisted = false
+         vim.cmd "enew"
+      else
+         vim.cmd "hide"
+      end
+      return
+   end
+
+   -- if file doesnt exist & its modified
+   if vim.bo.modified then
+      print "save the file!"
+      return
+   end
+
+	-- TODO: adapt to barbar
 end
 
-U = {}
-
--- Keymaps
-U.keymap = {}
-
-function U.keymap.map(mode, key, cmd, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, key, cmd, options)
+M.load_config = function()
+   return require "core.config"
 end
 
-function U.keymap.buf_map(mode, key, cmd, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_buf_set_keymap(mode, key, cmd, options)
+M.remove_default_keys = function()
+   local user_mappings = {}
+   local user_keys = {}
+   local user_sections = vim.tbl_keys(user_mappings)
+
+   -- push user_map keys in user_keys table
+   for _, section in ipairs(user_sections) do
+      user_keys = vim.tbl_deep_extend("force", user_keys, user_mappings[section])
+   end
+
+   local function disable_key(mode, keybind, mode_mapping)
+      local keys_in_mode = vim.tbl_keys(user_keys[mode] or {})
+
+      if vim.tbl_contains(keys_in_mode, keybind) then
+         mode_mapping[keybind] = nil
+      end
+   end
+
+   local default_mappings = require("core.config").mappings
+
+   -- remove user_maps from default mapping table
+   for _, section_mappings in pairs(default_mappings) do
+      for mode, mode_mapping in pairs(section_mappings) do
+         for keybind, _ in pairs(mode_mapping) do
+            disable_key(mode, keybind, mode_mapping)
+         end
+      end
+   end
 end
 
--- Vim source
-function U.source(file, base)
-	if base == nil then
-		base = "~/.config/nvim"
-	end
-	vim.cmd("source " .. base .. file)
+M.load_mappings = function(mappings, mapping_opt)
+   -- set mapping function with/without whichkey
+   local map_func
+   local whichkey_exists, wk = pcall(require, "which-key")
+
+   if whichkey_exists then
+      map_func = function(keybind, mapping_info, opts)
+         wk.register({ [keybind] = mapping_info }, opts)
+      end
+   else
+      map_func = function(keybind, mapping_info, opts)
+         local mode = opts.mode
+         opts.mode = nil
+         vim.keymap.set(mode, keybind, mapping_info[1], opts)
+      end
+   end
+
+   mappings = mappings or vim.deepcopy(M.load_config().mappings)
+   mappings.lspconfig = nil
+
+   for _, section_mappings in pairs(mappings) do
+      -- skip mapping this as its mapppings are loaded in lspconfig
+      for mode, mode_mappings in pairs(section_mappings) do
+         for keybind, mapping_info in pairs(mode_mappings) do
+            -- merge default + user opts
+
+            local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
+            local opts = merge_tb("force", default_opts, mapping_info.opts or {})
+
+            if mapping_info.opts then
+               mapping_info.opts = nil
+            end
+
+            map_func(keybind, mapping_info, opts)
+         end
+      end
+   end
 end
+
+M.remove_default_plugins = function(plugins)
+   local removals = M.load_config().plugins.remove or {}
+
+   if not vim.tbl_isempty(removals) then
+      for _, plugin in pairs(removals) do
+         plugins[plugin] = nil
+      end
+   end
+
+   return plugins
+end
+
+-- merge default/user plugin tables
+M.merge_plugins = function(default_plugins)
+   local user_plugins = M.load_config().plugins.user
+
+   -- merge default + user plugin table
+   default_plugins = merge_tb("force", default_plugins, user_plugins)
+
+   local final_table = {}
+
+   for key, _ in pairs(default_plugins) do
+      default_plugins[key][1] = key
+
+      final_table[#final_table + 1] = default_plugins[key]
+   end
+
+   return final_table
+end
+
+M.load_override = function(default_table, plugin_name)
+   local user_table = M.load_config().plugins.override[plugin_name]
+
+   if type(user_table) == "function" then
+      user_table = user_table()
+   elseif type(user_table) == "table" then
+      default_table = merge_tb("force", default_table, user_table)
+   else
+      default_table = default_table
+   end
+
+   return default_table
+end
+
+M.bufilter = function()
+   local bufs = vim.t.bufs
+
+   for i = #bufs, 1, -1 do
+      if not vim.api.nvim_buf_is_loaded(bufs[i]) then
+         table.remove(bufs, i)
+      end
+   end
+
+   return bufs
+end
+
+return M
