@@ -1,46 +1,58 @@
---------------------------
--- LSP Run server setup --
---------------------------
+local present, lspconfig = pcall(require, "lspconfig")
 
--- Imports
-local lspconfig = require("lspconfig")
-local lspconfig_util = require("lspconfig.util")
-local lspconfig_configs = require("lspconfig.configs")
-local ts_util = require("nvim-lsp-ts-utils")
-
--- Init custom handlers
-require("plugin.lsp.handlers")
-
--- Additional LSP Plugins
-require("plugin.lsp.lspkind")
-require("plugin.lsp.trouble")
-
-require("nvim-lsp-installer").setup({
-	ensure_installed = {
-		"intelephense",
-		"volar",
-		"tsserver",
-		"tailwindcss",
-		"html",
-		"eslint",
-		"sumneko_lua",
-	},
-})
-
-local custom_init = function(client)
-	client.config.flags = client.config.flags or {}
-	client.config.flags.allow_incremental_sync = true
+if not present then
+	return
 end
 
-local custom_attach = require("plugin.lsp.on-attach")
+local M = {}
+local utils = require "core.utils"
 
-local updated_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require "ui.lsp"
 
--- local volar_cmd = { "~/.local/share/nvim/lsp_servers/volar/node_modules/.bin/vue-language-server", "--stdio" }
--- local volar_cmd = { "~/.local/share/nvim/lsp_servers/volar/node_modules/@volar/vue-language-server/bin/vue-language-server.js", "--stdio" }
+local lspconfig_util = require("lspconfig.util")
+local lspconfig_configs = require("lspconfig.configs")
+
+M.on_attach = function(client, bufnr)
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
+
+	local lsp_mappings = utils.load_config().mappings.lspconfig
+	utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
+
+	-- if client.server_capabilities.signatureHelpProvider then
+	--    require("nvchad.ui.signature").setup(client)
+	-- end
+end
+
+-- local custom_init = function(client)
+-- 	client.config.flags = client.config.flags or {}
+-- 	client.config.flags.allow_incremental_sync = true
+-- end
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+capabilities.textDocument.completion.completionItem = {
+	documentationFormat = { "markdown", "plaintext" },
+	snippetSupport = true,
+	preselectSupport = true,
+	insertReplaceSupport = true,
+	labelDetailsSupport = true,
+	deprecatedSupport = true,
+	commitCharactersSupport = true,
+	tagSupport = { valueSet = { 1 } },
+	resolveSupport = {
+		properties = {
+			"documentation",
+			"detail",
+			"additionalTextEdits",
+		},
+	},
+}
+
 local volar_cmd = { "/Users/iwanphillips/.local/share/nvim/lsp_servers/volar/node_modules/.bin/vue-language-server", "--stdio" }
 local volar_root_dir = lspconfig_util.root_pattern("package.json")
 local ts_serverpath = "/Users/iwanphillips/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
+
 
 -- Custom lsp language servers
 lspconfig_configs.volar_api = {
@@ -178,20 +190,17 @@ local servers = {
 	},
 	sumneko_lua = {
 		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				path = vim.split(package.path, ";"),
-			},
 			diagnostics = {
-				-- Get the language server to recognize the `vim` global
 				globals = { "vim" },
 			},
 			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
+				library = {
+					[vim.fn.expand "$VIMRUNTIME/lua"] = true,
+					[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+				},
+				maxPreload = 100000,
+				preloadFileSize = 10000,
 			},
-			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {
 				enable = false,
 			},
@@ -199,7 +208,6 @@ local servers = {
 	},
 	tailwindcss = true,
 	tsserver = {
-		init_options = ts_util.init_options,
 		cmd = { "typescript-language-server", "--stdio" },
 		filetypes = {
 			"javascript",
@@ -209,12 +217,7 @@ local servers = {
 			"typescriptreact",
 			"typescript.tsx",
 		},
-		on_attach = function(client)
-			custom_attach(client)
-
-			ts_util.setup({ auto_inlay_hints = false })
-			ts_util.setup_client(client)
-		end,
+		on_attach = M.on_attach,
 	},
 	-- volar = {
 	-- 	settings = {
@@ -265,7 +268,7 @@ local servers = {
 	zk = true,
 }
 
-local setup_server = function(server, config)
+M.setup_server = function(server, config)
 	if not config then
 		return
 	end
@@ -275,9 +278,9 @@ local setup_server = function(server, config)
 	end
 
 	config = vim.tbl_deep_extend("force", {
-		on_init = custom_init,
-		on_attach = custom_attach,
-		capabilities = updated_capabilities,
+		-- on_init = custom_init,
+		on_attach = M.on_attach,
+		capabilities = capabilities,
 		flags = {
 			debounce_text_changes = nil,
 		},
@@ -287,20 +290,7 @@ local setup_server = function(server, config)
 end
 
 for server, config in pairs(servers) do
-	setup_server(server, config)
+	M.setup_server(server, config)
 end
 
--- Null ls
--- Initialise null language server
-require("plugin.lsp.null-ls")
-
--- Highlighting
--- vim.api.nvim_command([[ hi def link LspReferenceText IncSearch ]])
--- vim.api.nvim_command([[ hi def link LspReferenceWrite IncSearch ]])
--- vim.api.nvim_command([[ hi def link LspReferenceRead IncSearch ]])
---
-return {
-	on_init = custom_init,
-	on_attach = custom_attach,
-	capabilities = updated_capabilities,
-}
+return M

@@ -1,5 +1,11 @@
+local present, neotree = pcall(require, "neotree")
+
+if not present then
+   return
+end
+
 -- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+vim.opt_global.neo_tree_remove_legacy_commands = 1
 
 -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 vim.fn.sign_define("DiagnosticSignError",
@@ -13,7 +19,7 @@ vim.fn.sign_define("DiagnosticSignHint",
 -- NOTE: this is changed from v1.x, which used the old style of highlight groups
 -- in the form "LspDiagnosticsSignWarning"
 
-require("neo-tree").setup({
+neotree.setup({
 	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 	popup_border_style = "rounded",
 	enable_git_status = true,
@@ -169,5 +175,3 @@ require("neo-tree").setup({
 		}
 	}
 })
-
-vim.keymap.set("n", "<leader>f", require("plugin.helpers.tree").toggle)
