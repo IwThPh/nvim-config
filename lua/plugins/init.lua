@@ -15,10 +15,35 @@ local plugins = {
       end,
    },
 
+   ["tpope/vim-surround"] = {},
+
+   ["lewis6991/impatient.nvim"] = {},
+
    ["NvChad/nvterm"] = {
       module = "nvterm",
       config = function()
          require "plugins.configs.nvterm"
+      end,
+   },
+
+   ["EdenEast/nightfox.nvim"] = {
+      config = function()
+	 require("nightfox").setup({
+		options = {
+			transparent = false,
+			terminal_color = true,
+			styles = {
+				comments = "italic", -- change style of comments to be italic
+				keywords = "bold", -- change style of keywords to be bold
+				functions = "italic,bold", -- styles can be a comma separated list
+			},
+			inverse = {
+				-- match_paren = true, -- Enable/Disable inverse highlighting for match parens
+				-- visual = true, -- Enable/Disable inverse highlighting for visual selection
+				-- search = true, -- Enable/Disable inverse highlights for search highlights
+			},
+		},
+	})
       end,
    },
 
@@ -157,19 +182,30 @@ local plugins = {
       end,
    },
 
-   -- file managing , picker etc
-   ["kyazdani42/nvim-tree.lua"] = {
-      ft = "alpha",
-      cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-      config = function()
-         require "plugins.configs.nvimtree"
-      end,
-   },
+   -- ["nvim-neo-tree/neo-tree.nvim"] = {
+   --    branch = "v2.x",
+   --    -- cmd = { "NeoTree" },
+   --    config = function()
+   --       require "plugins.configs.neotree"
+   --    end,
+   -- },
 
    ["nvim-telescope/telescope.nvim"] = {
       cmd = "Telescope",
       config = function()
          require "plugins.configs.telescope"
+      end,
+   },
+
+   -- TODO: lazy load...
+   -- ["romgrk/barbar.nvim"] = {
+   --    config = function()
+   --       require "plugins.configs.barbar"
+   --    end,
+   -- },
+   ["rebelot/heirline.nvim"] = {
+      config = function()
+         require "plugins.configs.heirline"
       end,
    },
 

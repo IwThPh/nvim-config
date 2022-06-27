@@ -1,3 +1,9 @@
+local present, neotree = pcall(require, "neo-tree")
+
+if not present then
+   return
+end
+
 -- Unless you are still migrating, remove the deprecated commands from v1.x
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
@@ -13,7 +19,7 @@ vim.fn.sign_define("DiagnosticSignHint",
 -- NOTE: this is changed from v1.x, which used the old style of highlight groups
 -- in the form "LspDiagnosticsSignWarning"
 
-require("neo-tree").setup({
+neotree.setup({
 	close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
 	popup_border_style = "rounded",
 	enable_git_status = true,

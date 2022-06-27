@@ -249,14 +249,14 @@ M.lspconfig = {
 	},
 }
 
-M.nvimtree = {
+M.neotree = {
 
 	n = {
 		-- toggle
-		["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+		["<C-n>"] = { "<cmd> NeoTreeFocusToggle <CR>", "   toggle nvimtree" },
 
 		-- focus
-		["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+		["<leader>e"] = { "<cmd> NeoTreeFocus <CR>", "   focus nvimtree" },
 	},
 }
 

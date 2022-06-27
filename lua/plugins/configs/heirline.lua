@@ -1,3 +1,19 @@
+local present, heirline = pcall(require, "heirline")
+
+if not present then
+   return
+end
+
+local function lspSymbol(name, icon)
+   local hl = "DiagnosticSign" .. name
+   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+end
+
+lspSymbol("Error", "")
+lspSymbol("Info", "")
+lspSymbol("Hint", "")
+lspSymbol("Warn", "")
+
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
@@ -467,4 +483,4 @@ local statuslines = {
 }
 
 --TODO: Winbar
-require("heirline").setup(statuslines)
+heirline.setup(statuslines)

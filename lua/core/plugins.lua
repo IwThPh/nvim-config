@@ -1,8 +1,5 @@
-use "rebelot/heirline.nvim"
-use("romgrk/barbar.nvim")
-
 use({
-	"rcarriga/nvim-notify",
+	"",
 	config = function()
 		local notify = require 'notify'
 		vim.notify = notify
@@ -29,9 +26,6 @@ use({
 		require("stabilize").setup()
 	end,
 })
-
-use("tpope/vim-surround")
-
 
 use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 use({
@@ -62,8 +56,6 @@ use({
 		require("fidget").setup({})
 	end,
 })
-
-use("lewis6991/impatient.nvim")
 
 use("onsails/lspkind-nvim")
 
