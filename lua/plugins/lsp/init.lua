@@ -290,10 +290,6 @@ for server, config in pairs(servers) do
 	setup_server(server, config)
 end
 
--- Null ls
--- Initialise null language server
-require("plugin.lsp.null-ls")
-
 -- Highlighting
 -- vim.api.nvim_command([[ hi def link LspReferenceText IncSearch ]])
 -- vim.api.nvim_command([[ hi def link LspReferenceWrite IncSearch ]])

@@ -29,7 +29,7 @@ use("sindrets/diffview.nvim")
 
 use("nvim-lua/lsp_extensions.nvim")
 use({
-	"jose-elias-alvarez/null-ls.nvim",
+	"",
 })
 
 use("onsails/lspkind-nvim")

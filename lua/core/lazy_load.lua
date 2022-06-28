@@ -71,6 +71,8 @@ M.lsp_cmds = {
    "LspInstallLog",
    "LspLog",
    "LspPrintInstalled",
+   "NullLsLog",
+   "NullLsDebug"
 }
 
 M.treesitter_cmds = {

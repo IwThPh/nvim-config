@@ -45,7 +45,6 @@ opt.splitright = true
 opt.scrolloff = 7
 opt.spelllang = "en_gb"
 opt.langmenu = "en"
-opt.tabstop = 8
 opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
