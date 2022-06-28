@@ -7,8 +7,23 @@
 -- vmap("<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z")
 -- vmap("<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
 
+local function nmap(key, cmd, opts)
+    vim.api.nvim_set_keymap("n", key, cmd, opts)
+end
+local function vmap(key, cmd, opts)
+    vim.api.nvim_set_keymap("v", key, cmd, opts)
+end
 
 -- n, v, i, t = mode names
+local remap = { noremap = false }
+nmap("˙", "<M-h>", remap)
+nmap("∆", "<M-j>", remap)
+nmap("˚", "<M-k>", remap)
+nmap("¬", "<M-l>", remap)
+vmap("˙", "<M-h>", remap)
+vmap("∆", "<M-j>", remap)
+vmap("˚", "<M-k>", remap)
+vmap("¬", "<M-l>", remap)
 
 local function termcodes(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -51,32 +66,12 @@ M.general = {
 		-- splits
 		["="] = { ":vsplit<cr>", "❙  vertical split" },
 		["-"] = { ":split<cr>", "―  horizontal split" },
-
-		["<leader>tt"] = {
-			function()
-				require("base46").toggle_theme()
-			end,
-
-			"   toggle theme",
-		},
-
-		-- remap alt keys on MacOS
-		["˙"] = { "<M-h>", "" },
-		["∆"] = { "<M-j>", "" },
-		["˚"] = { "<M-k>", "" },
-		["¬"] = { "<M-l>", "" },
 	},
 
 	v = {
 		-- indentation
 		[">"] = { ">gv", "  increase indentation" },
 		["<"] = { "<gv", "  decrease indentation" },
-
-		-- remap alt keys on MacOS
-		["˙"] = { "<M-h>", "" },
-		["∆"] = { "<M-j>", "" },
-		["˚"] = { "<M-k>", "" },
-		["¬"] = { "<M-l>", "" },
 	},
 
 	t = {

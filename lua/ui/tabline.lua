@@ -1,4 +1,3 @@
-require("base46").load_highlight "tbline"
 local api = vim.api
 
 -- btn click functions
@@ -12,7 +11,6 @@ vim.cmd [[
 vim.cmd "function! TbNewTab(a,b,c,d) \n tabnew \n endfunction"
 vim.cmd "function! TbGotoTab(tabnr,b,c,d) \n execute a:tabnr ..'tabnext' \n endfunction"
 vim.cmd "function! TbTabClose(a,b,c,d) \n lua require('core.utils').tabuflineCloseTab() \n endfunction"
-vim.cmd "function! TbToggle_theme(a,b,c,d) \n lua require('base46').toggle_theme() \n endfunction"
 vim.cmd "function! TbToggleTabs(a,b,c,d) \n let g:TbTabsToggled = !g:TbTabsToggled | redrawtabline \n endfunction"
 
 local devicons_present, devicons = pcall(require, "nvim-web-devicons")
@@ -119,12 +117,8 @@ local function tablist()
    end
 end
 
-local function buttons()
-   return "%@TbToggle_theme@%#TbLineThemeToggleBtn#" .. vim.g.toggle_theme_icon .. "%X"
-end
-
 return {
    run = function()
-      return (Offset() or "") .. bufferlist() .. (tablist() or "") .. buttons()
+      return (Offset() or "") .. bufferlist() .. (tablist() or "")
    end,
 }

@@ -5,19 +5,11 @@ local plugins = {
 
    ["nvim-lua/plenary.nvim"] = { module = "plenary" },
 
-   ["NvChad/base46"] = {
-      config = function()
-         local ok, base46 = pcall(require, "base46")
-
-         if ok then
-            base46.load_theme()
-         end
-      end,
-   },
-
    ["tpope/vim-surround"] = {},
 
    ["lewis6991/impatient.nvim"] = {},
+
+   ["MunifTanjim/nui.nvim"] = {},
 
    ["NvChad/nvterm"] = {
       module = "nvterm",
@@ -38,9 +30,9 @@ local plugins = {
 				functions = "italic,bold", -- styles can be a comma separated list
 			},
 			inverse = {
-				-- match_paren = true, -- Enable/Disable inverse highlighting for match parens
-				-- visual = true, -- Enable/Disable inverse highlighting for visual selection
-				-- search = true, -- Enable/Disable inverse highlights for search highlights
+				match_paren = true, -- Enable/Disable inverse highlighting for match parens
+				visual = true, -- Enable/Disable inverse highlighting for visual selection
+				search = true, -- Enable/Disable inverse highlights for search highlights
 			},
 		},
 	})
@@ -167,7 +159,6 @@ local plugins = {
    },
 
    ["goolord/alpha-nvim"] = {
-      after = "base46",
       disable = true,
       config = function()
          require "plugins.configs.alpha"
@@ -182,13 +173,19 @@ local plugins = {
       end,
    },
 
-   -- ["nvim-neo-tree/neo-tree.nvim"] = {
-   --    branch = "v2.x",
-   --    -- cmd = { "NeoTree" },
-   --    config = function()
-   --       require "plugins.configs.neotree"
-   --    end,
-   -- },
+   ["nvim-neo-tree/neo-tree.nvim"] = {
+      branch = "v2.x",
+      -- cmd = { "NeoTree" },
+      config = function()
+         require "plugins.configs.neotree"
+      end,
+   },
+
+   ["rcarriga/nvim-notify"] = {
+      config = function()
+         require("plugins.configs.others").notify()
+      end,
+   },
 
    ["nvim-telescope/telescope.nvim"] = {
       cmd = "Telescope",
@@ -208,6 +205,13 @@ local plugins = {
          require "plugins.configs.heirline"
       end,
    },
+
+   ["j-hui/fidget.nvim"] = {
+      module = "lspconfig",
+      config = function()
+	  require("fidget").setup({})
+      end,
+  },
 
    -- Only load whichkey after all the gui
    ["folke/which-key.nvim"] = {

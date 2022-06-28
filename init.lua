@@ -12,5 +12,7 @@ end, 0)
 require("core.packer").bootstrap()
 require "plugins"
 
+require('ui.theme').generate_user_config_highlights()
+
 -- -- Load the configuration set above and apply the colorscheme
 vim.cmd([[colorscheme terafox]])

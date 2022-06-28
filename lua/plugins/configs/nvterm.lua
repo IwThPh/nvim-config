@@ -4,8 +4,6 @@ if not present then
    return
 end
 
-require "base46.term"
-
 local options = {
    terminals = {
       list = {},

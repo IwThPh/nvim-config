@@ -1,22 +1,3 @@
-use({
-	"",
-	config = function()
-		local notify = require 'notify'
-		vim.notify = notify
-		notify.setup({ stages = "slide" })
-	end
-})
-
-use({
-	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v2.x",
-	requires = {
-		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons",
-		"MunifTanjim/nui.nvim",
-	},
-})
-
 use("folke/zen-mode.nvim")
 use("folke/twilight.nvim")
 use("gelguy/wilder.nvim")
@@ -49,12 +30,6 @@ use("sindrets/diffview.nvim")
 use("nvim-lua/lsp_extensions.nvim")
 use({
 	"jose-elias-alvarez/null-ls.nvim",
-})
-use({
-	"j-hui/fidget.nvim",
-	config = function()
-		require("fidget").setup({})
-	end,
 })
 
 use("onsails/lspkind-nvim")

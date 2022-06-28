@@ -29,8 +29,6 @@ M.blankline = function()
       return
    end
 
-   require("base46").load_highlight "blankline"
-
    local options = {
       indentLine_enabled = 1,
       char = "▏",
@@ -133,8 +131,6 @@ M.gitsigns = function()
       return
    end
 
-   require("base46").load_highlight "git"
-
    local options = {
       signs = {
          add = { hl = "DiffAdd", text = "│", numhl = "GitSignsAddNr" },
@@ -153,13 +149,22 @@ M.devicons = function()
    local present, devicons = pcall(require, "nvim-web-devicons")
 
    if present then
-      require("base46").load_highlight "devicons"
-
       local options = { override = require("ui.icons").devicons }
       options = require("core.utils").load_override(options, "kyazdani42/nvim-web-devicons")
 
       devicons.setup(options)
    end
+end
+
+M.notify = function()
+   local present, notify = pcall(require, "notify")
+
+   if not (present) then
+      return
+   end
+
+    vim.notify = notify
+    notify.setup({ stages = "slide" })
 end
 
 return M
