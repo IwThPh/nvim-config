@@ -4,7 +4,7 @@ if not present then
    return
 end
 
-vim.g.theme_switcher_loaded = true
+require('ui.theme').load_highlight('telescope')
 
 local actions = require"telescope.actions"
 
