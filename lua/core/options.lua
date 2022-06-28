@@ -2,10 +2,8 @@ local opt = vim.opt
 local g = vim.g
 local config = require("core.utils").load_config()
 
-g.nvchad_theme = config.ui.theme
-g.toggle_theme_icon = "   "
+g.theme = config.ui.theme
 g.transparency = config.ui.transparency
-g.theme_switcher_loaded = false
 
 -- use filetype.lua instead of filetype.vim
 g.did_load_filetypes = 0

@@ -15,8 +15,8 @@ M.ui = {
 	hl_add = {},
 	hl_override = {},
 	changed_themes = {},
-	theme_toggle = { "nightfox" },
-	theme = "nightfox", -- default theme
+	theme_toggle = { "terafox", "dawnfox" },
+	theme = "terafox",
 	transparency = false,
 
 	statusline = {

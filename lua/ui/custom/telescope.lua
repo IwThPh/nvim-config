@@ -1,55 +1,59 @@
-local colors = require("ui.theme").get_theme "base_30"
+local palette = require("ui.theme").get_palette()
 
 return {
-
    TelescopeBorder = {
-      fg = colors.darker_black,
-      bg = colors.darker_black,
+      fg = palette.bg0,
+      bg = palette.bg0,
    },
 
    TelescopePromptBorder = {
-      fg = colors.black2,
-      bg = colors.black2,
+      fg = palette.bg2,
+      bg = palette.bg2,
    },
 
    TelescopePromptNormal = {
-      fg = colors.white,
-      bg = colors.black2,
+      fg = palette.white.base,
+      bg = palette.bg2,
    },
 
    TelescopePromptPrefix = {
-      fg = colors.red,
-      bg = colors.black2,
+      fg = palette.red.base,
+      bg = palette.bg2,
    },
 
-   TelescopeNormal = { bg = colors.darker_black },
+   TelescopeNormal = {
+	   bg = palette.bg0,
+   },
 
    TelescopePreviewTitle = {
-      fg = colors.black,
-      bg = colors.green,
+      fg = palette.bg2,
+      bg = palette.green.base,
    },
 
    TelescopePromptTitle = {
-      fg = colors.black,
-      bg = colors.red,
+      fg = palette.bg2,
+      bg = palette.red.base,
    },
 
    TelescopeResultsTitle = {
-      fg = colors.darker_black,
-      bg = colors.darker_black,
+      fg = palette.bg0,
+      bg = palette.bg0,
    },
 
-   TelescopeSelection = { bg = colors.black2, fg = colors.white },
+   TelescopeSelection = {
+	   fg = palette.white.base,
+	   bg = palette.sel0,
+   },
 
    TelescopeResultsDiffAdd = {
-      fg = colors.green,
+      fg = palette.green.base,
    },
 
    TelescopeResultsDiffChange = {
-      fg = colors.yellow,
+      fg = palette.yellow.base,
    },
 
    TelescopeResultsDiffDelete = {
-      fg = colors.red,
+      fg = palette.red.base,
    },
 }

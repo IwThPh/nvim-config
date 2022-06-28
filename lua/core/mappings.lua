@@ -249,10 +249,10 @@ M.neotree = {
 
 	n = {
 		-- toggle
-		["<C-n>"] = { "<cmd> NeoTreeFocusToggle <CR>", "   toggle nvimtree" },
+		["<C-n>"] = { "<cmd> NeoTreeRevealToggle <CR>", "   toggle neotree" },
 
 		-- focus
-		["<leader>e"] = { "<cmd> NeoTreeFocus <CR>", "   focus nvimtree" },
+		["<leader>e"] = { "<cmd> NeoTreeFocus <CR>", "   focus neotree" },
 	},
 }
 

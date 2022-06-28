@@ -33,21 +33,7 @@ M.close_buffer = function(bufnr)
 end
 
 M.load_config = function()
-   local config = require "core.config"
-   local chadrc_exists, chadrc = pcall(require, "custom.chadrc")
-
-   if chadrc_exists then
-      -- merge user config if it exists and is a table; otherwise display an error
-      if type(chadrc) == "table" then
-         M.remove_default_keys()
-         config = merge_tb("force", config, chadrc)
-      else
-         error "chadrc must return a table!"
-      end
-   end
-
-   config.mappings.disabled = nil
-   return config
+   return require "core.config"
 end
 
 M.remove_default_keys = function()
