@@ -207,6 +207,28 @@ local plugins = {
 		end,
 	},
 
+	["vim-test/vim-test"] = {
+		module = "testing",
+	},
+
+	["nvim-neotest/neotest"] = {
+		module = "testing",
+	},
+
+	["nvim-neotest/neotest-vim-test"] = {
+		module = "testing",
+		after = { 'vim-test', 'neotest' },
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					-- Or to only allow specified file types
+					require("neotest-vim-test")({ allow_file_types = { "php" } }),
+				}
+			})
+		end,
+	},
+
+
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {
 		module = "which-key",
