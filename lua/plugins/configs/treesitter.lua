@@ -5,9 +5,7 @@ if not present then
 end
 
 local options = {
-   ensure_installed = {
-      "all",
-   },
+   ensure_installed = "all",
    highlight = {
       enable = true,
       use_languagetree = true,
