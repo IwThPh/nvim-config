@@ -208,7 +208,7 @@ M.lspconfig = {
 			"   goto prev",
 		},
 
-		["d]"] = {
+		["]d"] = {
 			function()
 				vim.diagnostic.goto_next()
 			end,
@@ -367,14 +367,14 @@ M.nvterm = {
 
 		-- new
 
-		["<leader>h"] = {
+		["<leader>th"] = {
 			function()
 				require("nvterm.terminal").new "horizontal"
 			end,
 			"   new horizontal term",
 		},
 
-		["<leader>v"] = {
+		["<leader>tv"] = {
 			function()
 				require("nvterm.terminal").new "vertical"
 			end,
@@ -417,6 +417,57 @@ M.blankline = {
 			end,
 
 			"  Jump to current_context",
+		},
+	},
+}
+
+M.gitsigns = {
+	n = {
+		["]c"] = {
+			function ()
+				if vim.wo.diff then return ']c' end
+				vim.schedule(function() require'gitsigns'.next_hunk() end)
+				return '<Ignore>'
+			end,
+			'git next hunk'
+		},
+		["[c"] = {
+			function ()
+				if vim.wo.diff then return '[c' end
+				vim.schedule(function() require'gitsigns'.prev_hunk() end)
+				return '<Ignore>'
+			end,
+			'git previous hunk'
+		},
+		["<leader>hs"] = {
+			function ()
+				require'gitsigns'.stage_hunk()
+			end,
+			'git stage hunk'
+		},
+		["<leader>hu"] = {
+			function ()
+				require'gitsigns'.undo_stage_hunk()
+			end,
+			'git unstage hunk'
+		},
+		["<leader>hr"] = {
+			function ()
+				require'gitsigns'.reset_hunk()
+			end,
+			'git reset hunk'
+		},
+		["<leader>hp"] = {
+			function ()
+				require'gitsigns'.preview_hunk()
+			end,
+			'git preview hunk'
+		},
+		["<leader>hb"] = {
+			function ()
+				require'gitsigns'.blame_line()
+			end,
+			'git blame line'
 		},
 	},
 }
