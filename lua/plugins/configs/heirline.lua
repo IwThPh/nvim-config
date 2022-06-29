@@ -76,7 +76,7 @@ local modes = {
 local ViMode = {
 	{
 		init = function(self) self.mode = vim.api.nvim_get_mode().mode end,
-		provider = function(self) return "  " .. modes[self.mode][1] .. " " end,
+		provider = function(self) return "  " .. modes[self.mode][1] .. " " end,
 		hl = function(self) return { bg = modes[self.mode][2] } end,
 	},
 	{
