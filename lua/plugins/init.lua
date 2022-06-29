@@ -213,6 +213,11 @@ local plugins = {
 
 	["nvim-neotest/neotest"] = {
 		module = "testing",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim"
+		}
 	},
 
 	["nvim-neotest/neotest-vim-test"] = {
