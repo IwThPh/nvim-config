@@ -208,11 +208,9 @@ local plugins = {
 	},
 
 	["vim-test/vim-test"] = {
-		module = "testing",
 	},
 
 	["nvim-neotest/neotest"] = {
-		module = "testing",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -221,7 +219,6 @@ local plugins = {
 	},
 
 	["nvim-neotest/neotest-vim-test"] = {
-		module = "testing",
 		after = { 'vim-test', 'neotest' },
 		config = function()
 			require("neotest").setup({

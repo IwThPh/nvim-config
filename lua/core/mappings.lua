@@ -472,4 +472,40 @@ M.gitsigns = {
 	},
 }
 
+M.testing = {
+	n = {
+		["tn"] = {
+			function ()
+				require'neotest'.run.run()
+				-- require'neotest'.run.run({strategy = "dap"}) requires nvim-dap
+			end,
+			'run nearest test'
+		},
+		["tf"] = {
+			function ()
+				require'neotest'.run.run(vim.fn.expand('%'))
+			end,
+			'run all tests in file'
+		},
+		["ta"] = {
+			function ()
+				require'neotest'.run.run(vim.fn.getcwd())
+			end,
+			'run all tests'
+		},
+		["tl"] = {
+			function ()
+				require'neotest'.run.run_last()
+			end,
+			'run last test'
+		},
+		["ts"] = {
+			function ()
+				require'neotest'.summary.toggle()
+			end,
+			'toggle test summary'
+		},
+	},
+}
+
 return M
