@@ -4,6 +4,8 @@ if not present then
 	return
 end
 
+local navicPresent, navic = pcall(require, "nvim-navic")
+
 local M = {}
 local utils = require "core.utils"
 
@@ -13,11 +15,15 @@ local lspconfig_util = require("lspconfig.util")
 local lspconfig_configs = require("lspconfig.configs")
 
 M.on_attach = function(client, bufnr)
-	client.server_capabilities.documentFormattingProvider = false
-	client.server_capabilities.documentRangeFormattingProvider = false
+	client.server_capabilities.documentFormattingProvider = true
+	client.server_capabilities.documentRangeFormattingProvider = true
 
 	local lsp_mappings = utils.load_config().mappings.lspconfig
 	utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
+
+	if navicPresent and client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
 
 	-- if client.server_capabilities.signatureHelpProvider then
 	--    require("nvchad.ui.signature").setup(client)
@@ -202,63 +208,64 @@ local servers = {
 		},
 	},
 	tailwindcss = true,
-	tsserver = {
-		cmd = { "typescript-language-server", "--stdio" },
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
-		on_attach = M.on_attach,
-	},
-	-- volar = {
-	-- 	settings = {
-	-- 		languageFeatures = {
-	-- 			-- not supported - https://github.com/neovim/neovim/pull/14122
-	-- 			semanticTokens = false,
-	-- 			references = true,
-	-- 			definition = true,
-	-- 			typeDefinition = true,
-	-- 			callHierarchy = true,
-	-- 			hover = true,
-	-- 			rename = true,
-	-- 			renameFileRefactoring = true,
-	-- 			signatureHelp = true,
-	-- 			codeAction = true,
-	-- 			completion = {
-	-- 				defaultTagNameCase = "both",
-	-- 				defaultAttrNameCase = "kebabCase",
-	-- 			},
-	-- 			schemaRequestService = true,
-	-- 			documentHighlight = true,
-	-- 			documentLink = true,
-	-- 			codeLens = true,
-	-- 			diagnostics = true,
-	-- 		},
-	-- 		documentFeatures = {
-	-- 			-- not supported - https://github.com/neovim/neovim/pull/13654
-	-- 			documentColor = false,
-	-- 			selectionRange = true,
-	-- 			foldingRange = true,
-	-- 			linkedEditingRange = true,
-	-- 			documentSymbol = true,
-	-- 			documentFormatting = {
-	-- 				defaultPrintWidth = 100,
-	-- 			},
-	-- 		},
+	-- tsserver = {
+	-- 	cmd = { "typescript-language-server", "--stdio" },
+	-- 	filetypes = {
+	-- 		"javascript",
+	-- 		"javascriptreact",
+	-- 		"javascript.jsx",
+	-- 		"typescript",
+	-- 		"typescriptreact",
+	-- 		"typescript.tsx",
 	-- 	},
-	-- 	init_options = {
-	-- 		typescript = {
-	-- 			serverPath = "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js",
-	-- 		},
-	-- 	},
+	-- 	on_attach = M.on_attach,
 	-- },
-	volar_api = true,
-	volar_doc = true,
-	volar_html = true,
+	volar = {
+		filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+		init_options = {
+			typescript = {
+				serverPath = ts_serverpath,
+			},
+		},
+		settings = {
+			languageFeatures = {
+				-- not supported - https://github.com/neovim/neovim/pull/14122
+				semanticTokens = false,
+				references = true,
+				definition = true,
+				typeDefinition = true,
+				callHierarchy = true,
+				hover = true,
+				rename = true,
+				renameFileRefactoring = true,
+				signatureHelp = true,
+				codeAction = true,
+				completion = {
+					defaultTagNameCase = "both",
+					defaultAttrNameCase = "kebabCase",
+				},
+				schemaRequestService = true,
+				documentHighlight = true,
+				documentLink = true,
+				codeLens = true,
+				diagnostics = true,
+			},
+			documentFeatures = {
+				-- not supported - https://github.com/neovim/neovim/pull/13654
+				documentColor = false,
+				selectionRange = true,
+				foldingRange = true,
+				linkedEditingRange = true,
+				documentSymbol = false, -- Not using up to date spec... will make pr
+				documentFormatting = {
+					defaultPrintWidth = 100,
+				},
+			},
+		},
+	},
+	volar_api = false,
+	volar_doc = false,
+	volar_html = false,
 	yamlls = true,
 	zk = true,
 }

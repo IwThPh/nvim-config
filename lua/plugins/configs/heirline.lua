@@ -1,17 +1,17 @@
 local present, heirline = pcall(require, "heirline")
 
 if not present then
-   return
+	return
 end
 
-local sep_style = require("ui.icons").statusline_separators
-local user_sep = require("core.utils").load_config().ui.statusline.separator_style
-local sep_l = sep_style[user_sep]["left"]
-local sep_r = sep_style[user_sep]["right"]
+local navicPresent, navic = pcall(require, "nvim-navic")
+
+local sep_l = ''
+local sep_r = ''
 
 local function lspSymbol(name, icon)
-   local hl = "DiagnosticSign" .. name
-   vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+	local hl = "DiagnosticSign" .. name
+	vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
 end
 
 lspSymbol("Error", "")
@@ -21,7 +21,7 @@ lspSymbol("Warn", "")
 
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
-local palette = require('ui.theme').get_palette()
+local palette = require("ui.theme").get_palette()
 
 local colors = {
 	red = palette.red.base,
@@ -47,47 +47,63 @@ local colors = {
 local Align = { provider = "%=" }
 local Space = { provider = " " }
 local modes = {
-   ["n"] = { "NORMAL", palette.red.base },
-   ["niI"] = { "NORMAL i", palette.red.base },
-   ["niR"] = { "NORMAL r", palette.red.base },
-   ["niV"] = { "NORMAL v", palette.red.base },
-   ["no"] = { "N-PENDING", palette.red.base },
-   ["i"] = { "INSERT", palette.yellow.base },
-   ["ic"] = { "INSERT", palette.yellow.base },
-   ["ix"] = { "INSERT completion", palette.yellow.base },
-   ["t"] = { "TERMINAL", palette.green.base },
-   ["nt"] = { "NTERMINAL", palette.green.base},
-   ["v"] = { "VISUAL", palette.blue.base },
-   ["V"] = { "V-LINE", palette.blue.base },
-   [""] = { "V-BLOCK", palette.blue.base },
-   ["R"] = { "REPLACE", palette.cyan.base },
-   ["Rv"] = { "V-REPLACE", palette.cyan.base },
-   ["s"] = { "SELECT", palette.pink.base },
-   ["S"] = { "S-LINE", palette.pink.base },
-   ["c"] = { "COMMAND", palette.orange.base },
-   ["cv"] = { "COMMAND", palette.orange.base },
-   ["ce"] = { "COMMAND", palette.orange.base },
-   ["r"] = { "PROMPT", palette.pink.base },
-   ["rm"] = { "MORE", palette.pink.base },
-   ["r?"] = { "CONFIRM", palette.pink.base },
-   ["!"] = { "SHELL", palette.green.base },
+	["n"] = { "NORMAL", palette.red.base },
+	["niI"] = { "NORMAL i", palette.red.base },
+	["niR"] = { "NORMAL r", palette.red.base },
+	["niV"] = { "NORMAL v", palette.red.base },
+	["no"] = { "N-PENDING", palette.red.base },
+	["i"] = { "INSERT", palette.yellow.base },
+	["ic"] = { "INSERT", palette.yellow.base },
+	["ix"] = { "INSERT completion", palette.yellow.base },
+	["t"] = { "TERMINAL", palette.green.base },
+	["nt"] = { "NTERMINAL", palette.green.base },
+	["v"] = { "VISUAL", palette.blue.base },
+	["V"] = { "V-LINE", palette.blue.base },
+	[""] = { "V-BLOCK", palette.blue.base },
+	["R"] = { "REPLACE", palette.cyan.base },
+	["Rv"] = { "V-REPLACE", palette.cyan.base },
+	["s"] = { "SELECT", palette.pink.base },
+	["S"] = { "S-LINE", palette.pink.base },
+	["c"] = { "COMMAND", palette.orange.base },
+	["cv"] = { "COMMAND", palette.orange.base },
+	["ce"] = { "COMMAND", palette.orange.base },
+	["r"] = { "PROMPT", palette.pink.base },
+	["rm"] = { "MORE", palette.pink.base },
+	["r?"] = { "CONFIRM", palette.pink.base },
+	["!"] = { "SHELL", palette.green.base },
 }
 
 local ViMode = {
 	{
-		init = function(self) self.mode = vim.api.nvim_get_mode().mode end,
-		provider = function(self) return "  " .. modes[self.mode][1] .. " " end,
-		hl = function(self) return { bg = modes[self.mode][2] } end,
+		init = function(self)
+			self.mode = vim.api.nvim_get_mode().mode
+		end,
+		provider = function(self)
+			return "  " .. modes[self.mode][1] .. " "
+		end,
+		hl = function(self)
+			return { bg = modes[self.mode][2] }
+		end,
 	},
 	{
-		init = function(self) self.mode = vim.api.nvim_get_mode().mode end,
-		provider = function() return sep_r end,
-		hl = function(self) return { bg = palette.bg2, fg = modes[self.mode][2] } end,
+		init = function(self)
+			self.mode = vim.api.nvim_get_mode().mode
+		end,
+		provider = function()
+			return sep_r
+		end,
+		hl = function(self)
+			return { bg = palette.bg2, fg = modes[self.mode][2] }
+		end,
 	},
 	{
-		provider = function() return sep_r end,
-		hl = function() return { bg = palette.bg1, fg = palette.bg2 } end,
-	}
+		provider = function()
+			return sep_r
+		end,
+		hl = function()
+			return { bg = palette.bg1, fg = palette.bg2 }
+		end,
+	},
 }
 
 local FileNameBlock = {
@@ -95,7 +111,9 @@ local FileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
-	hl = function() return { fg = palette.fg1, bg = palette.bg1 } end,
+	hl = function()
+		return { fg = palette.fg1, bg = palette.bg1 }
+	end,
 }
 -- We can now define some children separately and add them later
 
@@ -109,8 +127,12 @@ local FileIcon = {
 			{ default = true }
 		)
 	end,
-	provider = function(self) return self.icon end,
-	hl = function(self) return { fg = self.icon_color } end,
+	provider = function(self)
+		return self.icon
+	end,
+	hl = function(self)
+		return { fg = self.icon_color }
+	end,
 }
 
 local FileName = {
@@ -171,10 +193,6 @@ FileNameBlock = utils.insert(
 	FileIcon,
 	utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
 	unpack(FileFlags), -- A small optimisation, since their parent does nothing
-	{
-		provider = function() return sep_r end,
-		hl = function() return { bg = palette.bg0, fg = palette.bg1 } end,
-	},
 	{ provider = "%<" } -- this means that the statusline is cut here when there's not enough space
 )
 
@@ -183,15 +201,17 @@ local Git = {
 
 	on_click = {
 		callback = function(self, minwid, nclicks, button)
-			vim.defer_fn(function() vim.cmd("Telescope git_branches") end, 100)
-        end,
-        name = "heirline_git",
+			vim.defer_fn(function()
+				vim.cmd("Telescope git_branches")
+			end, 100)
+		end,
+		name = "heirline_git",
 	},
 
 	static = {
-		add_icon = "  " ,
-		change_icon = "  " ,
-		delete_icon = "  " ,
+		add_icon = "  ",
+		change_icon = "  ",
+		delete_icon = "  ",
 	},
 
 	init = function(self)
@@ -338,9 +358,11 @@ local LSPActive = {
 	on_click = {
 		callback = function(self, minwid, nclicks, button)
 			vim.lsp.stop_client(vim.lsp.get_active_clients())
-			vim.defer_fn(function() vim.cmd [[e]] end, 100)
-        end,
-        name = "heirline_lspactive",
+			vim.defer_fn(function()
+				vim.cmd([[e]])
+			end, 100)
+		end,
+		name = "heirline_lspactive",
 	},
 
 	-- You can keep it simple,
@@ -367,18 +389,26 @@ local TerminalName = {
 	hl = { fg = colors.blue, bold = true },
 }
 
+local NavicLocation = {
+	condition = function ()
+		return conditions.lsp_attached and navicPresent and navic.is_available()
+	end,
+	provider = function()
+		return navic.get_location()
+	end,
+	hl = { fg = palette.fg1, force = true },
+}
+
 local DefaultStatusline = {
 	ViMode,
 	FileNameBlock,
+	Space,
 	Git,
-	Diagnostics,
+	Space,
 	Align,
+	Diagnostics,
+	Space,
 	LSPActive,
-	Space,
-	Space,
-	FileType,
-	Space,
-	Ruler,
 	Space,
 	ScrollBar,
 }
@@ -435,5 +465,60 @@ local statuslines = {
 	DefaultStatusline,
 }
 
+vim.api.nvim_create_autocmd("User", {
+	pattern = "HeirlineInitWinbar",
+	callback = function(args)
+		local buf = args.buf
+		local buftype = vim.tbl_contains({ "prompt", "nofile", "help", "quickfix" }, vim.bo[buf].buftype)
+		local filetype = vim.tbl_contains({ "gitcommit", "fugitive" }, vim.bo[buf].filetype)
+		if buftype or filetype then
+			vim.opt_local.winbar = nil
+		end
+	end,
+})
+
+local WinBars = {
+	init = utils.pick_child_on_condition,
+	{ -- Hide the winbar for special buffers
+		condition = function()
+			return conditions.buffer_matches({
+				buftype = { "nofile", "prompt", "help", "quickfix" },
+				filetype = { "^git.*", "fugitive" },
+			})
+		end,
+		init = function()
+			vim.opt_local.winbar = nil
+		end,
+	},
+	{ -- A special winbar for terminals
+		condition = function()
+			return conditions.buffer_matches({ buftype = { "terminal" } }) and conditions.is_active()
+		end,
+		{
+			hl = { bg = palette.green.base, force = true },
+			FileType,
+			Space,
+			TerminalName,
+		},
+	},
+	{ -- An inactive winbar for regular files
+		condition = function()
+			return not conditions.is_active()
+		end,
+		utils.surround({ "█", sep_r}, palette.sel0, { hl = { fg = "gray", force = true }, FileNameBlock }),
+		Space,
+		NavicLocation,
+	},
+	-- A winbar for regular files
+	{
+		utils.surround({ "█", sep_r }, palette.orange.dim, {
+			hl = { fg = palette.fg1, force = true },
+			FileNameBlock,
+		}),
+		Space,
+		NavicLocation,
+	},
+}
+
 --TODO: Winbar
-heirline.setup(statuslines)
+heirline.setup(statuslines, WinBars)

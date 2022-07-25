@@ -5,7 +5,6 @@ if not present then
 end
 
 null_ls.setup({
-	debug = true,
 	on_attach = function(client, bufnr)
 		-- Default on attach
 		require("plugins.configs.lspconfig").on_attach(client, bufnr)

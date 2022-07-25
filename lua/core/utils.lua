@@ -27,9 +27,7 @@ M.close_buffer = function(bufnr)
       return
    end
 
-   bufnr = bufnr or api.nvim_get_current_buf()
-   require("core.utils").tabuflinePrev()
-   vim.cmd("bd" .. bufnr)
+	-- TODO: adapt to barbar
 end
 
 M.load_config = function()
@@ -198,38 +196,6 @@ M.bufilter = function()
    end
 
    return bufs
-end
-
-M.tabuflineNext = function()
-   local bufs = M.bufilter() or {}
-
-   for i, v in ipairs(bufs) do
-      if api.nvim_get_current_buf() == v then
-         vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
-         break
-      end
-   end
-end
-
-M.tabuflinePrev = function()
-   local bufs = M.bufilter() or {}
-
-   for i, v in ipairs(bufs) do
-      if api.nvim_get_current_buf() == v then
-         vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
-         break
-      end
-   end
-end
--- closes tab + all of its buffers
-M.tabuflineCloseTab = function()
-   local bufs = vim.t.bufs or {}
-
-   vim.cmd "tabclose"
-
-   for _, buf in ipairs(bufs) do
-      vim.cmd("bd" .. buf)
-   end
 end
 
 return M

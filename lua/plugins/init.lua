@@ -84,6 +84,10 @@ local plugins = {
 		end,
 	},
 
+	["SmiteshP/nvim-navic"] = {
+		requires = "neovim/nvim-lspconfig",
+	},
+
 	["neovim/nvim-lspconfig"] = {
 		after = "nvim-lsp-installer",
 		module = "lspconfig",
@@ -179,12 +183,12 @@ local plugins = {
 		end,
 	},
 
-	-- TODO: lazy load...
-	-- ["romgrk/barbar.nvim"] = {
-	--    config = function()
-	--       require "plugins.configs.barbar"
-	--    end,
-	-- },
+	["romgrk/barbar.nvim"] = {
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = function()
+			require("plugins.configs.barbar")
+		end,
+	},
 	["rebelot/heirline.nvim"] = {
 		config = function()
 			require("plugins.configs.heirline")
@@ -207,29 +211,27 @@ local plugins = {
 		end,
 	},
 
-	["vim-test/vim-test"] = {
-	},
+	["vim-test/vim-test"] = {},
 
 	["nvim-neotest/neotest"] = {
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim"
-		}
+			"antoinemadec/FixCursorHold.nvim",
+		},
 	},
 
 	["nvim-neotest/neotest-vim-test"] = {
-		after = { 'vim-test', 'neotest' },
+		after = { "vim-test", "neotest" },
 		config = function()
 			require("neotest").setup({
 				adapters = {
 					-- Or to only allow specified file types
 					require("neotest-vim-test")({ allow_file_types = { "php" } }),
-				}
+				},
 			})
 		end,
 	},
-
 
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {

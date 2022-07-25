@@ -18,15 +18,6 @@ M.ui = {
 	theme_toggle = { "terafox", "dawnfox" },
 	theme = "terafox",
 	transparency = false,
-
-	statusline = {
-		separator_style = "default", -- default/round/block/arrow
-		config = "%!v:lua.require('ui.statusline').run()",
-		override = {},
-	},
-
-	-- lazyload it when there are 1+ buffers
-	tabufline_lazyloaded = true,
 }
 
 M.plugins = {

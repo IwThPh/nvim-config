@@ -6,12 +6,11 @@ g.theme = config.ui.theme
 g.transparency = config.ui.transparency
 
 -- use filetype.lua instead of filetype.vim
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1
+-- g.did_load_filetypes = 0
+-- g.do_filetype_lua = 1
 
 opt.cmdheight = 1 -- Cannot use 0 which whichkey
 opt.laststatus = 3 -- global statusline
-opt.statusline = config.ui.statusline.config
 opt.showmode = false
 opt.colorcolumn = "0"
 opt.cursorline = false

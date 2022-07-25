@@ -34,4 +34,4 @@ nightfox.setup({
 })
 
 -- -- Load the configuration set above and apply the colorscheme
-vim.cmd([[colorscheme terafox]])
+-- vim.cmd([[colorscheme terafox]])

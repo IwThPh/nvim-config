@@ -81,27 +81,18 @@ M.general = {
 	},
 }
 
-M.tabufline = {
+-- M.tabufline = {
+M.bufferline = {
 
 	n = {
-		-- new buffer
-		["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
-
 		-- cycle through buffers
-		["<TAB>"] = { "<cmd> Tbufnext <CR>", "  goto next buffer" }, -- BufferNext
-		["<S-Tab>"] = { "<cmd> Tbufprev <CR> ", "  goto prev buffer" }, -- BufferPrevious
+		["<TAB>"] = { "<cmd> BufferNext <CR>", "  goto next buffer" }, -- BufferNext
+		["<S-Tab>"] = { "<cmd> BufferPrevious <CR> ", "  goto prev buffer" }, -- BufferPrevious
 
 		-- cycle through tabs
 		["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
 		["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
-
-		-- close buffer + hide terminal buffer
-		["<leader>q"] = {
-			function()
-				require("core.utils").close_buffer()
-			end,
-			"   close buffer",
-		},
+		["<leader>q"] = { "<cmd> BufferClose <CR>", "   close buffer" },
 	},
 }
 
@@ -138,9 +129,7 @@ M.lspconfig = {
 		},
 
 		["gd"] = {
-			function()
-				vim.lsp.buf.definition()
-			end,
+ 			"<cmd> Telescope lsp_definitions <CR>",
 			"   lsp definition",
 		},
 
@@ -152,9 +141,7 @@ M.lspconfig = {
 		},
 
 		["gi"] = {
-			function()
-				vim.lsp.buf.implementation()
-			end,
+ 			"<cmd> Telescope lsp_implementations <CR>",
 			"   lsp implementation",
 		},
 
@@ -166,9 +153,7 @@ M.lspconfig = {
 		},
 
 		["<leader>D"] = {
-			function()
-				vim.lsp.buf.type_definition()
-			end,
+ 			"<cmd> Telescope lsp_type_definitions <CR>",
 			"   lsp definition type",
 		},
 
@@ -188,9 +173,7 @@ M.lspconfig = {
 		},
 
 		["gr"] = {
-			function()
-				vim.lsp.buf.references()
-			end,
+ 			"<cmd> Telescope lsp_references <CR>",
 			"   lsp references",
 		},
 
@@ -266,6 +249,7 @@ M.telescope = {
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
 		["<leader>tk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
+		["<leader>qf"] = { "<cmd> Telescope quickfix <CR>", "   quickfix list" },
 
 		-- spelling
 		["<leader>so"] = { "<cmd> Telescope spell_suggest <CR>", "🕮   show spelling options" },
