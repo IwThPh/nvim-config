@@ -76,12 +76,15 @@ local plugins = {
 
 	-- lsp stuff
 
-	["williamboman/nvim-lsp-installer"] = {
+	["williamboman/mason.nvim"] = {
 		opt = true,
 		cmd = require("core.lazy_load").lsp_cmds,
 		setup = function()
-			require("core.lazy_load").on_file_open("nvim-lsp-installer")
+			require("core.lazy_load").on_file_open("mason.nvim")
 		end,
+	},
+	["williamboman/mason-lspconfig.nvim"] = {
+		requires = "williamboman/mason.nvim",
 	},
 
 	["SmiteshP/nvim-navic"] = {
@@ -89,7 +92,7 @@ local plugins = {
 	},
 
 	["neovim/nvim-lspconfig"] = {
-		after = "nvim-lsp-installer",
+		after = "mason.nvim",
 		module = "lspconfig",
 		config = function()
 			require("plugins.configs.lsp_installer")

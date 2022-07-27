@@ -1,16 +1,10 @@
-local present, lsp_installer = pcall(require, "nvim-lsp-installer")
+local present, mason = pcall(require, "mason")
 
 if not present then
    return
 end
 
 local options = {
-   -- ensure_installed is not needed as automatic_installation is enabled
-   -- then any lsp server you setup by lspconfig is going to get installed automatically!
-
-   -- ensure_installed = { "lua" },
-   automatic_installation = true,
-
    ui = {
       icons = {
          server_installed = " ",
@@ -31,6 +25,15 @@ local options = {
    max_concurrent_installers = 10,
 }
 
-options = require("core.utils").load_override(options, "williamboman/nvim-lsp-installer")
+mason.setup(options)
 
-lsp_installer.setup(options)
+local masonLspConfigPresent, masonLspConfig = pcall(require, "mason-lspconfig")
+
+if not masonLspConfigPresent then
+   return
+end
+
+masonLspConfig.setup({
+	automatic_installation = true,
+})
+
