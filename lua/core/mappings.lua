@@ -1,29 +1,14 @@
--- Return to last edit position when opening files (You want this!)
--- vim.cmd([[ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]])
-
--- Move a line of text using ALT+[jk] or Command+[jk] on mac
--- nmap("<M-J>", "mz:m+<cr>`z")
--- nmap("<M-K>", "mz:m-2<cr>`z")
--- vmap("<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z")
--- vmap("<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z")
-
-local function nmap(key, cmd, opts)
+local function nvmapNoRemap(key, cmd)
+	local opts = { noremap = false }
     vim.api.nvim_set_keymap("n", key, cmd, opts)
-end
-local function vmap(key, cmd, opts)
     vim.api.nvim_set_keymap("v", key, cmd, opts)
 end
 
--- n, v, i, t = mode names
-local remap = { noremap = false }
-nmap("˙", "<M-h>", remap)
-nmap("∆", "<M-j>", remap)
-nmap("˚", "<M-k>", remap)
-nmap("¬", "<M-l>", remap)
-vmap("˙", "<M-h>", remap)
-vmap("∆", "<M-j>", remap)
-vmap("˚", "<M-k>", remap)
-vmap("¬", "<M-l>", remap)
+-- Macos alt key remaps
+nvmapNoRemap("˙", "<M-h>")
+nvmapNoRemap("∆", "<M-j>")
+nvmapNoRemap("˚", "<M-k>")
+nvmapNoRemap("¬", "<M-l>")
 
 local function termcodes(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -232,7 +217,7 @@ M.neotree = {
 
 	n = {
 		-- toggle
-		["<C-n>"] = { "<cmd> NeoTreeRevealToggle <CR>", "   toggle neotree" },
+		["<C-n>"] = { "<cmd> NeoTreeFloatToggle <CR>", "   toggle neotree" },
 
 		-- focus
 		["<leader>e"] = { "<cmd> NeoTreeFocus <CR>", "   focus neotree" },

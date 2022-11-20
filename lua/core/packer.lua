@@ -43,7 +43,6 @@ M.run = function(plugins)
       return
    end
 
-   -- Override with chadrc values
    plugins = require("core.utils").remove_default_plugins(plugins)
    plugins = require("core.utils").merge_plugins(plugins)
 

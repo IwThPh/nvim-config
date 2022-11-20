@@ -5,15 +5,18 @@ local config = require("core.utils").load_config()
 g.theme = config.ui.theme
 g.transparency = config.ui.transparency
 
--- use filetype.lua instead of filetype.vim
--- g.did_load_filetypes = 0
--- g.do_filetype_lua = 1
-
-opt.cmdheight = 1 -- Cannot use 0 which whichkey
+opt.cmdheight = 0
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 opt.colorcolumn = "0"
 opt.cursorline = false
+opt.pumheight = 10
+
+opt.shortmess:append "c" -- don't show redundant messages from ins-completion-menu
+opt.shortmess:append "I" -- don't show the default intro message
+opt.whichwrap:append "<,>,[,],h,l"
+
+opt.completeopt = { "menuone", "noselect" }
 
 opt.title = true
 
@@ -33,9 +36,6 @@ opt.number = true
 opt.numberwidth = 2
 opt.ruler = false
 
--- disable nvim intro
-opt.shortmess:append "sI"
-
 opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
@@ -48,10 +48,6 @@ opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
-
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
 
 g.mapleader = " "
 
@@ -93,13 +89,6 @@ local default_plugins = {
 for _, plugin in pairs(default_plugins) do
    g["loaded_" .. plugin] = 1
 end
-
--- TODO: Find out what this does
--- set shada path
--- vim.schedule(function()
---    vim.opt.shadafile = vim.fn.expand "$HOME" .. "/.local/share/nvim/shada/main.shada"
---    vim.cmd [[ silent! rsh ]]
--- end)
 
 opt.termguicolors = true
 opt.lazyredraw = true

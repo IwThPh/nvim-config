@@ -52,9 +52,9 @@ local modes = {
 	["niR"] = { "NORMAL r", palette.red.base },
 	["niV"] = { "NORMAL v", palette.red.base },
 	["no"] = { "N-PENDING", palette.red.base },
-	["i"] = { "INSERT", palette.yellow.base },
-	["ic"] = { "INSERT", palette.yellow.base },
-	["ix"] = { "INSERT completion", palette.yellow.base },
+	["i"] = { "INSERT", palette.orange.base },
+	["ic"] = { "INSERT", palette.orange.base },
+	["ix"] = { "INSERT completion", palette.orange.base },
 	["t"] = { "TERMINAL", palette.green.base },
 	["nt"] = { "NTERMINAL", palette.green.base },
 	["v"] = { "VISUAL", palette.blue.base },
@@ -458,7 +458,7 @@ local statuslines = {
 		end
 	end,
 
-	init = utils.pick_child_on_condition,
+	fallthrough = false,
 
 	SpecialStatusline,
 	TerminalStatusline,
@@ -478,7 +478,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 local WinBars = {
-	init = utils.pick_child_on_condition,
+	fallthrough = false,
 	{ -- Hide the winbar for special buffers
 		condition = function()
 			return conditions.buffer_matches({

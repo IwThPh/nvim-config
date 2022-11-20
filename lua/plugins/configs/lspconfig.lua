@@ -7,16 +7,14 @@ end
 local navicPresent, navic = pcall(require, "nvim-navic")
 
 local M = {}
-local utils = require "core.utils"
+local utils = require("core.utils")
 
-require "ui.lsp"
-
-local lspconfig_util = require("lspconfig.util")
-local lspconfig_configs = require("lspconfig.configs")
+require("ui.lsp")
 
 M.on_attach = function(client, bufnr)
-	client.server_capabilities.documentFormattingProvider = true
-	client.server_capabilities.documentRangeFormattingProvider = true
+	-- Rely on null-ls
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
 
 	local lsp_mappings = utils.load_config().mappings.lspconfig
 	utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
@@ -24,13 +22,14 @@ M.on_attach = function(client, bufnr)
 	if navicPresent and client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
-
-	-- if client.server_capabilities.signatureHelpProvider then
-	--    require("nvchad.ui.signature").setup(client)
-	-- end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local cmpNvimPresent, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if cmpNvimPresent then
+	capabilities = cmp_nvim_lsp.default_capabilities()
+end
 
 capabilities.textDocument.completion.completionItem = {
 	documentationFormat = { "markdown", "plaintext" },
@@ -50,99 +49,8 @@ capabilities.textDocument.completion.completionItem = {
 	},
 }
 
-local volar_cmd = { "/Users/iwanphillips/.local/share/nvim/lsp_servers/volar/node_modules/.bin/vue-language-server", "--stdio" }
-local volar_root_dir = lspconfig_util.root_pattern("package.json")
-local ts_serverpath = "/Users/iwanphillips/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
-
-
--- Custom lsp language servers
-lspconfig_configs.volar_api = {
-	default_config = {
-		cmd = volar_cmd,
-		root_dir = volar_root_dir,
-		filetypes = { "vue" },
-		-- If you want to use Volar's Take Over Mode (if you know, you know)
-		--filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-		init_options = {
-			typescript = {
-				serverPath = ts_serverpath,
-			},
-			languageFeatures = {
-				inlayHints = true, -- new in @volar/vue-language-server v0.34.8
-				implementation = true, -- new in @volar/vue-language-server v0.33
-				references = true,
-				definition = true,
-				typeDefinition = true,
-				callHierarchy = true,
-				hover = true,
-				rename = true,
-				renameFileRefactoring = true,
-				signatureHelp = true,
-				codeAction = true,
-				workspaceSymbol = true,
-				completion = {
-					defaultTagNameCase = "both",
-					defaultAttrNameCase = "kebabCase",
-					getDocumentNameCasesRequest = false,
-					getDocumentSelectionRequest = false,
-				},
-			},
-		},
-	},
-}
-lspconfig_configs.volar_doc = {
-	default_config = {
-		cmd = volar_cmd,
-		root_dir = volar_root_dir,
-		filetypes = { "vue" },
-		-- If you want to use Volar's Take Over Mode (if you know, you know):
-		--filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-		init_options = {
-			typescript = {
-				serverPath = ts_serverpath,
-			},
-			languageFeatures = {
-				inlayHints = true,
-				implementation = true, -- new in @volar/vue-language-server v0.33
-				documentHighlight = true,
-				documentLink = true,
-				codeLens = { showReferencesNotification = true },
-				-- not supported - https://github.com/neovim/neovim/pull/15723
-				semanticTokens = false,
-				diagnostics = true,
-				schemaRequestService = true,
-			},
-		},
-	},
-}
-lspconfig_configs.volar_html = {
-	default_config = {
-		cmd = volar_cmd,
-		root_dir = volar_root_dir,
-		filetypes = { "vue" },
-		-- If you want to use Volar's Take Over Mode (if you know, you know), intentionally no 'json':
-		--filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-		init_options = {
-			typescript = {
-				serverPath = ts_serverpath,
-			},
-			languageFeatures = {
-				inlayHints = true,
-			},
-			documentFeatures = {
-				selectionRange = true,
-				foldingRange = true,
-				linkedEditingRange = true,
-				documentSymbol = true,
-				-- not supported - https://github.com/neovim/neovim/pull/13654
-				documentColor = false,
-				documentFormatting = {
-					defaultPrintWidth = 100,
-				},
-			},
-		},
-	},
-}
+local ts_serverpath =
+	vim.fn.expand("~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js")
 
 local servers = {
 	bashls = true,
@@ -153,7 +61,7 @@ local servers = {
 	graphql = true,
 	html = true,
 	intelephense = {
-		init_options = { licenceKey = "/Users/iwanphillips/.config/intelephense/licence.txt" },
+		init_options = { licenceKey = "/Users/iwanp/.config/intelephense/licence.txt" },
 		settings = {
 			intelephense = {
 				enviroment = { phpVersion = "7.4.21" },
@@ -190,22 +98,24 @@ local servers = {
 		},
 	},
 	sumneko_lua = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = {
-				library = {
-					[vim.fn.expand "$VIMRUNTIME/lua"] = true,
-					[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
 				},
-				maxPreload = 100000,
-				preloadFileSize = 10000,
+				workspace = {
+					library = {
+						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+						[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					},
+					maxPreload = 100000,
+					preloadFileSize = 10000,
+				},
+				telemetry = {
+					enable = false,
+				},
 			},
-			telemetry = {
-				enable = false,
-			},
-		},
+		}
 	},
 	tailwindcss = true,
 	-- tsserver = {
@@ -221,7 +131,7 @@ local servers = {
 	-- 	on_attach = M.on_attach,
 	-- },
 	volar = {
-		filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 		init_options = {
 			typescript = {
 				serverPath = ts_serverpath,
@@ -280,12 +190,8 @@ M.setup_server = function(server, config)
 	end
 
 	config = vim.tbl_deep_extend("force", {
-		-- on_init = custom_init,
 		on_attach = M.on_attach,
 		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = nil,
-		},
 	}, config)
 
 	lspconfig[server].setup(config)
