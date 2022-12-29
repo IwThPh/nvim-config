@@ -48,7 +48,7 @@ function M.config()
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 
-		local lsp_mappings = utils.load_config().mappings.lspconfig
+		local lsp_mappings = require("core.mappings").lspconfig
 		utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
 
 		if client.server_capabilities.documentSymbolProvider then

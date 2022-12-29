@@ -41,9 +41,9 @@ function M.config()
 			info = utils.get_highlight("DiagnosticInfo").fg,
 		},
 		git = {
-			del = utils.get_highlight("diffRemoved").fg,
-			add = utils.get_highlight("diffAdded").fg,
-			change = utils.get_highlight("diffChanged").fg,
+			add = palette.green.base, -- utils.get_highlight("DiffviewStatusAdded").fg,
+			del = palette.red.base, -- utils.get_highlight("DiffviewStatusDeleted").fg,
+			change = palette.orange.base, -- utils.get_highlight("DiffviewStatusModified").fg,
 		},
 	}
 

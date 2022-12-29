@@ -1,7 +1,7 @@
 local function nvmapNoRemap(key, cmd)
 	local opts = { noremap = false }
-    vim.api.nvim_set_keymap("n", key, cmd, opts)
-    vim.api.nvim_set_keymap("v", key, cmd, opts)
+	vim.api.nvim_set_keymap("n", key, cmd, opts)
+	vim.api.nvim_set_keymap("v", key, cmd, opts)
 end
 
 -- Macos alt key remaps
@@ -18,8 +18,7 @@ local M = {}
 
 M.general = {
 
-	i = {
-	},
+	i = {},
 
 	n = {
 		-- save
@@ -60,7 +59,7 @@ M.general = {
 	},
 
 	t = {
-		["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+		["<C-x>"] = { termcodes("<C-\\><C-N>"), "   escape terminal mode" },
 		-- -- Map escape to escape sequence in terminal buffer.
 		-- tmap("<Esc>", "<C-\\><C-n>")
 	},
@@ -68,7 +67,6 @@ M.general = {
 
 -- M.tabufline = {
 M.bufferline = {
-
 	n = {
 		-- cycle through buffers
 		["<TAB>"] = { "<cmd> BufferNext <CR>", "  goto next buffer" }, -- BufferNext
@@ -85,18 +83,15 @@ M.comment = {
 
 	-- toggle comment in both modes
 	n = {
-		["<leader>/"] = {
-			function()
-				require("Comment.api").toggle_current_linewise()
-			end,
-
+		["gcc"] = {
+			"<Plug>(comment_toggle_linewise_current)",
 			"蘒  toggle comment",
 		},
 	},
 
 	v = {
-		["<leader>/"] = {
-			"<ESC><cmd> lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
+		["gc"] = {
+			"<Plug>(comment_toggle_linewise_visual)",
 			"蘒  toggle comment",
 		},
 	},
@@ -114,7 +109,7 @@ M.lspconfig = {
 		},
 
 		["gd"] = {
- 			"<cmd> Telescope lsp_definitions <CR>",
+			"<cmd> Telescope lsp_definitions <CR>",
 			"   lsp definition",
 		},
 
@@ -126,7 +121,7 @@ M.lspconfig = {
 		},
 
 		["gi"] = {
- 			"<cmd> Telescope lsp_implementations <CR>",
+			"<cmd> Telescope lsp_implementations <CR>",
 			"   lsp implementation",
 		},
 
@@ -138,13 +133,13 @@ M.lspconfig = {
 		},
 
 		["<leader>D"] = {
- 			"<cmd> Telescope lsp_type_definitions <CR>",
+			"<cmd> Telescope lsp_type_definitions <CR>",
 			"   lsp definition type",
 		},
 
 		["<leader>ra"] = {
 			function()
-			    vim.lsp.buf.rename()
+				vim.lsp.buf.rename()
 				-- require("nvchad.ui.renamer").open()
 			end,
 			"   lsp rename",
@@ -158,7 +153,7 @@ M.lspconfig = {
 		},
 
 		["gr"] = {
- 			"<cmd> Telescope lsp_references <CR>",
+			"<cmd> Telescope lsp_references <CR>",
 			"   lsp references",
 		},
 
@@ -185,7 +180,7 @@ M.lspconfig = {
 
 		["<leader>fm"] = {
 			function()
-				vim.lsp.buf.format ({ async = true })
+				vim.lsp.buf.format({ async = true })
 			end,
 			"   lsp formatting",
 		},
@@ -247,7 +242,6 @@ M.telescope = {
 		-- pick a hidden term
 		["<leader>pt"] = { "<cmd> Telescope terms <CR>", "   pick hidden term" },
 
-
 		-- function M.edit_neovim()
 		-- 	require("telescope.builtin").find_files({
 		-- 		prompt_title = "~ dotfiles ~",
@@ -282,7 +276,6 @@ M.telescope = {
 		-- 		},
 		-- 	})
 		-- end
-
 	},
 }
 
@@ -290,13 +283,13 @@ M.whichkey = {
 	n = {
 		["<leader>wK"] = {
 			function()
-				vim.cmd "WhichKey"
+				vim.cmd("WhichKey")
 			end,
 			"   which-key all keymaps",
 		},
 		["<leader>wk"] = {
 			function()
-				local input = vim.fn.input "WhichKey: "
+				local input = vim.fn.input("WhichKey: ")
 				vim.cmd("WhichKey " .. input)
 			end,
 			"   which-key query lookup",
@@ -315,7 +308,7 @@ M.blankline = {
 
 				if ok then
 					vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-					vim.cmd [[normal! _]]
+					vim.cmd([[normal! _]])
 				end
 			end,
 
@@ -327,50 +320,58 @@ M.blankline = {
 M.gitsigns = {
 	n = {
 		["]c"] = {
-			function ()
-				if vim.wo.diff then return ']c' end
-				vim.schedule(function() require'gitsigns'.next_hunk() end)
-				return '<Ignore>'
+			function()
+				if vim.wo.diff then
+					return "]c"
+				end
+				vim.schedule(function()
+					require("gitsigns").next_hunk()
+				end)
+				return "<Ignore>"
 			end,
-			'git next hunk'
+			"git next hunk",
 		},
 		["[c"] = {
-			function ()
-				if vim.wo.diff then return '[c' end
-				vim.schedule(function() require'gitsigns'.prev_hunk() end)
-				return '<Ignore>'
+			function()
+				if vim.wo.diff then
+					return "[c"
+				end
+				vim.schedule(function()
+					require("gitsigns").prev_hunk()
+				end)
+				return "<Ignore>"
 			end,
-			'git previous hunk'
+			"git previous hunk",
 		},
 		["<leader>hs"] = {
-			function ()
-				require'gitsigns'.stage_hunk()
+			function()
+				require("gitsigns").stage_hunk()
 			end,
-			'git stage hunk'
+			"git stage hunk",
 		},
 		["<leader>hu"] = {
-			function ()
-				require'gitsigns'.undo_stage_hunk()
+			function()
+				require("gitsigns").undo_stage_hunk()
 			end,
-			'git unstage hunk'
+			"git unstage hunk",
 		},
 		["<leader>hr"] = {
-			function ()
-				require'gitsigns'.reset_hunk()
+			function()
+				require("gitsigns").reset_hunk()
 			end,
-			'git reset hunk'
+			"git reset hunk",
 		},
 		["<leader>hp"] = {
-			function ()
-				require'gitsigns'.preview_hunk()
+			function()
+				require("gitsigns").preview_hunk()
 			end,
-			'git preview hunk'
+			"git preview hunk",
 		},
 		["<leader>hb"] = {
-			function ()
-				require'gitsigns'.blame_line()
+			function()
+				require("gitsigns").blame_line()
 			end,
-			'git blame line'
+			"git blame line",
 		},
 	},
 }
@@ -378,35 +379,35 @@ M.gitsigns = {
 M.testing = {
 	n = {
 		["tn"] = {
-			function ()
-				require'neotest'.run.run()
+			function()
+				require("neotest").run.run()
 				-- require'neotest'.run.run({strategy = "dap"}) requires nvim-dap
 			end,
-			'run nearest test'
+			"run nearest test",
 		},
 		["tf"] = {
-			function ()
-				require'neotest'.run.run(vim.fn.expand('%'))
+			function()
+				require("neotest").run.run(vim.fn.expand("%"))
 			end,
-			'run all tests in file'
+			"run all tests in file",
 		},
 		["ta"] = {
-			function ()
-				require'neotest'.run.run(vim.fn.getcwd())
+			function()
+				require("neotest").run.run(vim.fn.getcwd())
 			end,
-			'run all tests'
+			"run all tests",
 		},
 		["tl"] = {
-			function ()
-				require'neotest'.run.run_last()
+			function()
+				require("neotest").run.run_last()
 			end,
-			'run last test'
+			"run last test",
 		},
 		["ts"] = {
-			function ()
-				require'neotest'.summary.toggle()
+			function()
+				require("neotest").summary.toggle()
 			end,
-			'toggle test summary'
+			"toggle test summary",
 		},
 	},
 }

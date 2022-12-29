@@ -1,6 +1,8 @@
 local opt = vim.opt
 local g = vim.g
 
+g.theme = "terafox"
+
 opt.cmdheight = 0
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
@@ -39,7 +41,7 @@ opt.scrolloff = 7
 opt.spelllang = "en_gb"
 opt.langmenu = "en"
 opt.termguicolors = true
-opt.timeoutlen = 400
+opt.timeoutlen = 1000
 opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns

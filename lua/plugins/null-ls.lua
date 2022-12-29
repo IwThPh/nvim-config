@@ -15,7 +15,7 @@ function M.config()
 			client.server_capabilities.documentRangeFormattingProvider = true
 
 			local utils = require("core.utils")
-			local lsp_mappings = utils.load_config().mappings.lspconfig
+			local lsp_mappings = require("core.mappings").lspconfig
 			utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
 
 			local navic = require("nvim-navic")
