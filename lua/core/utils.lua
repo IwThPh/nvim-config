@@ -10,6 +10,8 @@ local merge_tb = vim.tbl_deep_extend
 
 M.load_mappings = function(mappings, mapping_opt)
    -- set mapping function with/without whichkey
+   local mappings = mappings or {}
+
    local map_func
    local whichkey_exists, wk = pcall(require, "which-key")
 

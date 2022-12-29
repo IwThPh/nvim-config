@@ -3,6 +3,10 @@
 ---------------------------------------------------------------
 
 -- Initialise Lazy Nvim Package Manager
+require("core.options")
+require("core.autocmds")
+require("core.utils").load_mappings()
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -18,11 +22,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("plugins", {
 	defaults = { lazy = true },
-	install = { colorscheme = { "tokyonight" } },
+	install = { colorscheme = { "terafox" } },
 	checker = { enabled = true },
-	change_detection = {
-		notify = false,
-	},
+	change_detection = { notify = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -40,9 +42,6 @@ require("lazy").setup("plugins", {
 	-- debug = true,
 })
 
-require("core.options")
-require("core.autocmds")
-require("core.utils").load_mappings()
 
 -- Load the configuration set above and apply the colorscheme
 vim.cmd([[colorscheme terafox]])

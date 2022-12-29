@@ -1,9 +1,5 @@
 local opt = vim.opt
 local g = vim.g
-local config = require("core.utils").load_config()
-
-g.theme = config.ui.theme
-g.transparency = config.ui.transparency
 
 opt.cmdheight = 0
 opt.laststatus = 3 -- global statusline
