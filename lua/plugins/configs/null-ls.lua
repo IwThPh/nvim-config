@@ -16,7 +16,8 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.sqlformat,
 		null_ls.builtins.formatting.eslint_d,
-		-- null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.terraform_fmt,
+		null_ls.builtins.formatting.prettierd,
 		-- null_ls.builtins.formatting.fixjson,
 		null_ls.builtins.formatting.phpcsfixer,
 

@@ -89,6 +89,7 @@ local servers = {
 			},
 		},
 	},
+	phpactor = false,
 	jsonls = true,
 	rust_analyzer = true,
 	sqlls = {
@@ -118,6 +119,7 @@ local servers = {
 		}
 	},
 	tailwindcss = true,
+	terraformls = true,
 	-- tsserver = {
 	-- 	cmd = { "typescript-language-server", "--stdio" },
 	-- 	filetypes = {
@@ -176,7 +178,7 @@ local servers = {
 	volar_api = false,
 	volar_doc = false,
 	volar_html = false,
-	yamlls = true,
+	yamlls = false,
 	zk = true,
 }
 

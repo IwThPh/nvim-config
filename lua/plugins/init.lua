@@ -74,6 +74,12 @@ local plugins = {
 		end,
 	},
 
+	["sindrets/diffview.nvim"] = {
+		config = function()
+			require("plugins.configs.diffview")
+		end,
+	},
+
 	-- lsp stuff
 
 	["williamboman/mason.nvim"] = {
