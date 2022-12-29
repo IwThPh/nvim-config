@@ -12,10 +12,7 @@ return {
 		end,
 	},
 
-	{
 		"numToStr/Comment.nvim",
-		keys = { "gc", "gcc" },
-	},
 
 	{
 		"rcarriga/nvim-notify",

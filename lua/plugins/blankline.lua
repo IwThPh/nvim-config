@@ -4,20 +4,22 @@ local M = {
 }
 
 function M.config()
+   require("ui.theme").load_highlight("blankline")
    require("indent_blankline").setup({
       indentLine_enabled = 1,
       char = "▏",
       filetype_exclude = {
+         "lazy",
          "help",
          "terminal",
-         "alpha",
-         "packer",
          "lspinfo",
          "TelescopePrompt",
          "TelescopeResults",
          "lsp-installer",
          "",
       },
+		    space_char_blankline = " ",
+
       buftype_exclude = { "terminal" },
       show_trailing_blankline_indent = false,
       show_first_indent_level = false,
