@@ -19,11 +19,11 @@ autocmd('TermOpen', {
 })
 
 -- Start git commits in INSERT mode
-autocmd('FileType', {
-	group = bufcheck,
-	pattern = { 'gitcommit', 'gitrebase' },
-	command = 'startinsert',
-})
+-- autocmd('FileType', {
+-- 	group = bufcheck,
+-- 	pattern = { 'gitcommit', 'gitrebase' },
+-- 	command = 'startinsert',
+-- })
 
 autocmd('FileType', {
 	group = bufcheck,

@@ -34,8 +34,6 @@ local options = {
    },
 }
 
-options = require("core.utils").load_override(options, "folke/which-key.nvim")
-
 local utils = require "core.utils"
 
 local mappings = utils.load_config().mappings
