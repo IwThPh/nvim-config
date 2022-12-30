@@ -10,15 +10,16 @@ function M.config()
 	local null_ls = require("null-ls")
 	null_ls.setup({
 		on_attach = function(client, bufnr)
-			-- Set formatting providers
-			client.server_capabilities.documentFormattingProvider = true
-			client.server_capabilities.documentRangeFormattingProvider = true
-
 			local utils = require("core.utils")
-			local lsp_mappings = require("core.mappings").lspconfig
-			utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
-
 			local navic = require("nvim-navic")
+
+			-- Set formatting providers
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+
+			local lsp_mappings = { require("core.mappings").lspconfig or {} }
+			utils.load_mappings(lsp_mappings, { buffer = bufnr })
+
 			if client.server_capabilities.documentSymbolProvider then
 				navic.attach(client, bufnr)
 			end

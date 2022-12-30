@@ -44,10 +44,8 @@ opt.termguicolors = true
 opt.timeoutlen = 1000
 opt.undofile = true
 
-vim.opt.list = true
-vim.opt.listchars:append "trail:•"
-vim.opt.listchars:append "tab:→\\ "
-vim.opt.listchars:append "eol:↴"
+vim.opt.list = false
+vim.opt.listchars = { eol = '↴', trail = '•', tab = '→~' }
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250

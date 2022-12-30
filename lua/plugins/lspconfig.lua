@@ -1,6 +1,7 @@
 local M = {
 	"neovim/nvim-lspconfig",
 	name = "lspconfig",
+	event = "BufReadPre",
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -42,19 +43,6 @@ function M.config()
 	local lspconfig = require("lspconfig")
 	local navic = require("nvim-navic")
 	require("ui.lsp")
-
-	local on_attach = function(client, bufnr)
-		-- Rely on null-ls
-		client.server_capabilities.documentFormattingProvider = false
-		client.server_capabilities.documentRangeFormattingProvider = false
-
-		local lsp_mappings = require("core.mappings").lspconfig
-		utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
-
-		if client.server_capabilities.documentSymbolProvider then
-			navic.attach(client, bufnr)
-		end
-	end
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -224,7 +212,18 @@ function M.config()
 		end
 
 		config = vim.tbl_deep_extend("force", {
-			on_attach = on_attach,
+			on_attach = function(client, bufnr)
+				-- Rely on null-ls
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+
+				local lsp_mappings = { require("core.mappings").lspconfig or {} }
+				require("core.utils").load_mappings(lsp_mappings, { buffer = bufnr })
+
+				if client.server_capabilities.documentSymbolProvider then
+					navic.attach(client, bufnr)
+				end
+			end,
 			capabilities = capabilities,
 		}, config)
 

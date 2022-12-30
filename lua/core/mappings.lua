@@ -17,9 +17,6 @@ end
 local M = {}
 
 M.general = {
-
-	i = {},
-
 	n = {
 		-- save
 		["<leader><leader>"] = { "<cmd> w <CR>", "﬚  save file" },

@@ -18,7 +18,17 @@ return {
 		"rcarriga/nvim-notify",
 		config = function()
 			local notify = require("notify")
-			vim.notify = notify
+			vim.notify = function (msg, log_level)
+				if msg:match("exit code") then
+					return
+				end
+				if log_level == vim.log.levels.ERROR then
+					vim.api.nvim_err_writeln(msg)
+				else
+					notify(msg, log_level)
+				end
+			end
+
 			notify.setup({ stages = "slide" })
 		end,
 	},

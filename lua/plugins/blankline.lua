@@ -1,13 +1,12 @@
 local M = {
-"lukas-reineke/indent-blankline.nvim",
+    "lukas-reineke/indent-blankline.nvim",
 	name = "blankline"
 }
 
 function M.config()
    require("ui.theme").load_highlight("blankline")
    require("indent_blankline").setup({
-      indentLine_enabled = 1,
-      char = "▏",
+      char = "",
       filetype_exclude = {
          "lazy",
          "help",
@@ -18,11 +17,10 @@ function M.config()
          "lsp-installer",
          "",
       },
-		    space_char_blankline = " ",
-
       buftype_exclude = { "terminal" },
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = false,
+	  space_char_blankline = " ",
+      show_trailing_blankline_indent = true,
+      show_first_indent_level = true,
       show_current_context = true,
       show_current_context_start = true,
    })

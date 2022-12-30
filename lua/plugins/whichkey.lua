@@ -1,12 +1,10 @@
 local M = {
 	"folke/which-key.nvim",
+	name = "whichkey"
 }
 
 function M.config()
-	local wk = require("which-key")
-
-	local options = {
-
+	require("which-key").setup({
 		icons = {
 			breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
 			separator = "  ", -- symbol used between a key and it's label
@@ -33,19 +31,7 @@ function M.config()
 			i = { "j", "k" },
 			v = { "j", "k" },
 		},
-	}
-
-	local utils = require("core.utils")
-
-	local mappings = require("core.mappings")
-	local mapping_groups = { groups = vim.deepcopy(mappings.groups) }
-
-	mappings.disabled = nil
-	mappings.groups = nil
-
-	utils.load_mappings(mapping_groups)
-
-	wk.setup(options)
+	})
 end
 
 return M
