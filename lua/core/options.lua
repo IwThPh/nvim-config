@@ -14,8 +14,6 @@ opt.shortmess:append('c') -- don't show redundant messages from ins-completion-m
 opt.shortmess:append('I') -- don't show the default intro message
 opt.whichwrap:append('<,>,[,],h,l')
 
-opt.completeopt = { 'menuone', 'noselect' }
-
 opt.title = true
 
 -- Indenting
@@ -23,6 +21,7 @@ opt.expandtab = false
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.smartindent = true
+opt.breakindent = true -- maintain indent when wrapping indented lines
 
 opt.fillchars = { eob = ' ' }
 opt.ignorecase = true
@@ -38,14 +37,16 @@ opt.signcolumn = 'yes'
 opt.splitbelow = true
 opt.splitright = true
 opt.scrolloff = 7
+opt.sidescrolloff = 7
 opt.spelllang = 'en_gb'
 opt.langmenu = 'en'
 opt.termguicolors = true
 opt.timeoutlen = 1000
 opt.undofile = true
 
-vim.opt.list = false
-vim.opt.listchars = { eol = '↴', trail = '•', tab = '→~' }
+vim.opt.list = true
+vim.opt.listchars = { trail = '·', tab = '▸ ' } -- eol = '↴',
+
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250

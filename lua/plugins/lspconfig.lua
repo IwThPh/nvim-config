@@ -6,6 +6,8 @@ local M = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'SmiteshP/nvim-navic',
+		'b0o/schemastore.nvim',
+        'weilbith/nvim-code-action-menu',
     },
 }
 

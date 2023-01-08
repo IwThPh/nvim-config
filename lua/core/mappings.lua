@@ -14,6 +14,7 @@ set({ 'n', 'v' }, '¬', '<M-l>')
 
 set('n', '<leader><leader>', '<cmd> w <CR>') -- , "﬚  save file"
 set('n', '<leader><cr>', '<cmd> noh <CR>') -- , "  no highlight"
+set('n', 'q:', ':q<CR>') -- , "disable command history"
 set('n', '<leader>cd', '<cmd> cd %:p:h<cr><cmd> pwd<cr>') -- , "🗎  change CWD"
 
 set('n', '<C-h>', '<C-w>h') -- , "  window left"
@@ -38,6 +39,10 @@ set('n', '-', ':split<cr>') -- , "―  horizontal split"
 set('v', '>', '>gv') -- , "  increase indentation"
 set('v', '<', '<gv') -- , "  decrease indentation"
 
+-- When text is wrapped, move by terminal rows, not lines, unless a count is provided
+set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
+set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
+
 set('t', '<C-x>', termcodes('<C-\\><C-N>')) -- , "   escape terminal mode"
 
 set('n', '<TAB>', '<cmd> BufferNext <CR>') -- , "  goto next buffer" -- BufferNext
@@ -46,8 +51,8 @@ set('n', '<leader>tp', '<cmd> tabprevious <CR>') -- , "  goto next tab"
 set('n', '<leader>tn', '<cmd> tabnext <CR> ') -- , "  goto prev tab"
 set('n', '<leader>q', '<cmd> BufferClose <CR>') -- , "   close buffer"
 
-set('n', 'cc', '<Plug>(comment_toggle_linewise_current)') -- , "蘒  toggle comment"
-set('v', 'c', '<Plug>(comment_toggle_linewise_visual)') -- , "蘒  toggle comment"
+set('n', 'gcc', '<Plug>(comment_toggle_linewise_current)') -- , "蘒  toggle comment"
+set('v', 'gc', '<Plug>(comment_toggle_linewise_visual)') -- , "蘒  toggle comment"
 
 set('n', '<C-n>', '<cmd> NeoTreeFloatToggle <CR>') -- , "   toggle neotree"
 set('n', '<leader>e', '<cmd> NeoTreeFocus <CR>') -- , "   focus neotree"
@@ -87,7 +92,7 @@ set('n', ']c', function()
     end)
     return '<Ignore>'
 end) -- , "git next hunk"
-set('n', 'c', function()
+set('n', '[c', function()
     if vim.wo.diff then
         return '[c'
     end

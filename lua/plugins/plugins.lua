@@ -1,14 +1,27 @@
 return {
-    'wbthomason/packer.nvim',
     'nvim-lua/plenary.nvim',
     'tpope/vim-surround',
     'lewis6991/impatient.nvim',
     'MunifTanjim/nui.nvim',
 
     {
+        'antoinemadec/FixCursorHold.nvim',
+        config = function()
+            vim.g.cursorhold_updatetime = 100
+        end,
+    },
+
+    {
         'kyazdani42/nvim-web-devicons',
         config = function()
             require('nvim-web-devicons').setup({ override = require('ui.icons').devicons })
+        end,
+    },
+
+    {
+        'luukvbaal/stabilize.nvim',
+        config = function()
+            require('stabilize').setup()
         end,
     },
 
@@ -38,6 +51,15 @@ return {
         dependencies = { 'nvim-lspconfig' },
         config = function()
             require('fidget').setup({})
+        end,
+    },
+
+    {
+        'hood/popui.nvim',
+        dependencies = { 'RishabhRD/popfix' },
+        config = function()
+            vim.ui.select = require('popui.ui-overrider')
+            vim.ui.input = require('popui.input-overrider')
         end,
     },
 

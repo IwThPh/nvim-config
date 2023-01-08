@@ -82,10 +82,10 @@ function M.config()
                 self.mode = vim.api.nvim_get_mode().mode
             end,
             provider = function(self)
-                return '  ' .. modes[self.mode][1] .. ' '
+                return '  ' .. modes[self.mode][1] or self.mode .. ' '
             end,
             hl = function(self)
-                return { bg = modes[self.mode][2] }
+                return { bg = modes[self.mode][2] or palette.cyan.base }
             end,
         },
         {
@@ -96,16 +96,14 @@ function M.config()
                 return sep_r
             end,
             hl = function(self)
-                return { bg = palette.bg2, fg = modes[self.mode][2] }
+                return { bg = palette.bg2, fg = modes[self.mode][2] or palette.cyan.base }
             end,
         },
         {
             provider = function()
                 return sep_r
             end,
-            hl = function()
-                return { bg = palette.bg1, fg = palette.bg2 }
-            end,
+            hl = { bg = palette.bg1, fg = palette.bg2 },
         },
     }
 
@@ -114,9 +112,7 @@ function M.config()
         init = function(self)
             self.filename = vim.api.nvim_buf_get_name(0)
         end,
-        hl = function()
-            return { fg = palette.fg1, bg = palette.bg1 }
-        end,
+        hl = { fg = palette.fg1, bg = palette.bg1 },
     }
     -- We can now define some children separately and add them later
 
@@ -314,7 +310,7 @@ function M.config()
 
     local FileType = {
         provider = function()
-            return string.upper(vim.bo.filetype)
+            return vim.bo.filetype
         end,
         hl = { fg = utils.get_highlight('Type').fg, bold = true },
     }
@@ -421,14 +417,27 @@ function M.config()
             })
         end,
 
-        FileType,
+        {
+            condition = conditions.is_active,
+            ViMode,
+            {
+                provider = sep_r,
+                hl = { fg = palette.bg1 },
+            },
+            Space,
+        },
+
+        {
+            hl = { fg = palette.fg1, bg = palette.bg1, force = true },
+            FileType,
+        },
+
         Space,
         HelpFileName,
         Align,
     }
 
     local TerminalStatusline = {
-
         condition = function()
             return conditions.buffer_matches({ buftype = { 'terminal' } })
         end,
