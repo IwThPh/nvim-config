@@ -2,27 +2,15 @@ local palette = require('ui.theme').get_palette()
 
 return {
     TelescopeBorder = {
-        fg = palette.bg0,
-        bg = palette.bg0,
-    },
-
-    TelescopePromptBorder = {
-        fg = palette.bg2,
-        bg = palette.bg2,
+        fg = palette.white.base,
     },
 
     TelescopePromptNormal = {
         fg = palette.white.base,
-        bg = palette.bg2,
     },
 
     TelescopePromptPrefix = {
         fg = palette.red.base,
-        bg = palette.bg2,
-    },
-
-    TelescopeNormal = {
-        bg = palette.bg0,
     },
 
     TelescopePreviewTitle = {
@@ -36,8 +24,8 @@ return {
     },
 
     TelescopeResultsTitle = {
-        fg = palette.bg0,
-        bg = palette.bg0,
+        fg = palette.bg2,
+        bg = palette.white.base,
     },
 
     TelescopeSelection = {

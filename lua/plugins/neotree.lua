@@ -2,6 +2,7 @@ local M = {
     'nvim-neo-tree/neo-tree.nvim',
     name = 'neotree',
     version = 'v2.x',
+	enabled = false
 }
 
 function M.config()
