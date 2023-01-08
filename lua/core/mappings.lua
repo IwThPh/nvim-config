@@ -45,11 +45,11 @@ set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 set('t', '<C-x>', termcodes('<C-\\><C-N>')) -- , "   escape terminal mode"
 
-set('n', '<TAB>', '<cmd> BufferNext <CR>') -- , "  goto next buffer" -- BufferNext
-set('n', '<S-Tab>', '<cmd> BufferPrevious <CR> ') -- , "  goto prev buffer" -- BufferPrevious
+set('n', '<TAB>', '<cmd> bnext <CR>') -- , "  goto next buffer" -- BufferNext
+set('n', '<S-Tab>', '<cmd> bprevious <CR> ') -- , "  goto prev buffer" -- BufferPrevious
 set('n', '<leader>tp', '<cmd> tabprevious <CR>') -- , "  goto next tab"
 set('n', '<leader>tn', '<cmd> tabnext <CR> ') -- , "  goto prev tab"
-set('n', '<leader>q', '<cmd> BufferClose <CR>') -- , "   close buffer"
+set('n', '<leader>q', '<cmd> Bdelete <CR>') -- , "   close buffer"
 
 set('n', 'gcc', '<Plug>(comment_toggle_linewise_current)') -- , "蘒  toggle comment"
 set('v', 'gc', '<Plug>(comment_toggle_linewise_visual)') -- , "蘒  toggle comment"

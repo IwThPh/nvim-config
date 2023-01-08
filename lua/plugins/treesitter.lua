@@ -6,6 +6,7 @@ local M = {
     },
 }
 
+
 function M.config()
     local treesitter = require('nvim-treesitter.configs')
 

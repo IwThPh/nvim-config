@@ -64,6 +64,7 @@ function M.config()
             name = {
                 trailing_slash = false,
                 use_git_status_colors = true,
+
                 highlight = 'NeoTreeFileName',
             },
             git_status = {

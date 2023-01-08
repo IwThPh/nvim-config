@@ -2,6 +2,7 @@ return {
     'nvim-lua/plenary.nvim',
     'tpope/vim-surround',
     'lewis6991/impatient.nvim',
+    'famiu/bufdelete.nvim',
     'MunifTanjim/nui.nvim',
 
     {
@@ -72,6 +73,17 @@ return {
             'nvim-treesitter/nvim-treesitter',
             'antoinemadec/FixCursorHold.nvim',
         },
+    },
+
+    {
+        'karb94/neoscroll.nvim',
+        config = function()
+            require('neoscroll').setup()
+            require('neoscroll.config').set_mappings({
+                ['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '50' } },
+                ['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '50' } },
+            })
+        end,
     },
 
     {
