@@ -6,7 +6,7 @@ local M = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'SmiteshP/nvim-navic',
-		'b0o/schemastore.nvim',
+        'b0o/schemastore.nvim',
         'weilbith/nvim-code-action-menu',
     },
 }
@@ -69,6 +69,12 @@ function M.config()
                 'additionalTextEdits',
             },
         },
+    }
+
+	-- capabilities for nvim-ufo folding
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
     }
 
     local ts_serverpath =

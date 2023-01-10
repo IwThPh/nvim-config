@@ -26,6 +26,26 @@ return {
         end,
     },
 
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies = { 'kevinhwang91/promise-async' },
+        config = function()
+            local o = vim.o
+            o.foldcolumn = '1'
+            o.foldnestmax = '1'
+            o.foldlevel = 99
+            o.foldlevelstart = 99
+            o.foldenable = true
+            o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
+            o.statuscolumn = '%=%l%s%C'
+
+            local set = vim.keymap.set
+            set('n', 'zR', require('ufo').openAllFolds)
+            set('n', 'zM', require('ufo').closeAllFolds)
+		require('ufo').setup()
+        end,
+    },
+
     'numToStr/Comment.nvim',
 
     {

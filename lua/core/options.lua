@@ -14,6 +14,7 @@ opt.shortmess:append('c') -- don't show redundant messages from ins-completion-m
 opt.shortmess:append('I') -- don't show the default intro message
 opt.whichwrap:append('<,>,[,],h,l')
 
+
 opt.title = true
 
 -- Indenting
@@ -46,7 +47,6 @@ opt.undofile = true
 
 vim.opt.list = true
 vim.opt.listchars = { trail = '·', tab = '▸ ' } -- eol = '↴',
-
 
 -- interval for writing swap file to disk, also used by gitsigns
 opt.updatetime = 250
