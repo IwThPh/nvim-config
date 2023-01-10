@@ -37,7 +37,7 @@ return {
             o.foldlevelstart = 99
             o.foldenable = true
             o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
-            o.statuscolumn = '%=%l%s%C'
+            o.statuscolumn = '%=%l%s%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? "▼" : "⏵") : " " } '
 
             local set = vim.keymap.set
             set('n', 'zR', require('ufo').openAllFolds)
@@ -45,6 +45,7 @@ return {
 			require('ufo').setup({
 				open_fold_hl_timeout = 0
 			})
+
         end,
     },
 
