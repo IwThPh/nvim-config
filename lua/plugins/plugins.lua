@@ -42,7 +42,9 @@ return {
             local set = vim.keymap.set
             set('n', 'zR', require('ufo').openAllFolds)
             set('n', 'zM', require('ufo').closeAllFolds)
-		require('ufo').setup()
+			require('ufo').setup({
+				open_fold_hl_timeout = 0
+			})
         end,
     },
 
