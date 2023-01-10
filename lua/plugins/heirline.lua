@@ -665,7 +665,11 @@ function M.config()
     vim.o.showtabline = 2
     vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 
-    heirline.setup(StatusLine, WinBar, TabLine)
+    heirline.setup({
+        statusline = StatusLine,
+        winbar = WinBar,
+        tabline = TabLine,
+    })
 end
 
 return M

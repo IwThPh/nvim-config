@@ -6,6 +6,7 @@ local M = {
         'hrsh7th/cmp-nvim-lsp-signature-help',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
+		'petertriho/cmp-git',
         'rafamadriz/friendly-snippets',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
@@ -128,6 +129,7 @@ local function setupCmp()
         sources = {
             { name = 'nvim_lsp' },
             { name = 'nvim_lsp_signature_help' },
+            { name = 'git' },
             { name = 'nvim_lua' },
             { name = 'luasnip' },
             { name = 'path' },
@@ -141,6 +143,11 @@ end
 function M.config()
     setupLuaSnip()
     setupCmp()
+
+	-- Git commit completion
+	require("cmp_git").setup({
+		remotes = { "upstream", "origin", "origin-gh" }
+	})
 end
 
 return M

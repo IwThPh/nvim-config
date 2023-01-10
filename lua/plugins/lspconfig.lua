@@ -40,8 +40,6 @@ end
 function M.config()
     setupMason()
 
-    local utils = require('core.utils')
-
     local lspconfig = require('lspconfig')
     local navic = require('nvim-navic')
     require('ui.lsp')
@@ -71,7 +69,7 @@ function M.config()
         },
     }
 
-	-- capabilities for nvim-ufo folding
+    -- capabilities for nvim-ufo folding
     capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true,
@@ -89,10 +87,10 @@ function M.config()
         graphql = true,
         html = true,
         intelephense = {
-            init_options = { licenceKey = '/Users/iwanp/.config/intelephense/licence.txt' },
+            init_options = { licenceKey = vim.fn.expand('~/.config/intelephense/licence.txt') },
             settings = {
                 intelephense = {
-                    enviroment = { phpVersion = '7.4.21' },
+                    enviroment = { phpVersion = '7.4.*' },
                     phpdoc = {
                         propertyTemplate = {
                             summary = '$1',
