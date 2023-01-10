@@ -32,6 +32,15 @@ autocmd('FileType', {
     command = 'setlocal spell',
 })
 
+autocmd('FileType', {
+    group = bufcheck,
+    pattern = { 'lazy', 'help', 'terminal', 'lspinfo', 'TelescopePrompt', 'TelescopeResults', 'Mason', '' },
+    callback = function()
+        local winnr = vim.api.nvim_get_current_win()
+        vim.wo[winnr].statuscolumn = nil
+    end,
+})
+
 autocmd('FocusLost', {
     group = bufcheck,
     command = 'wa',
