@@ -4,6 +4,7 @@ local M = {
     dependancies = {
         'nvim-tree/nvim-web-devicons',
     },
+	enabled = false
 }
 
 function M.config()

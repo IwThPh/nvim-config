@@ -6,7 +6,7 @@ local M = {
         'hrsh7th/cmp-nvim-lsp-signature-help',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
-		'petertriho/cmp-git',
+        'petertriho/cmp-git',
         'rafamadriz/friendly-snippets',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
@@ -20,11 +20,16 @@ end
 
 local function setupLuaSnip()
     local luasnip = require('luasnip')
+    luasnip.filetype_extend('all', { '_' })
     luasnip.config.set_config({
         history = true,
         updateevents = 'TextChanged,TextChangedI',
     })
-    require('luasnip.loaders.from_vscode').lazy_load()
+
+    local from_vscode = require('luasnip.loaders.from_vscode')
+
+    from_vscode.lazy_load()
+    from_vscode.lazy_load({ paths = { '~/.config/nvim/snippets/php' } })
 
     vim.api.nvim_create_autocmd('InsertLeave', {
         callback = function()
@@ -144,10 +149,10 @@ function M.config()
     setupLuaSnip()
     setupCmp()
 
-	-- Git commit completion
-	require("cmp_git").setup({
-		remotes = { "upstream", "origin", "origin-gh" }
-	})
+    -- Git commit completion
+    require('cmp_git').setup({
+        remotes = { 'upstream', 'origin', 'origin-gh' },
+    })
 end
 
 return M

@@ -4,6 +4,7 @@ return {
     'lewis6991/impatient.nvim',
     'famiu/bufdelete.nvim',
     'MunifTanjim/nui.nvim',
+    'dstein64/vim-startuptime',
 
     {
         'antoinemadec/FixCursorHold.nvim',
@@ -37,15 +38,15 @@ return {
             o.foldlevelstart = 99
             o.foldenable = true
             o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
-			o.statuscolumn = '%=%l%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
+            o.statuscolumn =
+                '%=%l%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
 
             local map = vim.keymap.set
             map('n', 'zR', require('ufo').openAllFolds)
             map('n', 'zM', require('ufo').closeAllFolds)
-			require('ufo').setup({
-				open_fold_hl_timeout = 0
-			})
-
+            require('ufo').setup({
+                open_fold_hl_timeout = 0,
+            })
         end,
     },
 
@@ -87,15 +88,25 @@ return {
         end,
     },
 
-    'vim-test/vim-test',
-
     {
         'nvim-neotest/neotest',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
             'antoinemadec/FixCursorHold.nvim',
+            'olimorris/neotest-phpunit',
         },
+        config = function()
+            require('neotest').setup({
+                adapters = {
+                    require('neotest-phpunit')({
+                        phpunit_cmd = function()
+                            return 'vendor/bin/phpunit'
+                        end,
+                    }),
+                },
+            })
+        end,
     },
 
     {
@@ -105,19 +116,6 @@ return {
             require('neoscroll.config').set_mappings({
                 ['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '50' } },
                 ['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '50' } },
-            })
-        end,
-    },
-
-    {
-        'nvim-neotest/neotest-vim-test',
-        dependencies = { 'vim-test', 'neotest' },
-        config = function()
-            require('neotest').setup({
-                adapters = {
-                    -- Or to only allow specified file types
-                    require('neotest-vim-test')({ allow_file_types = { 'php' } }),
-                },
             })
         end,
     },

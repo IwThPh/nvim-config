@@ -1,0 +1,151 @@
+{
+  "TestCase": {
+    "prefix": "pu:testCase",
+    "body": [
+      "use PHPUnit\\Framework\\TestCase;\n",
+      "/**",
+      " * ${1:ClassName}Test",
+      " * @group ${2:group}",
+      " */",
+      "class ${1:ClassName}Test extends TestCase\n{",
+      "    /** @test */",
+      "    public function ${3:test_}${4:function}()",
+      "    {",
+      "        //Arrange",
+      "        ${5:// Arrange}",
+      "        //Act",
+      "        ${6:// Act}",
+      "        //Assert",
+      "        ${7:// Assert}",
+      "    }\n",
+      "}\n"
+    ],
+    "description": "Create TestCase Class"
+  },
+  "TestFunction": {
+    "prefix": "pu:testFunction",
+    "body": [
+      "/** @test */",
+      "public function ${1:test_}${2:function}()",
+      "{",
+      "    //Arrange",
+      "    ${3:// Arrange}",
+      "    //Act",
+      "    ${4:// Act}",
+      "    //Assert",
+      "    ${5:// Assert}",
+      "}\n"
+    ],
+    "description": "Create test function"
+  },
+  "TestDoxFunction": {
+    "prefix": "pu:testDoxFunction",
+    "body": [
+      "/** ",
+      " * @test",
+      " * @testdox  ${3:description}",
+      " */",
+      "public function ${1:test_}${2:function}()",
+      "{",
+      "    //Arrange",
+      "    ${4:// Arrange}",
+      "    //Act",
+      "    ${5:// Act}",
+      "    //Assert",
+      "    ${6:// Assert}",
+      "}\n"
+    ],
+    "description": "Create test function with @testdox"
+  },
+  "TestException": {
+    "prefix": "pu:testException",
+    "body": [
+      "/** ",
+      " * @test",
+      " * @expectedException  ${3:exception}",
+      " */",
+      "public function ${1:test_}${2:function}()",
+      "{",
+      "    //Arrange",
+      "    ${4:// Arrange}",
+      "    //Act",
+      "    ${5:// Act}",
+      "    //Assert",
+      "    ${6:// Assert}",
+      "}\n"
+    ],
+    "description": "Create test function with @expectedException (deprecated in PHPUnit 8)"
+  },
+
+  "assertPreConditions": {
+    "prefix": "pu:assertPreConditions",
+    "body": [
+      "protected function assertPreConditions(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "assertPreConditions()"
+  },
+  "assertPostConditions": {
+    "prefix": "pu:assertPostConditions",
+    "body": [
+      "protected function assertPostConditions(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "assertPostConditions()"
+  },
+  "setUpBeforeClass": {
+    "prefix": "pu:setUpBeforeClass",
+    "body": [
+      "public static function setUpBeforeClass(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "setUpBeforeClass()"
+  },
+  "setUp": {
+    "prefix": "pu:setUp",
+    "body": [
+      "protected function setUp(): void",
+      "{",
+      "    parent::setUp();\n",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "setUp()"
+  },
+  "tearDown": {
+    "prefix": "pu:tearDown",
+    "body": [
+      "protected function tearDown(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "tearDown()"
+  },
+  "tearDownAfterClass": {
+    "prefix": "pu:tearDownAfterClass",
+    "body": [
+      "public static function tearDownAfterClass(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "tearDownAfterClass()"
+  },
+  "onNotSuccessfulTest": {
+    "prefix": "pu:onNotSuccessfulTest",
+    "body": [
+      "protected function onNotSuccessfulTest(): void",
+      "{",
+      "    ${1:// code}",
+      "}\n"
+    ],
+    "description": "onNotSuccessfulTest()"
+  }
+}

@@ -54,8 +54,8 @@ set('n', '<leader>q', '<cmd> Bdelete <CR>') -- , "   close buffer"
 set('n', 'gcc', '<Plug>(comment_toggle_linewise_current)') -- , "蘒  toggle comment"
 set('v', 'gc', '<Plug>(comment_toggle_linewise_visual)') -- , "蘒  toggle comment"
 
-set('n', '<C-n>', '<cmd> NvimTreeToggle <CR>') -- , "   toggle neotree"
-set('n', '<leader>e', '<cmd> NvimTreeFocus <CR>') -- , "   focus neotree"
+set('n', '<C-n>', '<cmd> NeoTreeFloat <CR>') -- , "   toggle neotree"
+set('n', '<leader>e', '<cmd> NeoTreeReveal <CR>') -- , "   focus neotree"
 
 set('n', '<C-f>', '<cmd> Telescope find_files <CR>') -- , "  find files"
 set('n', '<leader>ff', '<cmd> Telescope find_files <CR>') -- , "  find files"
