@@ -137,7 +137,7 @@ function M.config()
             -- options, see :h filename-modifers
             local filename = vim.fn.fnamemodify(self.filename, ':.')
             if filename == '' then
-                return '[No Name]'
+                return ' No Name '
             end
             -- now, if the filename would occupy more than 1/4th of the available
             -- space, we trim the file path to its initials

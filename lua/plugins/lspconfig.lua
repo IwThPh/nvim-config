@@ -116,6 +116,14 @@ function M.config()
             },
         },
         phpactor = false,
+  --       phpactor = {
+		-- 	language_server_php_cs_fixer = {
+		-- 		enable = true,
+		-- 	},
+		-- 	language_server = {
+		-- 		diagnostics_on_update = false,
+		-- 	},
+		-- },
         jsonls = true,
         rust_analyzer = true,
         sqlls = {
@@ -124,7 +132,7 @@ function M.config()
                 cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
             },
         },
-        sumneko_lua = {
+        lua_ls = {
             settings = {
                 Lua = {
                     diagnostics = {

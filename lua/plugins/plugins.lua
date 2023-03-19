@@ -37,7 +37,7 @@ return {
             o.foldlevel = 99
             o.foldlevelstart = 99
             o.foldenable = true
-            o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
+            o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
             o.statuscolumn =
                 '%=%l%s%#FoldColumn#%{foldlevel(v:lnum) > foldlevel(v:lnum - 1) ? (foldclosed(v:lnum) == -1 ? " " : " ") : "  " }%*'
 
