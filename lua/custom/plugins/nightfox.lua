@@ -1,18 +1,19 @@
 return {
   {
     "EdenEast/nightfox.nvim",
+    priority = 1000,
     opts = {
       transparent = false,
       terminal_color = true,
       styles = {
-        comments = "italic", -- change style of comments to be italic
-        keywords = "bold", -- change style of keywords to be bold
+        comments = "italic",       -- change style of comments to be italic
+        keywords = "bold",         -- change style of keywords to be bold
         functions = "italic,bold", -- styles can be a comma separated list
       },
       inverse = {
         match_paren = true, -- Enable/Disable inverse highlighting for match parens
-        visual = true, -- Enable/Disable inverse highlighting for visual selection
-        search = true, -- Enable/Disable inverse highlights for search highlights
+        visual = true,      -- Enable/Disable inverse highlighting for visual selection
+        search = true,      -- Enable/Disable inverse highlights for search highlights
       },
       modules = {
         aerial = true,
