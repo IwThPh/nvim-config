@@ -7,8 +7,6 @@ opt.breakindent = true -- maintain indent when wrapping indented lines
 opt.fillchars = { eob = " " }
 opt.relativenumber = false
 opt.expandtab = true
-opt.shiftwidth = 4
-opt.tabstop = 4
 opt.spelllang = { "en_gb" }
 opt.whichwrap:append("<,>,[,],h,l")
 opt.list = true

@@ -8,33 +8,41 @@ return {
           return true
         end,
       },
+      inlay_hints = {
+        enabled = true,
+      },
       ---@type lspconfig.options
+      ---@diagnostic disable-next-line: missing-fields
       servers = {
-        bashls = {},
-        html = {},
-        cssls = {},
         dockerls = {},
-        emmet_ls = {},
-        graphql = {},
+        ---@diagnostic disable-next-line: missing-fields
+        eslint = {},
+
         intelephense = {
-          init_options = { licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") },
           settings = {
+            ---@diagnostic disable-next-line: missing-fields
             intelephense = {
+              licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") .. "",
               enviroment = { phpVersion = "8.1.*" },
             },
           },
         },
-        sqlls = {},
         volar = {
-          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-          init_options = {
+          settings = {
             typescript = {
-              serverPath = vim.fn.expand(
+              tsdk = vim.fn.expand(
                 "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
-              ),
+              ) .. "",
             },
+            ---@diagnostic disable-next-line: missing-fields
+            vue = {},
+            ---@diagnostic disable-next-line: missing-fields
+            volar = {},
+            ["vue-semantic-server"] = { trace = { server = "off" } },
+            ["vue-syntactic-server"] = { trace = { server = "off" } },
           },
         },
+        ---@diagnostic disable-next-line: missing-fields
         yamlls = {},
       },
     },

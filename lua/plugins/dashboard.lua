@@ -1,5 +1,5 @@
 return {
-  "goolord/alpha-nvim",
+  "nvimdev/dashboard-nvim",
   opts = function(_, opts)
     local logo = [[
             .    _  _  _  /_ .//._   _  _/_              
@@ -8,6 +8,6 @@ return {
                                                          
           Iwan Phillips <iwan@iwanphillips.dev>          
         ]]
-    opts.section.header.val = vim.split(logo, "\n", { trimempty = true })
+    opts.config.header = vim.split(logo, "\n", { trimempty = true })
   end,
 }
