@@ -11,3 +11,6 @@ opt.spelllang = { "en_gb" }
 opt.whichwrap:append("<,>,[,],h,l")
 opt.list = true
 opt.listchars = { trail = "·", tab = "▸ " } -- eol = '↴',
+
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldmethod = "expr"

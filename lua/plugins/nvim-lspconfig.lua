@@ -9,7 +9,7 @@ return {
         end,
       },
       inlay_hints = {
-        enabled = true,
+        enabled = false,
       },
       ---@type lspconfig.options
       ---@diagnostic disable-next-line: missing-fields
@@ -18,15 +18,6 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         eslint = {},
 
-        intelephense = {
-          settings = {
-            ---@diagnostic disable-next-line: missing-fields
-            intelephense = {
-              licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") .. "",
-              enviroment = { phpVersion = "8.1.*" },
-            },
-          },
-        },
         volar = {
           settings = {
             typescript = {
