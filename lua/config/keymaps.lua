@@ -33,3 +33,10 @@ else
   map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
   map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
+
+map("n", "<leader>cse", function()
+  require("scissors").editSnippet()
+end, { desc = "Edit snippet" })
+map("x", "<leader>csa", function()
+  require("scissors").addNewSnippet()
+end, { desc = "Add new snippet" })

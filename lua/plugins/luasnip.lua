@@ -8,10 +8,23 @@ return {
     end,
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load({
-        paths = { "~/.config/nvim/snippets/php" },
+        paths = {
+          vim.fn.stdpath("config") .. "/snippets/",
+          vim.fn.stdpath("config") .. "/snippets/php",
+        },
       })
     end,
   },
+
+  -- lazy.nvim
+  {
+    "chrisgrieser/nvim-scissors",
+    dependencies = "nvim-telescope/telescope.nvim",
+    opts = {
+      snippetDir = vim.fn.stdpath("config") .. "/snippets/",
+    },
+  },
+
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
