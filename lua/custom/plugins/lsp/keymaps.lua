@@ -13,137 +13,38 @@ function M.get()
     ---@class PluginLspKeys
     -- stylua: ignore
     M._keys = {
-      {
-        "<leader>cd",
-        vim.diagnostic.open_float,
-        desc =
-        "Line Diagnostics"
-      },
-      {
-        "<leader>cl",
-        "<cmd>LspInfo<cr>",
-        desc =
-        "Lsp Info"
-      },
+      { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+      { "<leader>cl", "<cmd>LspInfo<cr>",        desc = "Lsp Info" },
       {
         "gd",
-        function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,
-        desc =
-        "Goto Definition",
-        has =
-        "definition"
+        function() require("custom.util").telescope("lsp_definitions", { reuse_win = true }) end,
+        desc = "Goto Definition",
+        has = "definition"
       },
-      {
-        "gr",
-        "<cmd>Telescope lsp_references<cr>",
-        desc =
-        "References"
-      },
-      {
-        "gD",
-        vim.lsp.buf.declaration,
-        desc =
-        "Goto Declaration"
-      },
+      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+      { "gD", vim.lsp.buf.declaration,             desc = "Goto Declaration" },
       {
         "gI",
-        function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,
-        desc =
-        "Goto Implementation"
+        function() require("custom.util").telescope("lsp_implementations", { reuse_win = true }) end,
+        desc = "Goto Implementation"
       },
       {
         "gy",
-        function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
-        desc =
-        "Goto T[y]pe Definition"
+        function() require("custom.util").telescope("lsp_type_definitions", { reuse_win = true }) end,
+        desc = "Goto T[y]pe Definition"
       },
-      {
-        "K",
-        vim.lsp.buf.hover,
-        desc =
-        "Hover"
-      },
-      {
-        "gK",
-        vim.lsp.buf.signature_help,
-        desc =
-        "Signature Help",
-        has =
-        "signatureHelp"
-      },
-      {
-        "<c-k>",
-        vim.lsp.buf.signature_help,
-        mode = "i",
-        desc =
-        "Signature Help",
-        has =
-        "signatureHelp"
-      },
-      {
-        "]d",
-        M.diagnostic_goto(true),
-        desc =
-        "Next Diagnostic"
-      },
-      {
-        "[d",
-        M.diagnostic_goto(false),
-        desc =
-        "Prev Diagnostic"
-      },
-      {
-        "]e",
-        M.diagnostic_goto(true, "ERROR"),
-        desc =
-        "Next Error"
-      },
-      {
-        "[e",
-        M.diagnostic_goto(false, "ERROR"),
-        desc =
-        "Prev Error"
-      },
-      {
-        "]w",
-        M.diagnostic_goto(true, "WARN"),
-        desc =
-        "Next Warning"
-      },
-      {
-        "[w",
-        M.diagnostic_goto(false, "WARN"),
-        desc =
-        "Prev Warning"
-      },
-      {
-        "<leader>cf",
-        format,
-        desc =
-        "Format Document",
-        has =
-        "formatting"
-      },
-      {
-        "<leader>cf",
-        format,
-        desc =
-        "Format Range",
-        mode =
-        "v",
-        has =
-        "rangeFormatting"
-      },
-      {
-        "<leader>ca",
-        vim.lsp.buf.code_action,
-        desc =
-        "Code Action",
-        mode = {
-          "n", "v" },
-        has =
-        "codeAction"
-      },
+      { "K",          vim.lsp.buf.hover,                 desc = "Hover" },
+      { "gK",         vim.lsp.buf.signature_help,        desc = "Signature Help",  has = "signatureHelp" },
+      { "<c-k>",      vim.lsp.buf.signature_help,        mode = "i",               desc = "Signature Help", has = "signatureHelp" },
+      { "]d",         M.diagnostic_goto(true),           desc = "Next Diagnostic" },
+      { "[d",         M.diagnostic_goto(false),          desc = "Prev Diagnostic" },
+      { "]e",         M.diagnostic_goto(true, "ERROR"),  desc = "Next Error" },
+      { "[e",         M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+      { "]w",         M.diagnostic_goto(true, "WARN"),   desc = "Next Warning" },
+      { "[w",         M.diagnostic_goto(false, "WARN"),  desc = "Prev Warning" },
+      { "<leader>cf", format,                            desc = "Format Document", has = "formatting" },
+      { "<leader>cf", format,                            desc = "Format Range",    mode = "v",              has = "rangeFormatting" },
+      { "<leader>ca", vim.lsp.buf.code_action,           desc = "Code Action",     mode = { "n", "v" },     has = "codeAction" },
       {
         "<leader>cA",
         function()
@@ -193,7 +94,7 @@ function M.resolve(buffer)
     add(keymap)
   end
 
-  local opts = require("lazyvim.util").opts("nvim-lspconfig")
+  local opts = require("custom.plugins.lsp.opts")
   local clients = vim.lsp.get_active_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
@@ -215,7 +116,7 @@ function M.on_attach(client, buffer)
       opts.has = nil
       opts.silent = opts.silent ~= false
       opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
+      vim.keymap.set(keys.mode or "n", keys['lhs'], keys['rhs'], opts)
     end
   end
 end

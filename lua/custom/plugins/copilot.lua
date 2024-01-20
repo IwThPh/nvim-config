@@ -14,7 +14,10 @@ return {
   },
   {
     "zbirenbaum/copilot-cmp",
-    dependencies = "copilot.lua",
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "copilot.lua",
+    },
     opts = {},
     config = function(_, opts)
       local copilot_cmp = require("copilot_cmp")
@@ -27,5 +30,5 @@ return {
         end
       end)
     end,
-  }
+  },
 }

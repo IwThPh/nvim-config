@@ -1,90 +1,89 @@
-local Util = require('custom.util')
+local Util = require("custom.util")
 return {
   "nvim-telescope/telescope.nvim",
   cmd = "Telescope",
-  branch = '0.1.x',
+  branch = "0.1.x",
   version = false, -- telescope did only one release, so use HEAD for now
 
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    "nvim-lua/plenary.nvim",
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
     -- Only load if `make` is available. Make sure you have the system
     -- requirements installed.
     {
-      'nvim-telescope/telescope-fzf-native.nvim',
+      "nvim-telescope/telescope-fzf-native.nvim",
       -- NOTE: If you are having trouble with this installation,
       --       refer to the README for telescope-fzf-native for more instructions.
-      build = 'make',
+      build = "make",
       cond = function()
-        return vim.fn.executable 'make' == 1
+        return vim.fn.executable("make") == 1
       end,
     },
   },
 
   keys = {
-    { '<leader>/', function()
-      -- You can pass additional configuration to telescope to change theme, layout, etc.
-      Util.telescope('current_buffer_fuzzy_find', (require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      }))
-    end, { desc = '[/] Fuzzily search in current buffer' } },
-    { '<leader>gf', Util.telescope("git_files", { desc = 'Search [G]it [F]iles' }) },
-    { '<leader>sf', Util.telescope("find_files", { desc = '[S]earch [F]iles' }) },
-    { '<leader>sh', Util.telescope("help_tags", { desc = '[S]earch [H]elp' }) },
-    { '<leader>sg', Util.telescope("live_grep", { desc = '[S]earch by [G]rep' }) },
-    { '<leader>sd', Util.telescope("diagnostics", { desc = '[S]earch [D]iagnostics' }) },
-    { '<leader>sr', Util.telescope("resume", { desc = '[S]earch [R]resume' }) },
+    {
+      "<leader>/",
+      function()
+        -- You can pass additional configuration to telescope to change theme, layout, etc.
+        Util.telescope("current_buffer_fuzzy_find", (require("telescope.themes").get_dropdown({
+          winblend = 10,
+          previewer = false,
+        })))
+      end,
+      { desc = "[/] Fuzzily search in current buffer" },
+    },
+    { "<leader>gf", Util.telescope("git_files", { desc = "Search [G]it [F]iles" }) },
+    { "<leader>sf", Util.telescope("find_files", { desc = "[S]earch [F]iles" }) },
+    { "<leader>sh", Util.telescope("help_tags", { desc = "[S]earch [H]elp" }) },
+    { "<leader>sg", Util.telescope("live_grep", { desc = "[S]earch by [G]rep" }) },
+    { "<leader>sd", Util.telescope("diagnostics", { desc = "[S]earch [D]iagnostics" }) },
+    { "<leader>sr", Util.telescope("resume", { desc = "[S]earch [R]resume" }) },
     {
       "<leader><space>",
       Util.telescope("files"),
-      desc =
-      "Find Files (root dir)"
+      desc = "Find Files (root dir)",
     },
 
     -- find
-    { '<leader>fr', Util.telescope("oldfiles", { desc = '[F]ind [r]ecently opened files' }) },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",                                           desc = "Buffers" },
+    { "<leader>fr", Util.telescope("oldfiles", { desc = "[F]ind [r]ecently opened files" }) },
+    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     {
       "<leader>ff",
       Util.telescope("files"),
-      desc =
-      "Find Files (root dir)"
+      desc = "Find Files (root dir)",
     },
-    { "<leader>fF", Util.telescope("files", { cwd = false }),                          desc = "Find Files (cwd)" },
+    { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
 
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>",                                  desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>",                                   desc = "status" },
+    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
 
     -- search
-    { '<leader>s"', "<cmd>Telescope registers<cr>",                                    desc = "Registers" },
-    { "<leader>sC", "<cmd>Telescope commands<cr>",                                     desc = "Commands" },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>",                                      desc = "Key Maps" },
-    { "<leader>sM", "<cmd>Telescope man_pages<cr>",                                    desc = "Man Pages" },
-    { "<leader>sm", "<cmd>Telescope marks<cr>",                                        desc = "Jump to Mark" },
-    { "<leader>so", "<cmd>Telescope vim_options<cr>",                                  desc = "Options" },
-    { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }),              desc = "Word (root dir)" },
+    { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
+    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+    { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
     { "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
     {
       "<leader>sw",
       Util.telescope("grep_string"),
       mode = "v",
-      desc =
-      "Selection (root dir)"
+      desc = "Selection (root dir)",
     },
     {
       "<leader>sW",
       Util.telescope("grep_string", { cwd = false }),
       mode = "v",
-      desc =
-      "Selection (cwd)"
+      desc = "Selection (cwd)",
     },
     {
       "<leader>uC",
       Util.telescope("colorscheme", { enable_preview = true }),
-      desc =
-      "Colorscheme with preview"
+      desc = "Colorscheme with preview",
     },
 
     {
@@ -125,7 +124,7 @@ return {
     },
   },
   opts = function()
-    require('telescope').setup({
+    require("telescope").setup({
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
@@ -139,6 +138,6 @@ return {
       },
     })
     -- Enable telescope fzf native, if installed
-    pcall(require('telescope').load_extension, 'fzf')
+    pcall(require("telescope").load_extension, "fzf")
   end,
 }

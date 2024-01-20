@@ -5,27 +5,20 @@ return {
     keys = {
       {
         "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
+        function() require("notify").dismiss({ silent = true, pending = true }) end,
         desc = "Dismiss all Notifications",
       },
     },
     opts = {
       timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
+      level = vim.log.levels.WARN,
+      render = "compact",
+      stages = "fade",
+      max_height = function() return math.floor(vim.o.lines * 0.75) end,
+      max_width = function() return math.floor(vim.o.columns * 0.75) end,
     },
     init = function()
-      -- when noice is not enabled, install notify on VeryLazy
-      local Util = require("custom.util")
-      if not Util.has("noice.nvim") then
-        vim.notify = require("notify")
-      end
+      vim.notify = require("notify")
     end,
   },
 
@@ -85,18 +78,6 @@ return {
           lualine_x = {
             -- stylua: ignore
             {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.fg("Statement"),
-            },
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = Util.fg("Constant"),
-            },
-            -- stylua: ignore
-            {
               function() return "  " .. require("dap").status() end,
               cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
               color = Util.fg("Debug"),
@@ -130,26 +111,28 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
     opts = {
-      -- char = "▏",
-      char = "│",
-      filetype_exclude = {
-        "help",
-        "alpha",
-        "dashboard",
-        "neo-tree",
-        "Trouble",
-        "lazy",
-        "mason",
-        "notify",
-        "toggleterm",
-        "lazyterm",
+      indent = {
+        char = "│",
       },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
+      scope = {enabled = false},
     },
   },
-
 
   { "folke/which-key.nvim",        opts = {} },
 
