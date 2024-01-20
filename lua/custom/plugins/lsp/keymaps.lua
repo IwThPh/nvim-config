@@ -6,7 +6,6 @@ M._keys = nil
 ---@return (LazyKeys|{has?:string})[]
 function M.get()
   local format = function()
-    -- require("lazyvim.plugins.lsp.format").format({ force = true })
     vim.lsp.buf.format()
   end
   if not M._keys then

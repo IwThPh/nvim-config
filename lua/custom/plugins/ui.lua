@@ -45,7 +45,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-      local icons = require("lazyvim.config").icons
+      local icons = require("custom.util.icons")
       local Util = require("custom.util")
 
       return {
@@ -155,7 +155,7 @@ return {
         separator = " ",
         highlight = true,
         depth_limit = 5,
-        icons = require("lazyvim.config").icons.kinds,
+        icons = require("custom.util.icons").kinds
       }
     end,
   },

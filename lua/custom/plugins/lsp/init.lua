@@ -31,12 +31,12 @@ return {
         ---@type lsp.Client
         local client = vim.lsp.get_client_by_id(client_id)
         local buffer = vim.api.nvim_get_current_buf()
-        require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+        require("custom.plugins.lsp.keymaps").on_attach(client, buffer)
         return ret
       end
 
       -- diagnostics
-      for name, icon in pairs(require("lazyvim.config").icons.diagnostics) do
+      for name, icon in pairs(require("custom.util.icons").diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
@@ -54,7 +54,7 @@ return {
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
           or function(diagnostic)
-            local icons = require("lazyvim.config").icons.diagnostics
+            local icons = require("custom.util.icons").diagnostics
             for d, icon in pairs(icons) do
               if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                 return icon

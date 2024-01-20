@@ -1,5 +1,9 @@
 local M = {}
 
+M.root_patterns = {
+  ".git",
+}
+
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {

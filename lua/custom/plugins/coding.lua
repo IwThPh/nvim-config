@@ -5,7 +5,7 @@ return {
     "L3MON4D3/LuaSnip",
     build = (not jit.os:find("Windows"))
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-      or nil,
+        or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -101,7 +101,7 @@ return {
         }),
         formatting = {
           format = function(_, item)
-            local icons = require("lazyvim.config").icons.kinds
+            local icons = require("custom.util.icons").kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
@@ -127,8 +127,8 @@ return {
     },
     config = function()
       local snip = require("scissors")
-      vim.keymap.set("n", "<leader>cse", function() snip.editSnippet() end, {desc = "Edit snippet"})
-      vim.keymap.set("n", "<leader>csa", function() snip.addNewSnippet() end, {desc = "Add new snippet"})
+      vim.keymap.set("n", "<leader>cse", function() snip.editSnippet() end, { desc = "Edit snippet" })
+      vim.keymap.set("n", "<leader>csa", function() snip.addNewSnippet() end, { desc = "Add new snippet" })
     end
   },
 
@@ -145,12 +145,13 @@ return {
         changedelete = { text = "~" },
       },
       on_attach = function(bufnr)
-        vim.keymap.set(
-          "n",
-          "<leader>hp",
-          require("gitsigns").preview_hunk,
-          { buffer = bufnr, desc = "Preview git hunk" }
-        )
+        local gs = require "gitsigns"
+
+        vim.keymap.set( "n", "<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Preview git hunk" })
+        vim.keymap.set( "n", "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage git hunk" })
+        vim.keymap.set( "n", "<leader>hr", gs.reset_hunk, { buffer = bufnr, desc = "Restore git hunk" })
+        vim.keymap.set( "v", "<leader>hs", function () gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v')} end, { buffer = bufnr, desc = "Stage git hunk" })
+        vim.keymap.set( "v", "<leader>hr", function () gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v')} end, { buffer = bufnr, desc = "Restore git hunk" })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns

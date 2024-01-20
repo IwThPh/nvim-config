@@ -1,6 +1,9 @@
 return {
   {
     "EdenEast/nightfox.nvim",
+    config = function ()
+      vim.cmd("colorscheme terafox")
+    end,
     priority = 1000,
     opts = {
       transparent = false,
@@ -45,13 +48,6 @@ return {
         telescope = true,
         treesitter = true,
       },
-    },
-  },
-
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "terafox",
     },
   },
 }
