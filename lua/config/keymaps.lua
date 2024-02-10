@@ -1,19 +1,27 @@
-local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
-end
+local Util = require("custom.util")
+
+local map = vim.keymap.set
 
 -- Macos alt key remaps
 map({ "n", "v" }, "˙", "<M-h>")
 map({ "n", "v" }, "∆", "<M-j>")
 map({ "n", "v" }, "˚", "<M-k>")
 map({ "n", "v" }, "¬", "<M-l>")
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+map("n", "<leader>ur",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / clear hlsearch / diff update" }
+)
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 -- Add mapping for split window right with = instead of |
 map("n", "<leader>w=", "<C-W>v", { desc = "Split window right" })
@@ -41,6 +49,30 @@ map("v", ">", ">gv")
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
--- Diagnostic keymaps
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
+
+-- formatting
+map({ "n", "v" }, "<leader>cf", function()
+  Util.format({ force = true })
+end, { desc = "Format" })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+

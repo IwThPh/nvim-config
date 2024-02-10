@@ -1,6 +1,5 @@
 return {
-  -- Better `vim.notify()`
-  {
+  { -- Better `vim.notify()`
     "rcarriga/nvim-notify",
     keys = {
       {
@@ -17,22 +16,17 @@ return {
       max_height = function() return math.floor(vim.o.lines * 0.75) end,
       max_width = function() return math.floor(vim.o.columns * 0.75) end,
     },
-    init = function()
-      vim.notify = require("notify")
-    end,
+    init = function() vim.notify = require("notify") end,
   },
 
-  -- better vim.ui
-  {
+  { -- better vim.ui
     "stevearc/dressing.nvim",
     lazy = true,
     init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.select(...)
       end
-      ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.input = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.input(...)
@@ -40,8 +34,7 @@ return {
     end,
   },
 
-  -- statusline
-  {
+  { -- statusline
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
@@ -52,6 +45,10 @@ return {
         options = {
           theme = "auto",
           globalstatus = true,
+          -- component_separators = { left = '', right = '' },
+          -- section_separators = { left = '', right = '' },
+          component_separators = '',
+          section_separators = '',
           disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
@@ -80,9 +77,9 @@ return {
             {
               function() return "  " .. require("dap").status() end,
               cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.fg("Debug"),
+              color = Util.ui.fg("Debug"),
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.ui.fg("Special") },
             {
               "diff",
               symbols = {
@@ -97,18 +94,15 @@ return {
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
+            -- function() return " " .. os.date("%R") end,
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "lazy" },
       }
     end,
   },
 
-  -- indent guides for Neovim
-  {
+  { -- indent guides for Neovim
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
@@ -130,7 +124,7 @@ return {
           "lazyterm",
         },
       },
-      scope = {enabled = false},
+      scope = { enabled = false },
     },
   },
 
@@ -144,7 +138,7 @@ return {
     lazy = true,
     init = function()
       vim.g.navic_silence = true
-      require("custom.util").on_attach(function(client, buffer)
+      require("custom.util").lsp.on_attach(function(client, buffer)
         if client.server_capabilities.documentSymbolProvider then
           require("nvim-navic").attach(client, buffer)
         end
@@ -159,10 +153,6 @@ return {
       }
     end,
   },
-
-  -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
-
-  -- ui components
-  { "MunifTanjim/nui.nvim",        lazy = true },
+  { "nvim-tree/nvim-web-devicons", lazy = true }, -- icons
+  { "MunifTanjim/nui.nvim",        lazy = true }, -- ui components
 }

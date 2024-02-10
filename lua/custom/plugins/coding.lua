@@ -1,7 +1,5 @@
 return {
-
-  -- snippets
-  {
+  { -- snippets
     "L3MON4D3/LuaSnip",
     build = (not jit.os:find("Windows"))
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
@@ -24,8 +22,7 @@ return {
     end,
   },
 
-  -- auto completion
-  {
+  { -- auto completion
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
     event = "InsertEnter",

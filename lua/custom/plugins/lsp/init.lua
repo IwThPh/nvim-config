@@ -4,22 +4,90 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+      { "williamboman/mason-lspconfig.nvim" },
+      { "folke/neodev.nvim",                opts = {} },
+      { "j-hui/fidget.nvim",                tag = "legacy", opts = {} },
     },
     ---@class PluginLspOpts
-    opts = require("custom.plugins.lsp.opts"),
+    opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "icons",
+        },
+        severity_sort = true,
+      },
+      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the inlay hints.
+      inlay_hints = {
+        enabled = false,
+      },
+      -- add any global capabilities here
+      capabilities = {},
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- but can be also overridden when specified
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+      -- LSP Server Settings
+      ---@type lspconfig.options
+      servers = {
+        rust_analyzer = {},
+        intelephense = {
+          init_options = { licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") },
+          settings = {
+            intelephense = { enviroment = { phpVersion = "8.1.*" } },
+          },
+        },
+        volar = {
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+          init_options = {
+            typescript = {
+              serverPath = vim.fn.expand(
+                "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
+              ),
+            },
+          },
+        },
+        tsserver = {},
+        jsonls = {},
+        lua_ls = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      },
+  -- you can do any additional lsp server setup here
+  -- return true if you don't want this server to be setup with lspconfig
+  ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+  setup = {},
+    },
     ---@param opts PluginLspOpts
     config = function(_, opts)
       local Util = require("custom.util")
 
-      -- setup autoformat
-      -- require("custom.plugins.lsp.format").setup(opts)
-      -- setup formatting and keymaps
-      Util.on_attach(function(client, buffer)
+      if Util.has("neoconf.nvim") then
+        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
+        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+      end
+
+      -- -- setup autoformat
+      Util.format.register(Util.lsp.formatter())
+
+      -- setup keymaps
+      Util.lsp.on_attach(function(client, buffer)
         require("custom.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -41,26 +109,24 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-
-      if opts.inlay_hints.enabled and inlay_hint then
-        Util.on_attach(function(client, buffer)
+      if opts.inlay_hints.enabled then
+        Util.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer, true)
+            Util.toggle.inlay_hints(buffer, true)
           end
         end)
       end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = require("custom.util.icons").diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = require("custom.util.icons").diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon .. "⎸"
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -118,9 +184,7 @@ return {
     end,
   },
 
-  -- cmdline tools and lsp servers
-  {
-
+  { -- cmdline tools and lsp servers
     "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
@@ -136,6 +200,17 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
+
+      mr:on("package:install:success", function()
+        vim.defer_fn(function()
+          -- trigger FileType event to possibly load this newly installed LSP server
+          require("lazy.core.handler.event").trigger({
+            event = "FileType",
+            buf = vim.api.nvim_get_current_buf(),
+          })
+        end, 100)
+      end)
+
       local function ensure_installed()
         for _, tool in ipairs(opts.ensure_installed) do
           local p = mr.get_package(tool)
