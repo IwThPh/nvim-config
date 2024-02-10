@@ -60,19 +60,21 @@ return {
         tsserver = {},
         jsonls = {},
         lua_ls = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
+          settings = {
+            Lua = {
+              workspace = { checkThirdParty = false },
+              telemetry = { enable = false },
+              diagnostics = {
+                globals = { "vim" },
+              },
             },
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
           },
         },
       },
-  -- you can do any additional lsp server setup here
-  -- return true if you don't want this server to be setup with lspconfig
-  ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-  setup = {},
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+      setup = {},
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
