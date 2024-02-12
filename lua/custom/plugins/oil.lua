@@ -10,14 +10,7 @@ return {
       padding = 2,
       border = "solid", -- solid or none
       win_options = {
-        winblend = 5,    -- transparency
-      },
-    },
-
-    preview = {
-      border = "solid", -- solid or none
-      win_options = {
-        winblend = 0,
+        winblend = 5, -- transparency
       },
     },
 

@@ -1,3 +1,4 @@
+local Util = require("custom.util")
 return {
   { -- Better `vim.notify()`
     "rcarriga/nvim-notify",
@@ -13,8 +14,14 @@ return {
       level = vim.log.levels.WARN,
       render = "compact",
       stages = "fade",
-      max_height = function() return math.floor(vim.o.lines * 0.75) end,
-      max_width = function() return math.floor(vim.o.columns * 0.75) end,
+      max_height = function() return math.floor(vim.o.lines * 0.5) end,
+      max_width = function() return math.floor(vim.o.columns * 0.5) end,
+
+      on_open = function(win)
+        local config = vim.api.nvim_win_get_config(win)
+        config.border = "single"
+        vim.api.nvim_win_set_config(win, config)
+      end
     },
     init = function() vim.notify = require("notify") end,
   },
@@ -22,6 +29,21 @@ return {
   { -- better vim.ui
     "stevearc/dressing.nvim",
     lazy = true,
+    config = function()
+      require("dressing").setup({
+        input = {
+          border = "solid",
+        },
+        select = {
+          border = "solid",
+          telescope = Util.telescope.theme({
+            layout_config = {
+              height = 0.25,
+            },
+          }),
+        },
+      })
+    end,
     init = function()
       vim.ui.select = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
@@ -39,7 +61,6 @@ return {
     event = "VeryLazy",
     opts = function()
       local icons = require("custom.util.icons")
-      local Util = require("custom.util")
 
       return {
         options = {

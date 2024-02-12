@@ -46,27 +46,29 @@ function M.telescope(builtin, opts)
       end
     end
 
-    require("telescope.builtin")[builtin](
-      vim.tbl_deep_extend("force", {}, params.opts or {}, require('telescope.themes').get_ivy({
-        winblend = 5,
-        border = true,
-        borderchars = {
-          "z",
-          prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
-          results = { " " },
-          preview = { " " },
-        },
-
-        layout_config = {
-          height = 0.6,
-        },
-      }))
-    )
+    require("telescope.builtin")[builtin](M.theme(params.opts))
   end
 end
 
 function M.config_files()
   return Util.telescope("find_files", { cwd = vim.fn.stdpath("config") })
+end
+
+function M.theme(opts)
+  return vim.tbl_deep_extend("force", {}, require('telescope.themes').get_ivy({
+    winblend = 5,
+    border = true,
+    borderchars = {
+      "z",
+      prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+      results = { " " },
+      preview = { " " },
+    },
+
+    layout_config = {
+      height = 0.6,
+    },
+  }), opts or {})
 end
 
 return M

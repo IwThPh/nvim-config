@@ -45,13 +45,13 @@ return {
 
     -- find
     { "<leader>fr", Util.telescope("oldfiles"),                                        desc = "[F]ind [r]ecently opened files" },
-    { "<leader>fb", Util.telescope("buffers"),                                      desc = "[F]ind [B]uffers" },
+    { "<leader>fb", Util.telescope("buffers"),                                         desc = "[F]ind [B]uffers" },
     { "<leader>ff", Util.telescope("files"),                                           desc = "[F]ind [F]iles (root dir)" },
     { "<leader>fF", Util.telescope("files", { cwd = false }),                          desc = "[F]ind [F]iles (cwd)" },
 
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>",                                  desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>",                                   desc = "status" },
+    { "<leader>gc", Util.telescope("git_commits"),                                     desc = "[G]it [C]ommits" },
+    { "<leader>gs", Util.telescope("git_status"),                                      desc = "[G]it [S]tatus" },
 
     -- search
     { '<leader>s"', "<cmd>Telescope registers<cr>",                                    desc = "Registers" },
