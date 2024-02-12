@@ -15,9 +15,7 @@ return {
       -- NOTE: If you are having trouble with this installation,
       --       refer to the README for telescope-fzf-native for more instructions.
       build = "make",
-      cond = function()
-        return vim.fn.executable("make") == 1
-      end,
+      cond = function() return vim.fn.executable("make") == 1 end,
     },
   },
 
@@ -33,12 +31,12 @@ return {
       end,
       { desc = "[/] Fuzzily search in current buffer" },
     },
-    { "<leader>gf", Util.telescope("git_files", { desc = "Search [G]it [F]iles" }) },
-    { "<leader>sf", Util.telescope("find_files", { desc = "[S]earch [F]iles" }) },
-    { "<leader>sh", Util.telescope("help_tags", { desc = "[S]earch [H]elp" }) },
-    { "<leader>sg", Util.telescope("live_grep", { desc = "[S]earch by [G]rep" }) },
-    { "<leader>sd", Util.telescope("diagnostics", { desc = "[S]earch [D]iagnostics" }) },
-    { "<leader>sr", Util.telescope("resume", { desc = "[S]earch [R]resume" }) },
+    { "<leader>gf", Util.telescope("git_files"),   desc = "Search [G]it [F]iles" },
+    { "<leader>sf", Util.telescope("find_files"),  desc = "[S]earch [F]iles" },
+    { "<leader>sh", Util.telescope("help_tags"),   desc = "[S]earch [H]elp" },
+    { "<leader>sg", Util.telescope("live_grep"),   desc = "[S]earch by [G]rep" },
+    { "<leader>sd", Util.telescope("diagnostics"), desc = "[S]earch [D]iagnostics" },
+    { "<leader>sr", Util.telescope("resume"),      desc = "[S]earch [R]resume" },
     {
       "<leader><space>",
       Util.telescope("files"),
@@ -46,27 +44,23 @@ return {
     },
 
     -- find
-    { "<leader>fr", Util.telescope("oldfiles", { desc = "[F]ind [r]ecently opened files" }) },
-    { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    {
-      "<leader>ff",
-      Util.telescope("files"),
-      desc = "Find Files (root dir)",
-    },
-    { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+    { "<leader>fr", Util.telescope("oldfiles"),                                        desc = "[F]ind [r]ecently opened files" },
+    { "<leader>fb", Util.telescope("buffers"),                                      desc = "[F]ind [B]uffers" },
+    { "<leader>ff", Util.telescope("files"),                                           desc = "[F]ind [F]iles (root dir)" },
+    { "<leader>fF", Util.telescope("files", { cwd = false }),                          desc = "[F]ind [F]iles (cwd)" },
 
     -- git
-    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+    { "<leader>gc", "<cmd>Telescope git_commits<CR>",                                  desc = "commits" },
+    { "<leader>gs", "<cmd>Telescope git_status<CR>",                                   desc = "status" },
 
     -- search
-    { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-    { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-    { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
+    { '<leader>s"', "<cmd>Telescope registers<cr>",                                    desc = "Registers" },
+    { "<leader>sC", "<cmd>Telescope commands<cr>",                                     desc = "Commands" },
+    { "<leader>sk", "<cmd>Telescope keymaps<cr>",                                      desc = "Key Maps" },
+    { "<leader>sM", "<cmd>Telescope man_pages<cr>",                                    desc = "Man Pages" },
+    { "<leader>sm", "<cmd>Telescope marks<cr>",                                        desc = "Jump to Mark" },
+    { "<leader>so", "<cmd>Telescope vim_options<cr>",                                  desc = "Options" },
+    { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }),              desc = "Word (root dir)" },
     { "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
     {
       "<leader>sw",
@@ -130,9 +124,8 @@ return {
         selection_caret = " ",
         mappings = {
           n = {
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
+            ["<C-c>"] = function(...) return require("telescope.actions").close(...) end,
+            ["q"] = function(...) return require("telescope.actions").close(...) end,
           },
         },
       },

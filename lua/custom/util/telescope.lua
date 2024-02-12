@@ -46,7 +46,22 @@ function M.telescope(builtin, opts)
       end
     end
 
-    require("telescope.builtin")[builtin](opts)
+    require("telescope.builtin")[builtin](
+      vim.tbl_deep_extend("force", {}, params.opts or {}, require('telescope.themes').get_ivy({
+        winblend = 5,
+        border = true,
+        borderchars = {
+          "z",
+          prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+          results = { " " },
+          preview = { " " },
+        },
+
+        layout_config = {
+          height = 0.6,
+        },
+      }))
+    )
   end
 end
 

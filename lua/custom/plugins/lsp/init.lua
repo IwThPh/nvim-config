@@ -51,9 +51,7 @@ return {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
           init_options = {
             typescript = {
-              serverPath = vim.fn.expand(
-                "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
-              ),
+              serverPath = vim.fn.expand("~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"),
             },
           },
         },
