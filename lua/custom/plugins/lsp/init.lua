@@ -51,7 +51,8 @@ return {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
           init_options = {
             typescript = {
-              serverPath = vim.fn.expand("~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"),
+              serverPath = vim.fn.expand(
+                "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"),
             },
           },
         },
@@ -225,5 +226,18 @@ return {
         ensure_installed()
       end
     end,
+  },
+
+  { -- show lightbulb for code actions
+    "kosayoda/nvim-lightbulb",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("nvim-lightbulb").setup({
+        autocmd = { enabled = true, updatetime = 100 },
+        sign = { enabled = true, text = " " },
+        line = { enabled = true },
+        number = { enabled = true },
+      })
+    end
   },
 }

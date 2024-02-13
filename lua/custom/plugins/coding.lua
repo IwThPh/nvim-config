@@ -22,7 +22,7 @@ return {
     end,
   },
 
-  { -- auto completion
+  {                  -- auto completion
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
     event = "InsertEnter",
@@ -144,11 +144,13 @@ return {
       on_attach = function(bufnr)
         local gs = require "gitsigns"
 
-        vim.keymap.set( "n", "<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Preview git hunk" })
-        vim.keymap.set( "n", "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage git hunk" })
-        vim.keymap.set( "n", "<leader>hr", gs.reset_hunk, { buffer = bufnr, desc = "Restore git hunk" })
-        vim.keymap.set( "v", "<leader>hs", function () gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v')} end, { buffer = bufnr, desc = "Stage git hunk" })
-        vim.keymap.set( "v", "<leader>hr", function () gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v')} end, { buffer = bufnr, desc = "Restore git hunk" })
+        vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Preview git hunk" })
+        vim.keymap.set("n", "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage git hunk" })
+        vim.keymap.set("n", "<leader>hr", gs.reset_hunk, { buffer = bufnr, desc = "Restore git hunk" })
+        vim.keymap.set("v", "<leader>hs", function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+          { buffer = bufnr, desc = "Stage git hunk" })
+        vim.keymap.set("v", "<leader>hr", function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+          { buffer = bufnr, desc = "Restore git hunk" })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
