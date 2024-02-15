@@ -1,5 +1,5 @@
 local Util = require("custom.util")
--- autoformat.lua
+-- format.lua
 --
 -- Use your language server to automatically format your code on save.
 -- Adds additional commands as well to manage the behavior
@@ -67,6 +67,15 @@ return {
           -- shfmt = {
           --   prepend_args = { "-i", "2", "-ci" },
           -- },
+          ['php-cs-fixer'] = function(bufnr)
+            return {
+              command = require("conform.util").find_executable({
+                'vendor/bin/php-cs-fixer'
+              }, 'php-cs-fixer'),
+              args = { "fix", "$FILENAME" },
+              stdin = false,
+            }
+          end
         },
       }
     end,
