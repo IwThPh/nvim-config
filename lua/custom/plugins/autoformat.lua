@@ -1,83 +1,74 @@
+local Util = require("custom.util")
 -- autoformat.lua
 --
 -- Use your language server to automatically format your code on save.
 -- Adds additional commands as well to manage the behavior
 
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    {
-      "stevearc/conform.nvim",
-      opts = function(_, opts)
-        opts.formatters_by_ft = vim.tbl_extend("force", opts.formatters_by_ft, {
-          php = { "php_cs_fixer" },
-        })
-      end,
+  {
+    "stevearc/conform.nvim",
+    dependencies = { "mason.nvim" },
+    lazy = true,
+    cmd = "ConformInfo",
+    keys = {
+      {
+        "<leader>cF",
+        function()
+          require("conform").format({ formatters = { "injected" } })
+        end,
+        mode = { "n", "v" },
+        desc = "Format Injected Langs",
+      },
     },
-  },
-  config = function()
-    -- Switch for controlling whether you want autoformatting.
-    --  Use :KickstartFormatToggle to toggle autoformatting on or off
-    local format_is_enabled = true
-    vim.api.nvim_create_user_command("KickstartFormatToggle", function()
-      format_is_enabled = not format_is_enabled
-      print("Setting autoformatting to: " .. tostring(format_is_enabled))
-    end, {})
-
-    -- Create an augroup that is used for managing our formatting autocmds.
-    --      We need one augroup per client to make sure that multiple clients
-    --      can attach to the same buffer without interfering with each other.
-    local _augroups = {}
-    local get_augroup = function(client)
-      if not _augroups[client.id] then
-        local group_name = "kickstart-lsp-format-" .. client.name
-        local id = vim.api.nvim_create_augroup(group_name, { clear = true })
-        _augroups[client.id] = id
-      end
-
-      return _augroups[client.id]
-    end
-
-    -- Whenever an LSP attaches to a buffer, we will run this function.
-    --
-    -- See `:help LspAttach` for more information about this autocmd event.
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach-format", { clear = true }),
-      -- This is where we attach the autoformatting for reasonable clients
-      callback = function(args)
-        local client_id = args.data.client_id
-        local client = vim.lsp.get_client_by_id(client_id)
-        local bufnr = args.buf
-
-        -- Only attach to clients that support document formatting
-        if not client.server_capabilities.documentFormattingProvider then
-          return
-        end
-
-        -- that are decent...
-        if client.name == "tsserver" then
-          return
-        end
-
-        -- Create an autocmd that will run *before* we save the buffer.
-        --  Run the formatting command for the LSP that has just attached.
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = get_augroup(client),
-          buffer = bufnr,
-          callback = function()
-            if not format_is_enabled then
-              return
-            end
-
-            vim.lsp.buf.format({
-              async = false,
-              filter = function(c)
-                return c.id == client.id
-              end,
-            })
+    init = function()
+      -- Install the conform formatter on VeryLazy
+      require("custom.util").on_very_lazy(function()
+        require("custom.util").format.register({
+          name = "conform.nvim",
+          priority = 100,
+          primary = true,
+          format = function(buf)
+            local plugin = require("lazy.core.config").plugins["conform.nvim"]
+            local Plugin = require("lazy.core.plugin")
+            local opts = Plugin.values(plugin, "opts", false)
+            require("conform").format(Util.merge(opts.format, { bufnr = buf }))
+          end,
+          sources = function(buf)
+            local ret = require("conform").list_formatters(buf)
+            ---@param v conform.FormatterInfo
+            return vim.tbl_map(function(v) return v.name end, ret)
           end,
         })
-      end,
-    })
-  end,
+      end)
+    end,
+    opts = function()
+      ---@class ConformOpts
+      return {
+        format = { timeout_ms = 3000, async = false, quiet = false },
+        ---@type table<string, conform.FormatterUnit[]>
+        formatters_by_ft = {
+          lua = { "stylua" },
+          sh = { "shfmt" },
+          php = { "php-cs-fixer" },
+        },
+        -- The options you set here will be merged with the builtin formatters.
+        -- You can also define any custom formatters here.
+        ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
+        formatters = {
+          injected = { options = { ignore_errors = true } },
+          -- # Example of using dprint only when a dprint.json file is present
+          -- dprint = {
+          --   condition = function(ctx)
+          --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
+          --   end,
+          -- },
+          --
+          -- # Example of using shfmt with extra args
+          -- shfmt = {
+          --   prepend_args = { "-i", "2", "-ci" },
+          -- },
+        },
+      }
+    end,
+  },
 }
