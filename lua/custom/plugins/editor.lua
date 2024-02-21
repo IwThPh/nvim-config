@@ -87,6 +87,9 @@ return {
                 },
             },
             plugins = {
+                options = {
+                    laststatus = 0, -- turn off the statusline in zen mode
+                },
                 kitty = {
                     -- this will change the font size on kitty when in zen mode
                     -- to make this work, you need to set the following kitty options:
