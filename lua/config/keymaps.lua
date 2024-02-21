@@ -2,6 +2,9 @@ local Util = require("custom.util")
 
 local map = vim.keymap.set
 
+map("i", "jk", "<Esc>")
+map("i", "kj", "<Esc>")
+
 -- Macos alt key remaps
 map({ "n", "v" }, "˙", "<M-h>")
 map({ "n", "v" }, "∆", "<M-j>")
