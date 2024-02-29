@@ -67,8 +67,20 @@ return {
     { -- statusline
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
+        init = function()
+            vim.g.lualine_laststatus = vim.o.laststatus
+            if vim.fn.argc(-1) > 0 then
+                -- set an empty statusline till lualine loads
+                vim.o.statusline = " "
+            end
+        end,
         opts = function()
+            local lualine_require = require("lualine_require")
+            lualine_require.require = require
+
             local icons = require("custom.util.icons")
+
+            vim.o.laststatus = vim.g.lualine_laststatus
 
             return {
                 options = {
@@ -98,12 +110,12 @@ return {
                         -- stylua: ignore
                     },
                     lualine_x = {
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.ui.fg("Debug"),
-            },
+                        -- stylua: ignore
+                        {
+                          function() return "  " .. require("dap").status() end,
+                          cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+                          color = Util.ui.fg("Debug"),
+                        },
                         {
                             require("lazy.status").updates,
                             cond = require("lazy.status").has_updates,
