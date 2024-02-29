@@ -30,7 +30,7 @@ return {
     Collapsed     = " ",
     Constant      = "󰏿 ",
     Constructor   = " ",
-    Copilot       = " ",
+    Copilot       = " ",
     Enum          = " ",
     EnumMember    = " ",
     Event         = " ",

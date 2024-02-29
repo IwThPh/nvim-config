@@ -83,13 +83,20 @@ return {
         opts = {
             window = {
                 options = {
-                    number = false,
+                    signcolumn = "no", -- disable signcolumn
+                    number = false, -- disable number column
+                    relativenumber = false, -- disable relative numbers
+                    cursorline = false, -- disable cursorline
+                    cursorcolumn = false, -- disable cursor column
+                    foldcolumn = "0", -- disable fold column
+                    list = false, -- disable whitespace characters
                 },
             },
             plugins = {
                 options = {
                     laststatus = 0, -- turn off the statusline in zen mode
                 },
+                gitsigns = { enabled = false }, -- disables git signs
                 kitty = {
                     -- this will change the font size on kitty when in zen mode
                     -- to make this work, you need to set the following kitty options:
@@ -99,6 +106,14 @@ return {
                     font = "+4", -- font size increment
                 },
             },
+            -- callback where you can add custom code when the Zen window opens
+            on_open = function(win)
+                vim.cmd("IBLDisable")
+            end,
+            -- callback where you can add custom code when the Zen window closes
+            on_close = function()
+                vim.cmd("IBLEnable")
+            end,
         },
     },
 }
