@@ -182,24 +182,15 @@ return {
         config = function()
             local sc = require("statuscol")
             local builtin = require("statuscol.builtin")
+
             sc.setup({
                 ft_ignore = { "help", "vim", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "toggleterm" },
                 relculright = true,
                 segments = {
-                    {
-                        sign = { namespace = { "gitsigns" }, maxwidth = 1, colwidth = 1, auto = false },
-                        click = "v:lua.ScSa",
-                    },
-                    {
-                        sign = { namespace = { "diagnostic" } },
-                        click = "v:lua.ScSa",
-                    },
-                    {
-                        sign = { name = { ".*" }, maxwidth = 1, colwidth = 1, auto = false },
-                        click = "v:lua.ScSa",
-                    },
-                    { text = { " ", builtin.lnumfunc }, click = "v:lua.ScLa" },
-                    { text = { " ", builtin.foldfunc }, click = "v:lua.ScFa" },
+                    { text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
+                    { sign = { name = { ".*" }, namespace = { ".*" } }, click = "v:lua.ScSa" },
+                    { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+                    { sign = { namespace = { "gitsigns" } }, click = "v:lua.ScSa" },
                 },
             })
         end,
