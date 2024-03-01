@@ -106,6 +106,20 @@ return {
                 filetype = "blade",
             }
 
+            parser_config.gotmpl = {
+                install_info = {
+                    url = "https://github.com/ngalaiko/tree-sitter-go-template",
+                    files = { "src/parser.c" },
+                },
+                filetype = "gotmpl",
+                used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
+            }
+
+            vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+                pattern = { "*.gohtmltmpl", "*.gotexttmpl", "*.gotmpl", "*.yaml" },
+                command = 'if search("{{.\\+}}", "nw") | setlocal filetype=gotmpl | endif',
+            })
+
             vim.filetype.add({
                 pattern = {
                     [".*%.blade%.php"] = "blade",
