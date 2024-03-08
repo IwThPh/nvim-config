@@ -48,7 +48,6 @@ return {
                     },
                 },
                 volar = {
-                    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
                     init_options = {
                         typescript = {
                             serverPath = vim.fn.expand(
@@ -73,11 +72,23 @@ return {
                 lua_ls = {
                     settings = {
                         Lua = {
-                            workspace = { checkThirdParty = false },
-                            telemetry = { enable = false },
-                            diagnostics = {
-                                globals = { "vim" },
+                            runtime = { version = "LuaJIT" },
+                            workspace = {
+                                checkThirdParty = false,
+                                -- Tells lua_ls where to find all the Lua files that you have loaded
+                                -- for your neovim configuration.
+                                library = {
+                                    "${3rd}/luv/library",
+                                    unpack(vim.api.nvim_get_runtime_file("", true)),
+                                },
+                                -- If lua_ls is really slow on your computer, you can try this instead:
+                                -- library = { vim.env.VIMRUNTIME },
                             },
+                            completion = {
+                                callSnippet = "Replace",
+                            },
+                            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                            diagnostics = { disable = { "missing-fields" } },
                         },
                     },
                 },
@@ -85,7 +96,37 @@ return {
             -- you can do any additional lsp server setup here
             -- return true if you don't want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-            setup = {},
+            setup = {
+                volar = function(server, opts)
+                    local Util = require("custom.util")
+                    local lspconfig_util = require("lspconfig.util")
+                    local function get_typescript_server_path(root_dir)
+                        local global_ts = "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib"
+                        -- Alternative location if installed as root:
+                        -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+                        local found_ts = ""
+                        local function check_dir(path)
+                            found_ts = lspconfig_util.path.join(path, "node_modules", "typescript", "lib")
+                            if lspconfig_util.path.exists(found_ts) then
+                                return path
+                            end
+                        end
+                        if lspconfig_util.search_ancestors(root_dir, check_dir) then
+                            return found_ts
+                        else
+                            return global_ts
+                        end
+                    end
+
+                    require("lspconfig")[server].setup(Util.merge(opts, {
+                        on_new_config = function(new_config, new_root_dir)
+                            new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+                        end,
+                    }))
+
+                    return true
+                end,
+            },
         },
         ---@param opts PluginLspOpts
         config = function(_, opts)
