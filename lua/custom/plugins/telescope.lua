@@ -24,14 +24,11 @@ return {
     keys = {
         {
             "<leader>/",
-            function()
-                -- You can pass additional configuration to telescope to change theme, layout, etc.
-                Util.telescope("current_buffer_fuzzy_find", (require("telescope.themes").get_dropdown({
-                    winblend = 10,
-                    previewer = false,
-                })))
-            end,
-            { desc = "[/] Fuzzily search in current buffer" },
+            Util.telescope("current_buffer_fuzzy_find", (require("telescope.themes").get_dropdown({
+                winblend = 10,
+                previewer = false,
+            }))),
+            desc = "[/] Fuzzily search in current buffer",
         },
         { "<leader>gf", Util.telescope("git_files"), desc = "Search [G]it [F]iles" },
         { "<leader>sf", Util.telescope("find_files"), desc = "[S]earch [F]iles" },
