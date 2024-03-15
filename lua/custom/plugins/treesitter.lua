@@ -44,7 +44,6 @@ return {
                 keymaps = {
                     init_selection = "<c-space>",
                     node_incremental = "<c-space>",
-                    scope_incremental = "<c-s>",
                     node_decremental = "<M-space>",
                 },
             },
@@ -164,7 +163,7 @@ return {
             close_fold_kinds = { "imports", "comment" },
 
             provider_selector = function(bufnr, filetype, buftype)
-                return { "treesitter", "indent" }
+                return { "treesitter", }
             end,
         },
 
@@ -181,9 +180,8 @@ return {
 
             local handler = function(virtText, lnum, endLnum, width, truncate)
                 local newVirtText = {}
-                local totalLines = vim.api.nvim_buf_line_count(0)
                 local foldedLines = endLnum - lnum
-                local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+                local suffix = ("  %d"):format(foldedLines)
                 local sufWidth = vim.fn.strdisplaywidth(suffix)
                 local targetWidth = width - sufWidth
                 local curWidth = 0

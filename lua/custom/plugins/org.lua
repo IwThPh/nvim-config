@@ -58,6 +58,8 @@ return {
                             use_template = false, -- provided by neorg-templates
                         },
                     },
+                    ["core.export"] = {}, -- Exports documents
+                    ["core.export.markdown"] = {},
                     ["external.templates"] = {
                         config = {
                             templates_dir = vim.fn.stdpath("config") .. "/templates/norg",
