@@ -160,7 +160,9 @@ return {
         event = "VeryLazy",
 
         opts = {
-            close_fold_kinds = { "imports", "comment" },
+            close_fold_kinds_for_ft = {
+                default = {"imports", "comment" }
+            },
 
             provider_selector = function(bufnr, filetype, buftype)
                 return { "treesitter", }

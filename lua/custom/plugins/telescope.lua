@@ -2,7 +2,6 @@ local Util = require("custom.util")
 return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    branch = "0.1.x",
     version = false, -- telescope did only one release, so use HEAD for now
 
     dependencies = {
@@ -35,30 +34,14 @@ return {
         { "<leader>sh", Util.telescope("help_tags"), desc = "[S]earch [H]elp" },
         { "<leader>sg", Util.telescope("live_grep"), desc = "[S]earch by [G]rep" },
         { "<leader>sd", Util.telescope("diagnostics"), desc = "[S]earch [D]iagnostics" },
-        { "<leader>sr", Util.telescope("resume"), desc = "[S]earch [R]resume" },
-        {
-            "<leader><space>",
-            Util.telescope("files"),
-            desc = "Find Files (root dir)",
-        },
+        { "<leader>sr", Util.telescope("resume"), desc = "[S]earch [R]esume" },
+        { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
 
         -- find
-        {
-            "<leader>fr",
-            Util.telescope("oldfiles"),
-            desc = "[F]ind [r]ecently opened files",
-        },
+        { "<leader>fr", Util.telescope("oldfiles"), desc = "[F]ind [r]ecently opened files" },
         { "<leader>fb", Util.telescope("buffers"), desc = "[F]ind [B]uffers" },
-        {
-            "<leader>ff",
-            Util.telescope("files"),
-            desc = "[F]ind [F]iles (root dir)",
-        },
-        {
-            "<leader>fF",
-            Util.telescope("files", { cwd = false }),
-            desc = "[F]ind [F]iles (cwd)",
-        },
+        { "<leader>ff", Util.telescope("files"), desc = "[F]ind [F]iles (root dir)" },
+        { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "[F]ind [F]iles (cwd)" },
 
         -- git
         { "<leader>gc", Util.telescope("git_commits"), desc = "[G]it [C]ommits" },
@@ -73,23 +56,9 @@ return {
         { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
         { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
         { "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-        {
-            "<leader>sw",
-            Util.telescope("grep_string"),
-            mode = "v",
-            desc = "Selection (root dir)",
-        },
-        {
-            "<leader>sW",
-            Util.telescope("grep_string", { cwd = false }),
-            mode = "v",
-            desc = "Selection (cwd)",
-        },
-        {
-            "<leader>uC",
-            Util.telescope("colorscheme", { enable_preview = true }),
-            desc = "Colorscheme with preview",
-        },
+        { "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
+        { "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
+        { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
 
         {
             "<leader>ss",
@@ -129,7 +98,8 @@ return {
         },
     },
     opts = function()
-        require("telescope").setup({
+        local telescope = require("telescope")
+        telescope.setup({
             defaults = {
                 prompt_prefix = " ",
                 selection_caret = " ",
@@ -150,6 +120,6 @@ return {
         vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "TelescopeNormal" })
 
         -- Enable telescope fzf native, if installed
-        pcall(require("telescope").load_extension, "fzf")
+        pcall(telescope.load_extension, "fzf")
     end,
 }

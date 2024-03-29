@@ -44,14 +44,25 @@ return {
             end)
         end,
         opts = function()
+            local js_formatters = { { "eslint_d", "prettierd", "prettier" } }
+
             ---@class ConformOpts
             return {
-                format = { timeout_ms = 3000, async = false, quiet = false },
+                format = {
+                    timeout_ms = 3000,
+                    async = false,
+                    quiet = false,
+                    lsp_fallback = true,
+                },
                 ---@type table<string, conform.FormatterUnit[]>
                 formatters_by_ft = {
                     lua = { "stylua" },
                     sh = { "shfmt" },
                     php = { { "php-cs-fixer", "pint" } },
+                    blade = { "blade-formatter" },
+                    vue = js_formatters,
+                    typescript = js_formatters,
+                    javascript = js_formatters,
                 },
                 -- The options you set here will be merged with the builtin formatters.
                 -- You can also define any custom formatters here.

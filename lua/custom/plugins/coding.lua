@@ -142,7 +142,7 @@ return {
         "lewis6991/gitsigns.nvim",
         opts = {
             -- See `:help gitsigns.txt`
-             -- signs = {
+            -- signs = {
             --     add = { text = "+" },
             --     change = { text = "~" },
             --     delete = { text = "_" },
@@ -161,7 +161,14 @@ return {
             on_attach = function(bufnr)
                 local gs = require("gitsigns")
 
-                vim.keymap.set("n", "<leader>hp", gs.preview_hunk, { buffer = bufnr, desc = "Preview git hunk" })
+                vim.keymap.set("n", "<leader>hp", gs.preview_hunk_inline, { buffer = bufnr, desc = "Preview git hunk" })
+                vim.keymap.set("n", "<leader>hb", function()
+                    gs.blame_line({ full = true })
+                end, { desc = "Blame Line" })
+                vim.keymap.set("n", "<leader>hd", gs.diffthis, { desc = "Diff This" })
+                vim.keymap.set("n", "<leader>hD", function()
+                    gs.diffthis("~")
+                end, { desc = "Diff This ~" })
                 vim.keymap.set("n", "<leader>hs", gs.stage_hunk, { buffer = bufnr, desc = "Stage git hunk" })
                 vim.keymap.set("n", "<leader>hr", gs.reset_hunk, { buffer = bufnr, desc = "Restore git hunk" })
                 vim.keymap.set("v", "<leader>hs", function()
@@ -174,7 +181,7 @@ return {
                 -- don't override the built-in and fugitive keymaps
                 local gs = package.loaded.gitsigns
                 vim.keymap.set({ "n", "v" }, "]c", function()
-                   if vim.wo.diff then
+                    if vim.wo.diff then
                         return "]c"
                     end
                     vim.schedule(function()
@@ -194,4 +201,5 @@ return {
             end,
         },
     },
+    { "almo7aya/openingh.nvim" },
 }

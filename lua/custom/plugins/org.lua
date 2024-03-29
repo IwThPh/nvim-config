@@ -1,11 +1,16 @@
 return {
     {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+    },
+    {
         "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        lazy = true, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
+        lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
         -- tag = "*",
         cmd = "Neorg",
         dependencies = {
+            "luarocks.nvim",
             "nvim-lua/plenary.nvim",
             { "pysan3/neorg-templates", dependencies = { "L3MON4D3/LuaSnip" } },
         },

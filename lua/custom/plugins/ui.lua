@@ -15,7 +15,7 @@ return {
             timeout = 3000,
             level = vim.log.levels.WARN,
             render = "compact",
-            stages = "fade",
+            stages = "static",
             max_height = function()
                 return math.floor(vim.o.lines * 0.5)
             end,
