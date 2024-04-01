@@ -44,27 +44,27 @@ return {
                 intelephense = {
                     init_options = { licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") },
                     settings = {
-                        intelephense = { enviroment = { phpVersion = "8.1.*" } },
+                        intelephense = { environment = { phpVersion = "8.1.*" } },
                     },
                 },
                 volar = {
                     init_options = {
-                        typescript = {
-                            serverPath = vim.fn.expand(
-                                "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib/tsserverlibrary.js"
-                            ),
+                        vue = {
+                            hybridMode = false,
                         },
                     },
                 },
                 tsserver = {
-                    filetypes = {
-                        "javascript",
-                        "javascriptreact",
-                        "javascript.jsx",
-                        "typescript",
-                        "typescriptreact",
-                        "typescript.tsx",
-                        "vue",
+                    init_options = {
+                        plugins = {
+                            {
+                                name = "@vue/typescript-plugin",
+                                location = vim.fn.expand(
+                                    "~/.nvm/versions/node/v16.16.0/lib/node_modules/@vue/language-server"
+                                ),
+                                languages = { "vue" },
+                            },
+                        },
                     },
                 },
                 jsonls = {},
@@ -106,37 +106,7 @@ return {
             -- you can do any additional lsp server setup here
             -- return true if you don't want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-            setup = {
-                volar = function(server, opts)
-                    local Util = require("custom.util")
-                    local lspconfig_util = require("lspconfig.util")
-                    local function get_typescript_server_path(root_dir)
-                        local global_ts = "~/.local/share/nvim/lsp_servers/tsserver/node_modules/typescript/lib"
-                        -- Alternative location if installed as root:
-                        -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
-                        local found_ts = ""
-                        local function check_dir(path)
-                            found_ts = lspconfig_util.path.join(path, "node_modules", "typescript", "lib")
-                            if lspconfig_util.path.exists(found_ts) then
-                                return path
-                            end
-                        end
-                        if lspconfig_util.search_ancestors(root_dir, check_dir) then
-                            return found_ts
-                        else
-                            return global_ts
-                        end
-                    end
-
-                    require("lspconfig")[server].setup(Util.merge(opts, {
-                        on_new_config = function(new_config, new_root_dir)
-                            new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-                        end,
-                    }))
-
-                    return true
-                end,
-            },
+            setup = {},
         },
         ---@param opts PluginLspOpts
         config = function(_, opts)
