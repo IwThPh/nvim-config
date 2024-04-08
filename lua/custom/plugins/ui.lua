@@ -138,7 +138,7 @@ return {
                         -- function() return " " .. os.date("%R") end,
                     },
                 },
-                extensions = { "lazy" },
+                extensions = { "oil", "lazy" },
             }
         end,
     },

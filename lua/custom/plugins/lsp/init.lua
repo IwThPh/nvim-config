@@ -28,6 +28,12 @@ return {
             inlay_hints = {
                 enabled = false,
             },
+            -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+            -- Be aware that you also will need to properly configure your LSP server to
+            -- provide the code lenses.
+            codelens = {
+                enabled = false,
+            },
             -- add any global capabilities here
             capabilities = {},
             -- options for vim.lsp.buf.format
@@ -43,17 +49,9 @@ return {
                 rust_analyzer = {},
                 intelephense = {
                     init_options = { licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") },
-                    settings = {
-                        intelephense = { environment = { phpVersion = "8.1.*" } },
-                    },
+                    settings = { intelephense = { environment = { phpVersion = "" } } },
                 },
-                volar = {
-                    init_options = {
-                        vue = {
-                            hybridMode = false,
-                        },
-                    },
-                },
+                volar = {},
                 tsserver = {
                     init_options = {
                         plugins = {
@@ -94,6 +92,9 @@ return {
                                 -- If lua_ls is really slow on your computer, you can try this instead:
                                 -- library = { vim.env.VIMRUNTIME },
                             },
+                            codeLens = {
+                                enable = true,
+                            },
                             completion = {
                                 callSnippet = "Replace",
                             },
@@ -106,7 +107,38 @@ return {
             -- you can do any additional lsp server setup here
             -- return true if you don't want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-            setup = {},
+            setup = {
+                intelephense = function(server, opts)
+                    local cwd = vim.uv.cwd()
+                    local root = require("lspconfig.util").root_pattern("composer.json", ".git")(cwd)
+
+                    local function read_file(path)
+                        local open = io.open
+                        local file = open(path, "rb") -- r read mode and b binary mode
+                        if not file then
+                            return nil
+                        end
+                        local content = file:read("*a") -- *a or *all reads the whole file
+                        file:close()
+                        return content
+                    end
+
+                    local default = { config = { platform = { php = "8.3.*" } } }
+                    local composer = vim.json.decode(read_file(root .. "/composer.json"))
+                    local platform = vim.tbl_deep_extend("force", default, composer)
+                    local version = platform.config.platform.php
+                    vim.notify("Configuring intelephense for php " .. version, vim.log.levels.OFF)
+                    vim.tbl_deep_extend("force", opts, {
+                        settings = {
+                            intelephense = {
+                                environment = {
+                                    phpVersion = version,
+                                },
+                            },
+                        },
+                    })
+                end,
+            },
         },
         ---@param opts PluginLspOpts
         config = function(_, opts)
@@ -147,6 +179,20 @@ return {
                 Util.lsp.on_attach(function(client, buffer)
                     if client.supports_method("textDocument/inlayHint") then
                         Util.toggle.inlay_hints(buffer, true)
+                    end
+                end)
+            end
+
+            -- code lens
+            if opts.codelens.enabled and vim.lsp.codelens then
+                Util.lsp.on_attach(function(client, buffer)
+                    if client.supports_method("textDocument/codeLens") then
+                        vim.lsp.codelens.refresh()
+                        --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+                        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                            buffer = buffer,
+                            callback = vim.lsp.codelens.refresh,
+                        })
                     end
                 end)
             end
