@@ -124,19 +124,19 @@ return {
                     end
 
                     local default = { config = { platform = { php = "8.3.*" } } }
-                    local composer = vim.json.decode(read_file(root .. "/composer.json"))
-                    local platform = vim.tbl_deep_extend("force", default, composer)
+                    local file = read_file(root .. "/composer.json")
+		    local composer = {}
+                    if (file) then
+                        composer = vim.json.decode(file)
+                    end
+                    local platform = vim.tbl_deep_extend("force", default, composer or {})
                     local version = platform.config.platform.php
                     vim.notify("Configuring intelephense for php " .. version, vim.log.levels.OFF)
-                    vim.tbl_deep_extend("force", opts, {
-                        settings = {
-                            intelephense = {
-                                environment = {
-                                    phpVersion = version,
-                                },
-                            },
-                        },
-                    })
+                    vim.tbl_deep_extend(
+                        "force",
+                        opts,
+                        { settings = { intelephense = { environment = { phpVersion = version } } } }
+                    )
                 end,
             },
         },
