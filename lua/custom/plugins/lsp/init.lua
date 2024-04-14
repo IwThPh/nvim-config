@@ -1,5 +1,6 @@
 return {
     -- lspconfig
+    { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -103,6 +104,25 @@ return {
                         },
                     },
                 },
+                omnisharp = {
+                    handlers = {
+                        ["textDocument/definition"] = function(...)
+                            return require("omnisharp_extended").handler(...)
+                        end,
+                    },
+                    keys = {
+                        {
+                            "gd",
+                            function()
+                                require("omnisharp_extended").telescope_lsp_definitions()
+                            end,
+                            desc = "Goto Definition",
+                        },
+                    },
+                    enable_roslyn_analyzers = true,
+                    organize_imports_on_format = true,
+                    enable_import_completion = true,
+                },
             },
             -- you can do any additional lsp server setup here
             -- return true if you don't want this server to be setup with lspconfig
@@ -125,8 +145,8 @@ return {
 
                     local default = { config = { platform = { php = "8.3.*" } } }
                     local file = read_file(root .. "/composer.json")
-		    local composer = {}
-                    if (file) then
+                    local composer = {}
+                    if file then
                         composer = vim.json.decode(file)
                     end
                     local platform = vim.tbl_deep_extend("force", default, composer or {})

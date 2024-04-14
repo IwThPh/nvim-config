@@ -17,6 +17,16 @@ return {
         ["src/*.ts"] = { alternate = "tests/Unit/{}.test.ts" },
         ["tests/Unit/*.test.ts"] = { alternate = "src/{}.ts" },
       },
+      -- TODO: fix .net testing
+      -- ["**/|**.Tests/"] = {
+      --   -- Project files
+      --   ["**/*.csproj"] = { alternate = "{}.Tests/{}.Tests.csproj" },
+      --   ["**.Tests/*.Tests.csproj"] = { alternate = "{}/{}.csproj" },
+      --
+      --   -- Src/Test files
+      --   ["**/*.cs"] = { alternate = "{}.Tests/{}.cs" },
+      --   ["**.Tests/*.cs"] = { alternate = "{}/{}.cs" },
+      -- },
     }
   end,
 }
