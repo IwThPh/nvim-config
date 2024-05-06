@@ -46,3 +46,4 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.list = true
 vim.opt.listchars = { trail = "·", tab = "▸ " } -- eol = '↴',
 vim.opt.cmdheight = 0
+vim.opt.scrolloff = 7

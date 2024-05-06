@@ -105,14 +105,20 @@ return {
                     enabled = true,
                     font = "+4", -- font size increment
                 },
+                alacritty = {
+                    enabled = true,
+                    font = "18", -- font size
+                },
             },
             -- callback where you can add custom code when the Zen window opens
             on_open = function(win)
                 vim.cmd("IBLDisable")
+                vim.opt.linebreak = true
             end,
             -- callback where you can add custom code when the Zen window closes
             on_close = function()
                 vim.cmd("IBLEnable")
+                vim.opt.linebreak = false
             end,
         },
     },

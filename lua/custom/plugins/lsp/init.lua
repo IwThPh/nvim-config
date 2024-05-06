@@ -1,6 +1,7 @@
 return {
     -- lspconfig
     { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
+    { "towolf/vim-helm", ft = "helm" },
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -53,6 +54,7 @@ return {
                     settings = { intelephense = { environment = { phpVersion = "" } } },
                 },
                 volar = {},
+                helm_ls = {},
                 tsserver = {
                     init_options = {
                         plugins = {
@@ -157,6 +159,11 @@ return {
                         opts,
                         { settings = { intelephense = { environment = { phpVersion = version } } } }
                     )
+                end,
+                helm_ls = function(server, opts)
+                    local mason_registry = require("mason-registry")
+                    local yamlls = mason_registry.get_package("yaml-language-server")
+                    vim.tbl_deep_extend("force", opts, { settings = { yamlls = { path = yamlls:get_install_path() } } })
                 end,
             },
         },

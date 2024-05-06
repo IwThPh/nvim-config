@@ -35,6 +35,7 @@ return {
         { "<leader>ds", function() require("dap").session() end, desc = "Session" },
         { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
         { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+        { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
     },
 
     config = function()
