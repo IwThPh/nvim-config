@@ -13,9 +13,11 @@ map({ "n", "v" }, "¬", "<M-l>")
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-map("n", "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / clear hlsearch / diff update" }
+map(
+    "n",
+    "<leader>ur",
+    "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+    { desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
@@ -60,16 +62,16 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 
 -- formatting
 map({ "n", "v" }, "<leader>cf", function()
-  Util.format({ force = true })
+    Util.format({ force = true })
 end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    severity = severity and vim.diagnostic.severity[severity] or nil
+    return function()
+        go({ severity = severity })
+    end
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -79,3 +81,30 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+if vim.fn.executable("zellij") == 1 then
+    local function zellijAction(opts)
+        local Job = require("plenary.job")
+
+        --stylua: ignore
+        local args = { "run", "-f", "-c", "-x", "10%", "-y", "10%", "--width", "80%", "--height", "80%" }
+
+        for _, v in ipairs(opts) do
+            table.insert(args, v)
+        end
+
+        Job:new({
+            command = "zellij",
+            args = args,
+        }):start()
+    end
+
+    map("n", "<leader>tf", function()
+        zellijAction({ "-n", "shell", "--", "zsh" })
+    end, { desc = "Launch [T]erminal [F]loating" })
+
+    if vim.fn.executable("lazygit") == 1 then
+        map("n", "<leader>tg", function()
+            zellijAction({ "-n", "lazygit", "--", "lazygit" })
+        end, { desc = "Launch [T]erminal [L]azygit" })
+    end
+end
