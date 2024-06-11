@@ -8,10 +8,6 @@ return {
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSUpdateSync" },
-        keys = {
-            { "<c-space>", desc = "Increment selection" },
-            { "<bs>", desc = "Decrement selection", mode = "x" },
-        },
         ---@type TSConfig
         opts = {
             ensure_installed = {

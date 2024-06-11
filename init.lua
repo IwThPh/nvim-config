@@ -12,25 +12,27 @@ vim.g.maplocalleader = " "
 -- Install package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 -- vim options
 require("config.options")
 
 -- configure plugins
-require("lazy").setup({
-  -- Detect tabstop and shiftwidth automatically
-  "tpope/vim-sleuth",
-
-  -- "gc" to comment visual regions/lines
-  { "numToStr/Comment.nvim",  opts = {} },
-
-  { import = "custom.plugins" },
-}, {})
+require("lazy").setup({ import = "custom.plugins" }, {
+    change_detection = {
+        notify = false,
+    },
+})
 
 require("config.keymaps")
 require("config.autocmds")

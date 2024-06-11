@@ -1,29 +1,14 @@
 return {
+    -- "gc" to comment visual regions/lines
+    { "numToStr/Comment.nvim", opts = {} },
     { -- buffer remove
         "echasnovski/mini.bufremove",
 
         keys = {
-            {
-                "<leader>bd",
-                function()
-                    local bd = require("mini.bufremove").delete
-                    if vim.bo.modified then
-                        local choice =
-                            vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-                        if choice == 1 then -- Yes
-                            vim.cmd.write()
-                            bd(0)
-                        elseif choice == 2 then -- No
-                            bd(0, true)
-                        end
-                    else
-                        bd(0)
-                    end
-                end,
-                desc = "Delete Buffer",
-            },
-            -- stylua: ignore
+            -- stylua: ignore start
+            { "<leader>bd", function() require("mini.bufremove").delete(0) end, desc = "Delete Buffer" },
             { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+            -- stylua: ignore end
         },
     },
 
@@ -36,28 +21,15 @@ return {
 
             harpoon:setup()
 
-            vim.keymap.set("n", "<leader>a", function()
-                harpoon:list():append()
-            end, { desc = "Harpoon Attach" })
-            vim.keymap.set("n", "<C-e>", function()
-                harpoon.ui:toggle_quick_menu(harpoon:list())
-            end, { desc = "Harpoon Target List" })
-
-            vim.keymap.set("n", "<leader>1", function()
-                harpoon:list():select(1)
-            end, { desc = "Harpoon Target 1" })
-            vim.keymap.set("n", "<leader>2", function()
-                harpoon:list():select(2)
-            end, { desc = "Harpoon Target 2" })
-            vim.keymap.set("n", "<leader>3", function()
-                harpoon:list():select(3)
-            end, { desc = "Harpoon Target 3" })
-            vim.keymap.set("n", "<leader>4", function()
-                harpoon:list():select(4)
-            end, { desc = "Harpoon Target 4" })
-            vim.keymap.set("n", "<leader>5", function()
-                harpoon:list():select(5)
-            end, { desc = "Harpoon Target 5" })
+            -- stylua: ignore start
+            vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon Attach" })
+            vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Target List" })
+            vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon Target 1" })
+            vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon Target 2" })
+            vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon Target 3" })
+            vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon Target 4" })
+            vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end, { desc = "Harpoon Target 5" })
+            -- stylua: ignore end
 
             -- Toggle previous & next buffers stored within Harpoon list
             vim.keymap.set("n", "<C-S-P>", function()
@@ -72,13 +44,8 @@ return {
     {
         "folke/zen-mode.nvim",
         keys = {
-            {
-                "<leader>uz",
-                function()
-                    require("zen-mode").toggle()
-                end,
-                desc = "Toggle Zenmode",
-            },
+            -- stylua: ignore
+            { "<leader>uz", function() require("zen-mode").toggle() end, desc = "Toggle Zenmode" },
         },
         opts = {
             window = {

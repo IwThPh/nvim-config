@@ -111,16 +111,4 @@ return {
             })
         end,
     },
-
-    -- neorg cmp source
-    {
-        "nvim-cmp",
-        dependencies = {
-            "nvim-neorg/neorg",
-        },
-        ---@param opts cmp.ConfigSchema
-        opts = function(_, opts)
-            table.insert(opts.sources, 1, { name = "neorg" })
-        end,
-    },
 }

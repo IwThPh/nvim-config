@@ -1,4 +1,7 @@
 {
+    "diagnostics.globals": [
+        "vim"
+    ],
     "workspace.library": [
         "/Users/iwanp/.local/share/nvim/lazy/neodev.nvim/types/nightly",
         "/opt/homebrew/Cellar/neovim/HEAD-46402c1/share/nvim/runtime/lua",

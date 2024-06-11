@@ -1,4 +1,3 @@
-local Util = require("custom.util")
 -- format.lua
 --
 -- Use your language server to automatically format your code on save.
@@ -11,37 +10,21 @@ return {
         lazy = true,
         cmd = "ConformInfo",
         keys = {
-            {
-                "<leader>cF",
-                function()
-                    require("conform").format({ formatters = { "injected" } })
-                end,
-                mode = { "n", "v" },
-                desc = "Format Injected Langs",
-            },
+            -- stylua: ignore start
+            { "<leader>cf", function() require("conform").format({ lsp_fallback = true }) end, mode = { "n", "v" }, desc = "Format" },
+            { "<leader>cF", function() require("conform").format({ formatters = { "injected" } }) end, mode = { "n", "v" }, desc = "Format Injected Langs" },
+            -- stylua: ignore end
         },
-        init = function()
-            -- Install the conform formatter on VeryLazy
-            require("custom.util").on_very_lazy(function()
-                require("custom.util").format.register({
-                    name = "conform.nvim",
-                    priority = 100,
-                    primary = true,
-                    format = function(buf)
-                        local plugin = require("lazy.core.config").plugins["conform.nvim"]
-                        local Plugin = require("lazy.core.plugin")
-                        local opts = Plugin.values(plugin, "opts", false)
-                        require("conform").format(Util.merge(opts.format, { bufnr = buf }))
-                    end,
-                    sources = function(buf)
-                        local ret = require("conform").list_formatters(buf)
-                        ---@param v conform.FormatterInfo
-                        return vim.tbl_map(function(v)
-                            return v.name
-                        end, ret)
-                    end,
-                })
-            end)
+        config = function()
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                callback = function(args)
+                    require("conform").format({
+                        bufnr = args.buf,
+                        lsp_fallback = true,
+                        quiet = true,
+                    })
+                end,
+            })
         end,
         opts = function()
             local js_formatters = { { "eslint_d", "prettierd", "prettier" } }
@@ -54,19 +37,18 @@ return {
                     quiet = false,
                     lsp_fallback = true,
                 },
-                ---@type table<string, conform.FormatterUnit[]>
                 formatters_by_ft = {
                     lua = { "stylua" },
                     sh = { "shfmt" },
                     php = { { "php-cs-fixer", "pint" } },
                     blade = { "blade-formatter" },
+                    sql = { "sqlfmt" },
                     vue = js_formatters,
                     typescript = js_formatters,
                     javascript = js_formatters,
                 },
                 -- The options you set here will be merged with the builtin formatters.
                 -- You can also define any custom formatters here.
-                ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
                 formatters = {
                     injected = { options = { ignore_errors = true } },
                     -- # Example of using dprint only when a dprint.json file is present
