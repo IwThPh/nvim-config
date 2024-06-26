@@ -25,6 +25,7 @@ return {
                 lua_ls = true,
                 rust_analyzer = true,
                 cssls = true,
+                nil_ls = true,
 
                 intelephense = {
                     init_options = { licenceKey = vim.fn.expand("~/.config/intelephense/licence.txt") },

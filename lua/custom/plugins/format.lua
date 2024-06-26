@@ -42,6 +42,7 @@ return {
                     sh = { "shfmt" },
                     php = { { "php-cs-fixer", "pint" } },
                     blade = { "blade-formatter" },
+                    nix = { "nixpkgs_fmt" },
                     sql = { "sqlfmt" },
                     vue = js_formatters,
                     typescript = js_formatters,
