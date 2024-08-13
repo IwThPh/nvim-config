@@ -34,6 +34,7 @@ return {
 
                 volar = true,
                 helm_ls = true,
+                terraformls = true,
 
                 tsserver = true,
                 -- init_options = {
@@ -190,4 +191,5 @@ return {
             })
         end,
     },
+    { "grafana/vim-alloy" },
 }

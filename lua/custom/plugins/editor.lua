@@ -6,7 +6,7 @@ return {
 
         keys = {
             -- stylua: ignore start
-            { "<leader>bd", function() require("mini.bufremove").delete(0) end, desc = "Delete Buffer" },
+            { "<leader>bd", function() require("mini.bufremove").delete(0) end,       desc = "Delete Buffer" },
             { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
             -- stylua: ignore end
         },
@@ -23,7 +23,8 @@ return {
 
             -- stylua: ignore start
             vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon Attach" })
-            vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon Target List" })
+            vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+                { desc = "Harpoon Target List" })
             vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon Target 1" })
             vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon Target 2" })
             vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon Target 3" })
@@ -50,18 +51,18 @@ return {
         opts = {
             window = {
                 options = {
-                    signcolumn = "no", -- disable signcolumn
-                    number = false, -- disable number column
+                    signcolumn = "no",      -- disable signcolumn
+                    number = false,         -- disable number column
                     relativenumber = false, -- disable relative numbers
-                    cursorline = false, -- disable cursorline
-                    cursorcolumn = false, -- disable cursor column
-                    foldcolumn = "0", -- disable fold column
-                    list = false, -- disable whitespace characters
+                    cursorline = false,     -- disable cursorline
+                    cursorcolumn = false,   -- disable cursor column
+                    foldcolumn = "0",       -- disable fold column
+                    list = false,           -- disable whitespace characters
                 },
             },
             plugins = {
                 options = {
-                    laststatus = 0, -- turn off the statusline in zen mode
+                    laststatus = 0,             -- turn off the statusline in zen mode
                 },
                 gitsigns = { enabled = false }, -- disables git signs
                 kitty = {
