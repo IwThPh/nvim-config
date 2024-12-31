@@ -1,14 +1,29 @@
+local telescope = require("custom.telescope")
+
 return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
+            {
+                -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+                -- used for completion, annotations and signatures of Neovim apis
+                "folke/lazydev.nvim",
+                ft = "lua",
+                opts = {
+                    library = {
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "luvit-meta/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             "Hoffs/omnisharp-extended-lsp.nvim",
-
             { "j-hui/fidget.nvim", opts = {} },
+            { "ErichDonGubler/lsp_lines.nvim" },
 
+            "stevearc/conform.nvim",
             -- Schema information
             "b0o/SchemaStore.nvim",
         },
@@ -22,7 +37,11 @@ return {
 
             local servers = {
                 bashls = true,
-                lua_ls = true,
+                lua_ls = {
+                    server_capabilities = {
+                        semanticTokensProvider = vim.NIL,
+                    },
+                },
                 rust_analyzer = true,
                 cssls = true,
                 nil_ls = true,
@@ -35,20 +54,31 @@ return {
                 volar = true,
                 helm_ls = true,
                 terraformls = true,
+                templ = true,
+                gopls = {
+                    settings = {
+                        gopls = {
+                            hints = {
+                                assignVariableTypes = true,
+                                compositeLiteralFields = true,
+                                compositeLiteralTypes = true,
+                                constantValues = true,
+                                functionTypeParameters = true,
+                                parameterNames = true,
+                                rangeVariableTypes = true,
+                            },
+                        },
+                    },
+                },
 
-                tsserver = true,
-                -- init_options = {
-                --     plugins = {
-                --         {
-                --             name = "@vue/typescript-plugin",
-                --             location = vim.fn.expand(
-                --                 "~/.nvm/versions/node/v16.16.0/lib/node_modules/@vue/language-server"
-                --             ),
-                --             languages = { "vue" },
-                --         },
-                --     },
-                -- },
-                -- },
+                tailwindcss = true,
+                ts_ls = {
+                    root_dir = require("lspconfig").util.root_pattern("package.json"),
+                    single_file = false,
+                    server_capabilities = {
+                        documentFormattingProvider = false,
+                    },
+                },
 
                 omnisharp = {
                     cmd = {
@@ -110,10 +140,12 @@ return {
                                 enable = false,
                                 url = "",
                             },
-                            schemas = require("schemastore").yaml.schemas(),
+                            -- schemas = require("schemastore").yaml.schemas(),
                         },
                     },
                 },
+
+                pyright = true,
             }
 
             local servers_to_install = vim.tbl_filter(function(key)
@@ -157,14 +189,16 @@ return {
 
                     vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
                     local Util = require("custom.util")
+                    local builtin = require("telescope.builtin")
+                    local theme = require("custom.telescope").theme()
 
                     -- stylua: ignore start
                     vim.keymap.set("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info", buffer = 0 })
-                    vim.keymap.set("n", "gd", Util.telescope("lsp_definitions"), { desc = "Goto Definition", buffer = 0 })
-                    vim.keymap.set("n", "gr", Util.telescope("lsp_references"), { desc = "References", buffer = 0 })
+                    vim.keymap.set("n", "gd", function() builtin.lsp_definitions(theme) end, { desc = "Goto Definition", buffer = 0 })
+                    vim.keymap.set("n", "gr", function() builtin.lsp_references(theme) end, { desc = "References", buffer = 0 })
                     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration", buffer = 0 })
-                    vim.keymap.set("n", "gT", Util.telescope("lsp_type_definition"), { desc = "Goto Type Definition", buffer = 0 })
-                    vim.keymap.set("n", "gI", Util.telescope("lsp_implementations"), { desc = "Goto Implementation", buffer = 0 })
+                    vim.keymap.set("n", "gT", function() builtin.lsp_type_definition(theme) end, { desc = "Goto Type Definition", buffer = 0 })
+                    vim.keymap.set("n", "gI", function() builtin.lsp_implementations(theme) end, { desc = "Goto Implementation", buffer = 0 })
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = 0 })
                     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = 0 })
                     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = 0 })
@@ -176,10 +210,10 @@ return {
                     if client.name == "omnisharp" then
                         local ose = require("omnisharp_extended")
                         -- stylua: ignore start
-                        vim.keymap.set("n", "gd", function() ose.telescope_lsp_definitions(Util.telescope.theme()) end, { desc = "Goto Definition", buffer = 0 })
-                        vim.keymap.set("n", "gr", function() ose.telescope_lsp_references(Util.telescope.theme()) end, { desc = "References", buffer = 0 })
-                        vim.keymap.set("n", "gT", function() ose.telescope_lsp_type_definition(Util.telescope.theme()) end, { desc = "Goto Type Definition", buffer = 0 })
-                        vim.keymap.set("n", "gI", function() ose.telescope_lsp_implementation(Util.telescope.theme()) end, { desc = "Goto Implementation", buffer = 0 })
+                        vim.keymap.set("n", "gd", function() ose.telescope_lsp_definitions(telescope.theme()) end, { desc = "Goto Definition", buffer = 0 })
+                        vim.keymap.set("n", "gr", function() ose.telescope_lsp_references(telescope.theme()) end, { desc = "References", buffer = 0 })
+                        vim.keymap.set("n", "gT", function() ose.telescope_lsp_type_definition(telescope.theme()) end, { desc = "Goto Type Definition", buffer = 0 })
+                        vim.keymap.set("n", "gI", function() ose.telescope_lsp_implementation(telescope.theme()) end, { desc = "Goto Implementation", buffer = 0 })
                         -- stylua: ignore end
                     end
 
@@ -189,6 +223,20 @@ return {
                     end
                 end,
             })
+
+            require("custom.autoformat").setup()
+
+            require("lsp_lines").setup()
+            vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+
+            vim.keymap.set("n", "<leader>l", function()
+                local config = vim.diagnostic.config() or {}
+                if config.virtual_text then
+                    vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+                else
+                    vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+                end
+            end, { desc = "Toggle lsp_lines" })
         end,
     },
     { "grafana/vim-alloy" },

@@ -6,12 +6,23 @@ return {
             -- Event to trigger linters
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                ["*"] = { "typos" },
+                -- ["*"] = { "typos" },
+                css = { "stylelint" },
+                scss = { "stylelint" },
+                sql = { "sqlfluff" },
+
+                typescript = { "eslint_d" },
+                javascript = { "eslint_d" },
+                typescriptreact = { "eslint_d" },
+                javascriptreact = { "eslint_d" },
             },
             -- LazyVim extension to easily override linter options
             -- or add custom linters.
             ---@type table<string,table>
             linters = {
+                sqlfluff = {
+                    stdin = true,
+                },
             },
         },
         config = function(_, opts)

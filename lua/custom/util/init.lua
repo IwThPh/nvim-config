@@ -4,7 +4,6 @@ local LazyUtil = require("lazy.core.util")
 ---@field icons custom.util.icons
 ---@field lualine custom.util.lualine
 ---@field root custom.util.root
----@field telescope custom.util.telescope
 ---@field toggle custom.util.toggle
 ---@field ui custom.util.ui
 local M = {}

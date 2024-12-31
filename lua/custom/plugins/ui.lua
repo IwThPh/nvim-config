@@ -44,7 +44,7 @@ return {
                 },
                 select = {
                     border = "solid",
-                    telescope = Util.telescope.theme({
+                    telescope = require("custom.telescope").theme({
                         layout_config = {
                             height = 0.25,
                         },

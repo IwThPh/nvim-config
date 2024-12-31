@@ -5,7 +5,6 @@
 --  Neovim Config | Iwan Phillips <iwan@iwanphillips.dev>  --
 -------------------------------------------------------------
 
--- Set <space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -22,10 +21,9 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
+-- Add lazy to the `runtimepath`, this allows us to `require` it.
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
--- vim options
-require("config.options")
 
 -- configure plugins
 require("lazy").setup({ import = "custom.plugins" }, {
@@ -33,6 +31,3 @@ require("lazy").setup({ import = "custom.plugins" }, {
         notify = false,
     },
 })
-
-require("config.keymaps")
-require("config.autocmds")
